@@ -61,10 +61,15 @@ fclean: clean
 	rm -f $(BIN_DIR)
 	rm -f $(NAME)
 
-bear: ft_printf.o
+re: fclean all
+
+bear: $(TEST_TARGET) ft_printf.o
 
 test: $(TEST_TARGET)
 	- $(TEST_TARGET)
+
+norminette:
+	norminette -R CheckForbiddenSourceHeader -R CheckDefine
 
 ############ PRINTING ##################
 #Phony targets
