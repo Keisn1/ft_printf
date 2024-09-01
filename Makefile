@@ -43,7 +43,7 @@ $(LIBFT)/libft.a:
 	$(MAKE) -C libft
 
 $(TEST_TARGET): $(NAME) | $(BIN_DIR)
-	$(CXX) $(CXX_FLAGS) $(INCLUDES) $(FSANITIZE) -o $@ tests/main.cpp $(LDFLAGS) $(NAME) $(LIBFT)/libft.a
+	$(CXX) $(CXX_FLAGS) $(FSANITIZE) -o $@ tests/main.cpp $(LDFLAGS) $(NAME) $(INCLUDES)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
