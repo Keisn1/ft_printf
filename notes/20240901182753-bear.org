@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       1387aa3d-a62f-42c4-9138-e47c078486a8
+:END:
+#+title: bear
+#+date: [2024-09-01 Sun 18:27]
+#+startup: overview
+
+https://github.com/rizsotto/Bear
+
+e.g.
+=bear -- make bear=
