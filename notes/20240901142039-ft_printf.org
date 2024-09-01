@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       9b37d2d1-a7d9-4275-87ef-f7ba85219ec5
+:END:
+#+title: ft_printf
+#+date: [2024-09-01 Sun 14:20]
+#+startup: overview
+
+* [#B] Instructions
+- Norm
+- no unexpected quit apart from undefined behaviors
+- freeing memory space
+- (-Wall -Wextra -Werror)
+
+* TODO Makefile
+** TODO $(NAME)
+** TODO all
+** TODO clean
+** TODO fclean
+** TODO re
+** TODO bonus
+** TODO Libft
+- copy its sources and its associated Makefile
+- project's Makefile must compile the library using Libft-Makefile
+- then compile the project
+** TODO Building with ar
+* The project - recode printf
+- !!! Must not do the buffer management like the real printf !!!
+
+** TODO Manage conversions
+*** TODO c
+*** TODO s
+*** TODO p
+*** TODO d
+*** TODO i
+*** TODO u
+*** TODO x
+*** TODO X
+** TODO flags
+*** TODO '-O.*'
+*** TODO Minimum field width with all conversions
+* TODO Testing
+** TODO Test with real printf
+* TODO Bonus part
+** TODO More conversions
+*** TODO n
+*** TODO f
+*** TODO g
+*** TODO e
+** TODO More flags
+*** TODO l
+*** TODO ll
+*** TODO h
+*** TODO hh
+** TODO Manage all the following flags
+*** TODO #
+*** TODO SPACE
+*** TODO +
