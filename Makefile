@@ -30,7 +30,8 @@ TEST_TARGET := bin/run_tests
 all:  $(NAME)
 
 $(NAME): ft_printf.o $(LIBFT)/libft.a
-	ar rc $@ $^
+	cp $(LIBFT)/libft.a $(NAME)
+	ar rc $(NAME) ft_printf.o
 
 ft_printf.o: src/ft_printf.c
 	$(CC) $(CFLAGS) $(INCLUDES) -Ilibft -c $< -o $@
