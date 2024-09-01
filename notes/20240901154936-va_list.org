@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       f58ea633-5f4d-423a-a02a-a8b1db7467c7
+:END:
+#+title: va_list
+#+date: [2024-09-01 Sun 15:49]
+#+startup: overview
