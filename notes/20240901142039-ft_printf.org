@@ -10,7 +10,6 @@
 - no unexpected quit apart from undefined behaviors
 - freeing memory space
 - (-Wall -Wextra -Werror)
-
 * TODO Makefile
 ** TODO $(NAME)
 ** TODO all
@@ -25,7 +24,6 @@
 ** TODO Building with ar
 * The project - recode printf
 - !!! Must not do the buffer management like the real printf !!!
-
 ** TODO Manage conversions
 *** TODO c
 *** TODO s
