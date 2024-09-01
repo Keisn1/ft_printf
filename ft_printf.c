@@ -11,36 +11,43 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdio.h>
+#include "libft/libft.h"
 
 int ft_printf(const char *fmt_string, ...) {
-	va_list args;
-	va_start(args, fmt_string);
+	ft_putstr_fd(fmt_string, STDOUT_FILENO);
 	return 0;
 }
 
+/* #include <stdarg.h> */
+/* #include <stdio.h> */
 
-void myFunction(const char* format, ...) {
-	va_list args;
-	va_start(args, format);
+/* int ft_printf(const char *fmt_string, ...) { */
+/* 	va_list args; */
+/* 	va_start(args, fmt_string); */
+/* 	return 0; */
+/* } */
 
-	const char* p = format;
-	while (*p != '\0') {
-		if (*p == 'd') {
-			int i = va_arg(args, int);
-			printf("%d\n", i);
-		} else if (*p == 'c') {
-			char c = va_arg(args, int); // chars are promoted to int
-			printf("%c\n", c);
-		}
-		p++;
-	}
 
-	va_end(args);
-}
+/* void myFunction(const char* format, ...) { */
+/* 	va_list args; */
+/* 	va_start(args, format); */
 
-int main() {
-	myFunction("dcd", 1, 'a', 3);
-	return 0;
-}
+/* 	const char* p = format; */
+/* 	while (*p != '\0') { */
+/* 		if (*p == 'd') { */
+/* 			int i = va_arg(args, int); */
+/* 			printf("%d\n", i); */
+/* 		} else if (*p == 'c') { */
+/* 			char c = va_arg(args, int); // chars are promoted to int */
+/* 			printf("%c\n", c); */
+/* 		} */
+/* 		p++; */
+/* 	} */
+
+/* 	va_end(args); */
+/* } */
+
+/* int main() { */
+/* 	myFunction("dcd", 1, 'a', 3); */
+/* 	return 0; */
+/* } */
