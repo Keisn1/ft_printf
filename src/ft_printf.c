@@ -13,11 +13,11 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-int ft_printf(const char *fmt_string, ...) {
+int	ft_printf(const char *fmt_string, ...)
+{
 	ft_putstr_fd(fmt_string, STDOUT_FILENO);
-	return 0;
+	return (0);
 }
-
 
 /* #include <stdarg.h> */
 /* #include <stdio.h> */
@@ -25,9 +25,8 @@ int ft_printf(const char *fmt_string, ...) {
 /* int ft_printf(const char *fmt_string, ...) { */
 /* 	va_list args; */
 /* 	va_start(args, fmt_string); */
-/* 	return 0; */
+/* 	return (0); */
 /* } */
-
 
 /* void myFunction(const char* format, ...) { */
 /* 	va_list args; */
@@ -50,5 +49,5 @@ int ft_printf(const char *fmt_string, ...) {
 
 /* int main() { */
 /* 	myFunction("dcd", 1, 'a', 3); */
-/* 	return 0; */
+/* 	return (0); */
 /* } */
