@@ -13,6 +13,15 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# ifdef __cplusplus
+extern "C"
+{
+#endif
+
 int ft_printf(const char *, ...);
+
+# ifdef __cplusplus
+}
+# endif
 
 #endif // FT_PRINTF_H
