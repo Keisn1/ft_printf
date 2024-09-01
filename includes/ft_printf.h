@@ -14,14 +14,14 @@
 # define FT_PRINTF_H
 
 # ifdef __cplusplus
+
 extern "C"
 {
 #endif
+int ft_printf(const char *fmt_string, ...);
+#  ifdef __cplusplus
 
-int ft_printf(const char *, ...);
-
-# ifdef __cplusplus
 }
-# endif
+#  endif
 
-#endif // FT_PRINTF_H
+# endif
