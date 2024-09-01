@@ -58,7 +58,7 @@ clean:
 
 fclean: clean
 	rm -f $(BIN_DIR)/*
-	rmdir $(BIN_DIR)
+	rm -f $(BIN_DIR)
 	rm -f $(NAME)
 
 bear: ft_printf.o
