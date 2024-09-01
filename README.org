@@ -1,5 +1,53 @@
 #+title: Ft_Printf
 
+* Makefile
+The archive =libftprintf.a= that we are building needs to incorporate =libft.a=.
+
+#+begin_src makefile
+NAME = libftprintf.a
+LIBFT = path/to/libft
+OBJ_FILES = file1.o file2.o # Add your object files here
+
+# Build target
+$(NAME): $(OBJ_FILES) $(LIBFT)/libft.a
+	cp $(LIBFT)/libft.a $(NAME)
+	ar rc $(NAME) $(OBJ_FILES)
+#+end_src
+
+Otherwise we can not use our archive without explicitly linking =libft.a=.
+
+Imagine an end-user that wants to use our new ft_printf and therefore is linking libftprintf to their project.
+
+#+begin_src c
+/* new_project.c */
+#include "libftprintf.h"
+
+int main() {
+	ft_printf("Hello world");
+    return 0;
+}
+#+end_src
+
+When they compile their project:
+
+#+begin_src shell
+cc new_project.c libftprintf.a
+#+end_src
+
+Suppose ft_printf uses ft_putstr_fd from libft. It might look like this:
+
+#+begin_src c
+#include "libft.h"
+
+int ft_printf(const char* fmt_string, ...) {
+	ft_putstr_fd(fmt_string, STDOUT_FILENO);
+	return 0;
+}
+#+end_src
+
+If we built =libftprintf.a= without incorporating =libft.a=, the compilation would fail because the linker would not be able to resolve ft_putstr_fd, as it would not be part of our archive.
+
+An archive essentially is an aggregation of object files that a compiler can link to, and ft_putstr_fd would not be present without inclusion.
 * va_*
 * conversions
 * flags

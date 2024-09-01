@@ -32,24 +32,24 @@ TEST_TARGET := bin/run_tests
 #Mandatory targets
 all:  $(NAME)
 
-$(NAME): $(OBJ_FILES) $(LIBFT)/libft.a $(BIN_DIR)
+$(NAME): $(OBJ_FILES) $(LIBFT)/libft.a
 	cp $(LIBFT)/libft.a $(NAME)
 	ar rc $(NAME) $<
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT) -c $< -o $@
+
+$(LIBFT)/libft.a:
+	$(MAKE) -C libft
+
+$(TEST_TARGET): $(NAME) | $(BIN_DIR)
+	$(CXX) $(CXX_FLAGS) $(INCLUDES) $(FSANITIZE) -o $@ tests/main.cpp $(LDFLAGS) $(NAME) $(LIBFT)/libft.a
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT) -c $< -o $@
-
-$(LIBFT)/libft.a:
-	$(MAKE) -C libft
-
-$(TEST_TARGET): $(NAME) $(BIN_DIR)
-	$(CXX) $(CXX_FLAGS) $(INCLUDES) $(FSANITIZE) -o $@ tests/main.cpp $(LDFLAGS) $(NAME) $(LIBFT)/libft.a
 
 ############ PHONY ##################
 clean:
