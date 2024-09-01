@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-Ilibft",
+      "-c",
+      "-o",
+      "ft_printf.o",
+      "src/ft_printf.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/ft_printf.c",
+    "output": "/home/kay/workspace/ft_printf/ft_printf.o"
+  }
+]
