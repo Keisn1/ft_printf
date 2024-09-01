@@ -33,7 +33,7 @@ $(NAME): ft_printf.o $(LIBFT)/libft.a
 	ar rc $@ $^
 
 ft_printf.o: src/ft_printf.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -Ilibft -c $< -o $@
 
 $(LIBFT)/libft.a:
 	$(MAKE) -C libft
