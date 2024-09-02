@@ -54,11 +54,9 @@ $(BIN_DIR):
 ############ PHONY ##################
 clean:
 	rm -f $(OBJ_FILES)
-	rm -f $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(BIN_DIR)/*
-	rm -f $(BIN_DIR)
 	rm -f $(NAME)
 
 re: fclean all
