@@ -1,6 +1,7 @@
 #+title: Ft_Printf
 
 * Makefile
+** Integrating libft into libftprintf
 The archive =libftprintf.a= that we are building needs to incorporate =libft.a=.
 
 #+begin_src makefile
@@ -48,6 +49,25 @@ int ft_printf(const char* fmt_string, ...) {
 If we built =libftprintf.a= without incorporating =libft.a=, the compilation would fail because the linker would not be able to resolve ft_putstr_fd, as it would not be part of our archive.
 
 An archive essentially is an aggregation of object files that a compiler can link to, and ft_putstr_fd would not be present without inclusion.
+** bear
+[[https://github.com/rizsotto/Bear][bear]] is a program that generates compile_commands.json file for you, so that clang-language server knows how compile the programs.
+
+#+begin_src shell
+bear -- <your-build-command>
+#+end_src
+
+By having a bear rule in your Makefile
+
+#+begin_src makefile
+bear: $(TEST_TARGET) $(OBJ_FILES)
+#+end_src
+
+you can generate the compile_commands.json as follows
+
+#+begin_src shell
+bear -- make bear
+#+end_src
+
 * va_*
 * conversions
 * flags

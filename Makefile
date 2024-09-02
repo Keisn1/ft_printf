@@ -63,7 +63,7 @@ fclean: clean
 
 re: fclean all
 
-bear: $(TEST_TARGET) ft_printf.o
+bear: $(TEST_TARGET) $(OBJ_FILES)
 
 test: $(TEST_TARGET)
 	- $(TEST_TARGET)
