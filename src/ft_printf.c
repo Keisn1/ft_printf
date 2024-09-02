@@ -10,12 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
+#include <unistd.h>
 #include "ft_printf.h"
 #include "libft.h"
 
 int	ft_printf(const char *fmt_string, ...)
 {
-	ft_putstr_fd(fmt_string, STDOUT_FILENO);
+	va_list ap;
+	va_start(ap, fmt_string);
+
+	const char *p = fmt_string;
+	while (*p != '\0') {
+		if (*p == '%') {
+			ft_putstr_fd( va_arg(ap, char*) , STDOUT_FILENO);
+			p += 2;
+			continue;
+		}
+		ft_putchar_fd(*(p++), STDOUT_FILENO);
+	}
+	va_end(ap);
 	return (0);
 }
 
