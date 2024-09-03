@@ -26,11 +26,16 @@ int	ft_printf(const char *fmt_string, ...)
 		if (*p == '%')
 		{
 			p++;
-			switch (*p) {
+			switch (*p)
+			{
 			case 'c':
-                /* need a cast here since va_arg only */
+				/* need a cast here since va_arg only */
 				ft_putchar_fd((char)va_arg(ap, int), STDOUT_FILENO);
-				break;
+				break ;
+			case 'd':
+				/* need a cast here since va_arg only */
+				ft_putnbr_fd(va_arg(ap, int), STDOUT_FILENO);
+				break ;
 			default:
 				ft_putstr_fd(va_arg(ap, char *), STDOUT_FILENO);
 			}

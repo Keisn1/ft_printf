@@ -168,7 +168,7 @@ correct (not tested yet):
 void (*func)() = va_arg(args, void (*));
 #+end_src
 
-**** fully promoted type
+**** default argument promotion and fully promoted type
 From the man page
 #+begin_src c
 /* need a cast here since va_arg only
@@ -179,7 +179,7 @@ c = (char) va_arg(ap, int);
 https://stackoverflow.com/a/1256122
 https://stackoverflow.com/a/1255818
 
-- In C, function arguments undergo a process known as "default argument promotions" when passed to a variadic function like =printf= or =va_arg=.
+In C, function arguments undergo a process known as "default argument promotions" when passed to a variadic function like =printf=.
 
 The default argument promotions ensure that arguments are compatible with the function's parameter types and include the following rules:
 - Integral promotions:
@@ -200,7 +200,6 @@ void va_end(va_list ap);
 #+end_src
 - Cleans up the =va_list= variable when done.
 - Should be called after accessing all the variable arguments.
-- =ap= is the =va_list= variable.
 
 * conversions
 * flags

@@ -24,5 +24,9 @@ TEST(ft_printf_test, string_conversion) {
 }
 
 TEST(ft_printf_test, character_conversion) {
-    compare_printf("Hello %c", 'c');
+    compare_printf("Hello %c", 'q');
+}
+
+TEST(ft_printf_test, integer_conversion) {
+    compare_printf("Hello %d", 1234);
 }
