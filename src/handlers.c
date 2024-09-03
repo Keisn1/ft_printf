@@ -43,19 +43,22 @@ int	handle_pointer(va_list ap)
 		return (5);
 	}
 	ft_ptr_to_hex(p, hex_str);
-	return (print_hex_str(hex_str));
+	return (print_hex_str(hex_str, true));
 }
 
-int	print_hex_str(char *hex_str)
+int	print_hex_str(char *hex_str, bool with_prefix)
 {
 	int		count;
 	int		idx;
 	bool	leading_zero;
 
-	count = 2;
 	idx = 0;
+	count = 0;
 	leading_zero = true;
-	ft_putstr_fd("0x", STDOUT_FILENO);
+	if (with_prefix) {
+		ft_putstr_fd("0x", STDOUT_FILENO);
+		count = 2;
+	}
 	idx = 0;
 	while (idx < 16)
 	{
@@ -66,6 +69,10 @@ int	print_hex_str(char *hex_str)
 		}
 		leading_zero = false;
 		ft_putchar_fd(hex_str[idx++], STDOUT_FILENO);
+		count++;
+	}
+	if (leading_zero && !with_prefix) {
+		ft_putchar_fd('0', STDOUT_FILENO);
 		count++;
 	}
 	return (count);
