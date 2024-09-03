@@ -61,7 +61,9 @@ extern "C"
 	void ft_putendl_fd(const char *s, int fd);
 	void ft_ptr_to_hex(void *p, char *hex_str);
 	int ft_num_of_digits(int d);
+	int ft_num_of_digits_unsigned(unsigned int d);
 	void ft_putnbr_fd(int nb, int fd);
+	void ft_put_unsigned_int_fd(unsigned int nb, int fd);
 	char *ft_strdup(const char *s);
 	void *ft_calloc(size_t nmemb, size_t size);
 	char *ft_itoa(int n);

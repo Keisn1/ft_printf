@@ -31,19 +31,6 @@ int	handle_char(va_list ap)
 	return (1);
 }
 
-int	handle_integer(va_list ap)
-{
-	int	d;
-	int	digits;
-
-	d = va_arg(ap, int);
-	ft_putnbr_fd(d, STDOUT_FILENO);
-	digits = ft_num_of_digits(d);
-	if (d < 0)
-		digits++;
-	return (digits);
-}
-
 int	handle_pointer(va_list ap)
 {
 	void	*p;

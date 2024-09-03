@@ -26,6 +26,8 @@ int	handle_conversion(va_list ap, char c)
 		return (handle_char(ap));
 	if (c == 'd' || c == 'i')
 		return (handle_integer(ap));
+	if (c == 'u')
+		return (handle_unsigned_integer(ap));
 	if (c == 'p')
 		return (handle_pointer(ap));
 	return (handle_string(ap));

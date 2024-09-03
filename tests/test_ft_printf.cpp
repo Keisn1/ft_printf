@@ -1,4 +1,5 @@
 #include "libftprintf.h"
+#include "limits.h"
 #include <gtest/gtest.h>
 #include <unistd.h>
 
@@ -27,7 +28,14 @@ TEST(ft_printf_test, integer_conversion) {
     compare_printf("Hello %d", 0);
     compare_printf("Hello %d", -8);
 
+    // with i instead of d
     compare_printf("Hello %i", -8);
+
+    // with unsigned decimal (u)
+    uint d = (uint)INT_MAX  + 10;
+    compare_printf("Hello %u", d);
+
+
 }
 
 TEST(ft_printf_test, pointer_conversion) {
