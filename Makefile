@@ -20,11 +20,15 @@ INCLUDES = -Iincludes
 BIN_DIR := ./bin
 SRC_DIR := ./src
 OBJ_DIR := ./obj
+TESTS_DIR := ./tests
+LIBFT_DIR := ./libft
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-LIBFT := libft
+TEST_FILES := $(wildcard $(TESTS_DIR)/*.cpp )
+TEST_OBJ_FILES := $(TEST_FILES:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+
 NAME := libftprintf.a
 TEST_TARGET := bin/run_tests
 
@@ -32,14 +36,14 @@ TEST_TARGET := bin/run_tests
 #Mandatory targets
 all:  $(NAME)
 
-$(NAME): $(OBJ_FILES) $(LIBFT)/libft.a
-	cp $(LIBFT)/libft.a $(NAME)
+$(NAME): $(OBJ_FILES) $(LIBFT_DIR)/libft.a
+	cp $(LIBFT_DIR)/libft.a $(NAME)
 	ar rc $(NAME) $<
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT_DIR) -c $< -o $@
 
-$(LIBFT)/libft.a:
+$(LIBFT_DIR)/libft.a:
 	$(MAKE) -C libft
 
 $(TEST_TARGET): $(NAME) | $(BIN_DIR)
@@ -66,10 +70,19 @@ bear: $(TEST_TARGET) $(OBJ_FILES)
 test: $(TEST_TARGET)
 	- $(TEST_TARGET)
 
+libft:
+	$(MAKE) -C libft
+
 norminette:
 	norminette -R CheckForbiddenSourceHeader -R CheckDefine
 
 ############ PRINTING ##################
 #Phony targets
-.PHONY: all clean fclean test
+.PHONY: all clean fclean test libft
+
+print_test_files:
+	@echo $(TEST_FILES)
+
+print_test_obj_files:
+	@echo $(TEST_OBJ_FILES)
 # end
