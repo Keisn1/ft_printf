@@ -13,7 +13,16 @@
     - [[#allowed-types][allowed types]]
   - [[#va_end][va_end]]
 - [[#conversions][conversions]]
+  - [[#string-conversion][string conversion]]
+  - [[#character-conversion][character conversion]]
+  - [[#integer-conversions][integer conversions]]
+    - [[#d--i][d / i]]
+    - [[#x--x][x / X]]
+    - [[#u][u]]
+  - [[#pointer-conversion][pointer conversion]]
 - [[#flags][flags]]
+  - [[#--precision]['.' = precision]]
+    - [[#]['*']]
 
 * Makefile
 ** Integrating libft into libftprintf
@@ -202,4 +211,38 @@ void va_end(va_list ap);
 - Should be called after accessing all the variable arguments.
 
 * conversions
+** string conversion
+- printing with =ft_putstr_fd=
+- getting the length with =ft_strlen=
+** character conversion
+- printing with =ft_putchar_fd=
+- always return 1
+** integer conversions
+*** d / i 
+- *precision*: minimum number of digits
+  - default *precision* = 1
+  - zero with explicit precision 0, output is empty
+
+- printing with =ft_putnbr_fd=
+- getting nbr of digits with =ft_num_of_digits= 
+*** x / X
+- using =ft_unsigned_to_hex=, which sets a string to the hexadecimal representation of the argument
+- using =print_hex_str= to print this string
+  - has an extra parameter to set if lower or upper_case
+*** u
+- printing with =ft_put_unsigned_int_fd=
+- getting nbr of digits with =ft_num_of_digits_unsigned= 
+** pointer conversion
+- use =ft_putstr_fd= if the pointer is =NULL=
+- using =ft_ptr_to_hex=, which sets a string to the hexadecimal representation of the argument (a pointer in this case)
+- using =print_hex_str= to print this string
 * flags
+The character % is followed by zero or more of the following flags:
+** '.' = precision
+- followed by optional decimal string
+- or by '*'
+- if precision given as '.', it equals to 0
+*** '*'
+- means that the precision is given in the next argument
+- must by of type =int=
+- '*m$' doesn't seem to be asked for

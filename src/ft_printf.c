@@ -15,7 +15,7 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
-int	handle_conversion(va_list ap, char c)
+int	handle_conversion(va_list ap, char c, bool precision)
 {
 	if (c == '%')
 	{
@@ -25,7 +25,7 @@ int	handle_conversion(va_list ap, char c)
 	if (c == 'c')
 		return (handle_char(ap));
 	if (c == 'd' || c == 'i')
-		return (handle_integer(ap));
+		return (handle_integer(ap, precision));
 	if (c == 'u')
 		return (handle_unsigned_integer(ap));
 	if (c == 'x')
@@ -42,6 +42,7 @@ int	ft_printf(const char *fmt_string, ...)
 	int			count;
 	va_list		ap;
 	const char	*p = fmt_string;
+	bool precision = false;
 
 	count = 0;
 	va_start(ap, fmt_string);
@@ -50,7 +51,11 @@ int	ft_printf(const char *fmt_string, ...)
 		if (*p == '%')
 		{
 			p++;
-			count += handle_conversion(ap, *p);
+			if (*p == '.') {
+				precision = true;
+				p++;
+			}
+			count += handle_conversion(ap, *p, precision);
 			p++;
 			continue ;
 		}

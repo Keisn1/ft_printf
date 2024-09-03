@@ -27,6 +27,7 @@ TEST(ft_printf_test, integer_conversions) {
     compare_printf("Hello %d", -976);
     compare_printf("Hello %d", 0);
     compare_printf("Hello %d", -8);
+    compare_printf("Hello %.d", 0);
 
     // with i instead of d
     compare_printf("Hello %i", -8);

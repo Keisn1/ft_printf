@@ -35,11 +35,14 @@ int	handle_integer_hex(va_list ap, bool up_case)
 	return print_hex_str(hex_str, false);
 }
 
-int	handle_integer(va_list ap)
+int	handle_integer(va_list ap, bool precision)
 {
 	int	d;
 	int	digits;
 
+	if (precision) {
+		return 0;
+	}
 	d = va_arg(ap, int);
 	ft_putnbr_fd(d, STDOUT_FILENO);
 	digits = ft_num_of_digits(d);
