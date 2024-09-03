@@ -42,6 +42,8 @@ TEST(ft_printf_test, integer_conversions) {
     compare_printf("Hello %x", 0);
     compare_printf("Hello %x", 16748);
     compare_printf("Hello %x", UINT_MAX);
+
+    compare_printf("Hello %X", UINT_MAX);
 }
 
 TEST(ft_printf_test, pointer_conversion) {

@@ -4,10 +4,10 @@
 int	main(void)
 {
 	printf("printf output: \n");
-	printf("hello");
+	printf("%X", 123);
 	printf("\n\n");
 	printf("ft_printf output: \n");
-	ft_printf("hello");
+	ft_printf("%X", 123);
 	printf("\n");
 	return (0);
 }

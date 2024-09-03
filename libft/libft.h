@@ -17,6 +17,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdbool.h>
 
 typedef struct s_list
 {
@@ -60,6 +61,7 @@ extern "C"
 	void ft_putstr_fd(const char *s, int fd);
 	void ft_putendl_fd(const char *s, int fd);
 	void ft_ptr_to_hex(void *p, char *hex_str);
+	void ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case);
 	int ft_num_of_digits(int d);
 	int ft_num_of_digits_unsigned(unsigned int d);
 	void ft_putnbr_fd(int nb, int fd);
