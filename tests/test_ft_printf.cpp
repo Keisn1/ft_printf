@@ -2,34 +2,9 @@
 #include <gtest/gtest.h>
 #include <unistd.h>
 
-
-void compare_printf_wo_args(const char* fmt_string) {
-    testing::internal::CaptureStdout();
-    int want_ret = printf("%s", fmt_string);
-    std::string stdPrintfResult = testing::internal::GetCapturedStdout();
-
-    testing::internal::CaptureStdout();
-    int got_return = ft_printf(fmt_string);
-    std::string ftPrintfResult = testing::internal::GetCapturedStdout();
-
-    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
-    EXPECT_EQ(want_ret, got_return);
-}
-
+void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
-void compare_printf(const char* fmt_string, Args... args) {
-    testing::internal::CaptureStdout();
-    int want_ret = printf(fmt_string, args...);
-    std::string stdPrintfResult = testing::internal::GetCapturedStdout();
-
-    testing::internal::CaptureStdout();
-    int got_return = ft_printf(fmt_string, args...);
-    std::string ftPrintfResult = testing::internal::GetCapturedStdout();
-
-    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
-    EXPECT_EQ(want_ret, got_return);
-}
-
+void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, without_arguments) {
     compare_printf_wo_args("Hello");
@@ -58,4 +33,31 @@ TEST(ft_printf_test, pointer_conversion) {
     compare_printf("Hello %p", &d);
     compare_printf("Hello %p", 0);
     compare_printf("Hello %p", 1);
+}
+
+void compare_printf_wo_args(const char* fmt_string) {
+    testing::internal::CaptureStdout();
+    int want_ret = printf("%s", fmt_string);
+    std::string stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    int got_return = ft_printf(fmt_string);
+    std::string ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_ret, got_return);
+}
+
+template<typename... Args>
+void compare_printf(const char* fmt_string, Args... args) {
+    testing::internal::CaptureStdout();
+    int want_ret = printf(fmt_string, args...);
+    std::string stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    int got_return = ft_printf(fmt_string, args...);
+    std::string ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_ret, got_return);
 }
