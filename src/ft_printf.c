@@ -24,7 +24,7 @@ int	handle_conversion(va_list ap, char c)
 	}
 	if (c == 'c')
 		return (handle_char(ap));
-	if (c == 'd')
+	if (c == 'd' || c == 'i')
 		return (handle_integer(ap));
 	if (c == 'p')
 		return (handle_pointer(ap));
