@@ -3,3 +3,4 @@
 *.a
 /.cache/
 /bin/
+/tests/see_output

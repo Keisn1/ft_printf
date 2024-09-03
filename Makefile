@@ -71,6 +71,10 @@ bear: $(TEST_TARGET) $(OBJ_FILES)
 test: $(TEST_TARGET)
 	- $(TEST_TARGET)
 
+see-output: $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT_DIR) $(TESTS_DIR)/see_output.c -o $(TESTS_DIR)/see_output $(NAME)
+	- @$(TESTS_DIR)/see_output
+
 libft:
 	$(MAKE) -C libft
 
