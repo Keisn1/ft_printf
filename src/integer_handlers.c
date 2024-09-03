@@ -25,6 +25,16 @@ int	handle_unsigned_integer(va_list ap)
 	return (digits);
 }
 
+int	handle_integer_hex(va_list ap, bool up_case)
+{
+	unsigned int	d;
+
+	d = va_arg(ap, unsigned int);
+	char hex_str[17];
+	ft_unsigned_to_hex(d, hex_str, up_case);
+	return print_hex_str(hex_str, false);
+}
+
 int	handle_integer(va_list ap)
 {
 	int	d;
@@ -38,27 +48,3 @@ int	handle_integer(va_list ap)
 	return (digits);
 }
 
-
-void	ft_unsigned_to_hex(unsigned int d, char *hex_str)
-{
-	const char	*hex_chars = "0123456789abcdef";
-	int			pos;
-
-	pos = 15;
-	while (pos >= 0)
-	{
-		hex_str[15 - pos] = hex_chars[((long unsigned)d >> (pos * 4)) & 0xF];
-		pos--;
-	}
-	hex_str[16] = '\0'; // Null-terminate the string
-}
-
-int	handle_integer_hex(va_list ap)
-{
-	unsigned int	d;
-
-	d = va_arg(ap, unsigned int);
-	char hex_str[17];
-	ft_unsigned_to_hex(d, hex_str);
-	return print_hex_str(hex_str, false);
-}
