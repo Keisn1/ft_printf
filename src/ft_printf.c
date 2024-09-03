@@ -13,8 +13,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 #include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
+#include <stdbool.h>
 
 int	handle_string(va_list ap)
 {
@@ -47,13 +46,35 @@ int	handle_integer(va_list ap)
 	return (digits);
 }
 
+int	print_hex_str(char *hex_str)
+{
+	int		count;
+	int		idx;
+	bool	leading_zero;
+
+	count = 2;
+	idx = 0;
+	leading_zero = true;
+	ft_putstr_fd("0x", STDOUT_FILENO);
+	idx = 0;
+	while (idx < 16)
+	{
+		if (hex_str[idx] == '0' && leading_zero)
+		{
+			idx++;
+			continue ;
+		}
+		leading_zero = false;
+		ft_putchar_fd(hex_str[idx++], STDOUT_FILENO);
+		count++;
+	}
+	return (count);
+}
+
 int	handle_pointer(va_list ap)
 {
-	void		*p;
-	char		c;
-	int			pos;
-	int			count;
-	const char	*hex_chars = "0123456789abcdef";
+	void	*p;
+	char	hex_str[17];
 
 	p = va_arg(ap, void *);
 	if (p == NULL)
@@ -61,23 +82,8 @@ int	handle_pointer(va_list ap)
 		ft_putstr_fd("(nil)", STDOUT_FILENO);
 		return (5);
 	}
-	pos = 15;
-	c = hex_chars[((long unsigned)p >> (pos * 4)) & 0xF];
-	while (pos >= 0 && c == '0')
-	{
-		pos--;
-		c = hex_chars[((long unsigned)p >> (pos * 4)) & 0xF];
-	}
-	count = 2;
-	ft_putstr_fd("0x", STDOUT_FILENO);
-	while (pos >= 0)
-	{
-		ft_putchar_fd(c, STDOUT_FILENO);
-		count++;
-		pos--;
-		c = hex_chars[((long unsigned)p >> (pos * 4)) & 0xF];
-	}
-	return (count);
+	ft_ptr_to_hex(p, hex_str);
+	return (print_hex_str(hex_str));
 }
 
 int	handle_conversion(va_list ap, char c)
