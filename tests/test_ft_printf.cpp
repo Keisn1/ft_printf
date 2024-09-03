@@ -21,7 +21,7 @@ TEST(ft_printf_test, character_conversion) {
     compare_printf("Hello %c", 'q');
 }
 
-TEST(ft_printf_test, integer_conversion) {
+TEST(ft_printf_test, integer_conversions) {
     compare_printf("Hello %d", 1234);
     compare_printf("Hello %d", 976);
     compare_printf("Hello %d", -976);
@@ -34,8 +34,14 @@ TEST(ft_printf_test, integer_conversion) {
     // with unsigned decimal (u)
     uint d = (uint)INT_MAX  + 10;
     compare_printf("Hello %u", d);
+    compare_printf("Hello %u", -10);
+    compare_printf("Hello %u", 0);
 
 
+    compare_printf("Hello %x", 1234);
+    compare_printf("Hello %x", 0);
+    compare_printf("Hello %x", 16748);
+    compare_printf("Hello %x", UINT_MAX);
 }
 
 TEST(ft_printf_test, pointer_conversion) {
@@ -53,7 +59,7 @@ TEST(ft_printf_test, conversion_combos) {
 
 void compare_printf_wo_args(const char* fmt_string) {
     testing::internal::CaptureStdout();
-    int want_ret = printf("%s", fmt_string);
+    int want_return = printf("%s", fmt_string);
     std::string stdPrintfResult = testing::internal::GetCapturedStdout();
 
     testing::internal::CaptureStdout();
@@ -61,13 +67,13 @@ void compare_printf_wo_args(const char* fmt_string) {
     std::string ftPrintfResult = testing::internal::GetCapturedStdout();
 
     EXPECT_EQ(stdPrintfResult, ftPrintfResult);
-    EXPECT_EQ(want_ret, got_return);
+    EXPECT_EQ(want_return, got_return);
 }
 
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args) {
     testing::internal::CaptureStdout();
-    int want_ret = printf(fmt_string, args...);
+    int want_return = printf(fmt_string, args...);
     std::string stdPrintfResult = testing::internal::GetCapturedStdout();
 
     testing::internal::CaptureStdout();
@@ -75,5 +81,5 @@ void compare_printf(const char* fmt_string, Args... args) {
     std::string ftPrintfResult = testing::internal::GetCapturedStdout();
 
     EXPECT_EQ(stdPrintfResult, ftPrintfResult);
-    EXPECT_EQ(want_ret, got_return);
+    EXPECT_EQ(want_return, got_return);
 }
