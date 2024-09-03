@@ -13,6 +13,23 @@
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-int	ft_printf(const char *fmt_string, ...);
+#include <stdarg.h>
+#include <stdbool.h>
 
-#endif // FT_PRINTF_H
+# ifdef __cplusplus
+
+extern "C"
+{
+#endif
+int ft_printf(const char *fmt_string, ...);
+int	handle_string(va_list ap);
+int	handle_char(va_list ap);
+int	handle_integer(va_list ap);
+int	handle_pointer(va_list ap);
+int	print_hex_str(char *hex_str);
+#  ifdef __cplusplus
+
+}
+#  endif
+
+# endif
