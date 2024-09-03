@@ -39,7 +39,7 @@ all:  $(NAME)
 
 $(NAME): $(OBJ_FILES) $(LIBFT_DIR)/libft.a
 	cp $(LIBFT_DIR)/libft.a $(NAME)
-	ar rc $(NAME) $<
+	ar rc $(NAME) $(OBJ_FILES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT_DIR) -c $< -o $@
