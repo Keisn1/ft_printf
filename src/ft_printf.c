@@ -12,10 +12,38 @@
 
 #include "ft_printf.h"
 #include "libft.h"
+#include <stdarg.h>
 
 int	ft_printf(const char *fmt_string, ...)
 {
-	ft_putstr_fd(fmt_string, STDOUT_FILENO);
+	va_list		ap;
+	const char	*p = fmt_string;
+
+	va_start(ap, fmt_string);
+	while (*p != '\0')
+	{
+		if (*p == '%')
+		{
+			p++;
+			switch (*p)
+			{
+			case 'c':
+				/* need a cast here since va_arg only */
+				ft_putchar_fd((char)va_arg(ap, int), STDOUT_FILENO);
+				break ;
+			case 'd':
+				/* need a cast here since va_arg only */
+				ft_putnbr_fd(va_arg(ap, int), STDOUT_FILENO);
+				break ;
+			default:
+				ft_putstr_fd(va_arg(ap, char *), STDOUT_FILENO);
+			}
+			p++;
+			continue ;
+		}
+		ft_putchar_fd(*(p++), STDOUT_FILENO);
+	}
+	va_end(ap);
 	return (0);
 }
 
