@@ -1,5 +1,20 @@
 #+title: Ft_Printf
 
+* Table of contents :TOC_3:
+- [[#makefile][Makefile]]
+  - [[#integrating-libft-into-libftprintf][Integrating libft into libftprintf]]
+  - [[#bear][bear]]
+- [[#testing][Testing]]
+  - [[#capturing-output][Capturing output]]
+  - [[#variadic-arguments][variadic arguments]]
+- [[#va_][va_*]]
+  - [[#va_start][va_start]]
+  - [[#va_arg][va_arg]]
+    - [[#allowed-types][allowed types]]
+  - [[#va_end][va_end]]
+- [[#conversions][conversions]]
+- [[#flags][flags]]
+
 * Makefile
 ** Integrating libft into libftprintf
 The archive =libftprintf.a= that we are building needs to incorporate =libft.a=.
@@ -67,9 +82,6 @@ you can generate the compile_commands.json as follows
 #+begin_src shell
 bear -- make bear
 #+end_src
-* va_*
-* conversions
-* flags
 * Testing
 We are dealing with two problems testing a function like ft_prinft.
 ** Capturing output
@@ -105,3 +117,90 @@ TEST(ft_printf_test, string_conversions) {
     compare_printf("Hello %s", "World");
 }
 #+end_src
+* va_*
+The =va_arg=, =va_start=, and =va_end= macros are part of the C standard library and are used to handle functions with a variable number of arguments. They are defined in the =<stdarg.h>= header.
+
+#+begin_src c
+void va_start(va_list ap, last);
+void va_end(va_list ap);
+#+end_src
+
+** va_start
+#+begin_src c
+void va_start(va_list ap, last);
+#+end_src
+- Initializes a =va_list= variable for subsequent use by =va_arg= and =va_end=.
+- Should be called once before accessing the variable arguments.
+- =ap= is the =va_list= variable, and =last= is the last fixed argument before the variable arguments.
+** va_arg
+#+begin_src c
+type va_arg(va_list ap, type);
+#+end_src
+- Retrieves the next argument in the list.
+- Should be called after =va_start= and before =va_end=.
+- =ap= is the =va_list= variable, and =type= is the type of the next argument.
+*** allowed types
+**** a type so that by adding a * to the type it becomes a pointer to that type
+Man page:
+#+begin_example
+The argument type is a type name specified so that the type of a pointer to an object that has the specified type can be obtained simply by adding a * to type.
+#+end_example
+- need to specify the type in a way that allows =va_arg= to correctly calculate the memory offset for the next argument
+- this requirement needs special care when working with array and function types
+
+***** arrays
+Wrong:
+#+begin_src c
+int array[10] = va_arg(args, int[10]);
+#+end_src
+correct:
+#+begin_src c
+int *array = va_arg(args, int *);
+#+end_src
+
+***** functions
+wrong:
+#+begin_src c
+void (func)() = va_arg(args, void());
+#+end_src
+correct (not tested yet):
+#+begin_src c
+void (*func)() = va_arg(args, void (*));
+#+end_src
+
+**** fully promoted type
+From the man page
+#+begin_src c
+/* need a cast here since va_arg only
+   takes fully promoted types */
+c = (char) va_arg(ap, int);
+#+end_src
+
+https://stackoverflow.com/a/1256122
+https://stackoverflow.com/a/1255818
+
+- In C, function arguments undergo a process known as "default argument promotions" when passed to a variadic function like =printf= or =va_arg=.
+
+The default argument promotions ensure that arguments are compatible with the function's parameter types and include the following rules:
+- Integral promotions:
+  - Types smaller than =int= (like =char= and =short=) are promoted to =int= or =unsigned int= if =int= can represent all the values of the original type.
+- Float arguments are promoted to =double= if the function parameter's type is =float=.
+
+If the type specified in the function call does not match the actual promoted type of the argument, you may need to use appropriate casts to correctly interpret the value retrieved using =va_arg=.
+
+#+begin_src c
+/* need a cast here since va_arg only
+   takes fully promoted types */
+c = (char) va_arg(ap, int);
+#+end_src
+
+** va_end
+#+begin_src c
+void va_end(va_list ap);
+#+end_src
+- Cleans up the =va_list= variable when done.
+- Should be called after accessing all the variable arguments.
+- =ap= is the =va_list= variable.
+
+* conversions
+* flags

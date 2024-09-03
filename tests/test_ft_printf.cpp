@@ -19,7 +19,10 @@ TEST(ft_printf_test, without_arguments) {
     compare_printf("", "");
 }
 
-
 TEST(ft_printf_test, string_conversion) {
     compare_printf("Hello %s", "World");
+}
+
+TEST(ft_printf_test, character_conversion) {
+    compare_printf("Hello %c", 'c');
 }

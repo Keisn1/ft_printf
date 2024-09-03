@@ -74,6 +74,8 @@ test: $(TEST_TARGET)
 norminette:
 	norminette -R CheckForbiddenSourceHeader -R CheckDefine
 
+norminette-src:
+	norminette -R CheckForbiddenSourceHeader -R CheckDefine $(SRC_DIR)
 ############ PRINTING ##################
 #Phony targets
 .PHONY: all clean fclean test
