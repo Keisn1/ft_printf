@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
+#include "libftprintf.h"
 
 int	handle_string(va_list ap)
 {
@@ -46,6 +46,12 @@ int	handle_pointer(va_list ap)
 	return (print_hex_str(hex_str, true));
 }
 
+int	put_prefix(const char *prefix)
+{
+	ft_putstr_fd(prefix, STDOUT_FILENO);
+	return (ft_strlen(prefix));
+}
+
 int	print_hex_str(char *hex_str, bool with_prefix)
 {
 	int		count;
@@ -55,11 +61,8 @@ int	print_hex_str(char *hex_str, bool with_prefix)
 	idx = 0;
 	count = 0;
 	leading_zero = true;
-	if (with_prefix) {
-		ft_putstr_fd("0x", STDOUT_FILENO);
-		count = 2;
-	}
-	idx = 0;
+	if (with_prefix)
+		count = put_prefix("0x");
 	while (idx < 16)
 	{
 		if (hex_str[idx] == '0' && leading_zero)
@@ -71,7 +74,8 @@ int	print_hex_str(char *hex_str, bool with_prefix)
 		ft_putchar_fd(hex_str[idx++], STDOUT_FILENO);
 		count++;
 	}
-	if (leading_zero && !with_prefix) {
+	if (leading_zero && !with_prefix)
+	{
 		ft_putchar_fd('0', STDOUT_FILENO);
 		count++;
 	}

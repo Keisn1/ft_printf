@@ -23,12 +23,13 @@ const char	*jump_digits(const char *p)
 const char	*handle_prec(va_list ap, const char *p, int *prec)
 {
 	p++;
-	if (*p == '*') {
+	if (*p == '*')
+	{
 		*prec = va_arg(ap, unsigned int);
-		return ++p;
+		return (++p);
 	}
 	*prec = ft_atoi(p);
-	return jump_digits(p);
+	return (jump_digits(p));
 }
 
 int	handle_conversion_specifier(va_list ap, char c, int prec)
@@ -38,8 +39,6 @@ int	handle_conversion_specifier(va_list ap, char c, int prec)
 		ft_putstr_fd("%%", STDOUT_FILENO);
 		return (2);
 	}
-	if (c == 'c')
-		return (handle_char(ap));
 	if (c == 'd' || c == 'i')
 		return (handle_integer(ap, prec));
 	if (c == 'u')
@@ -48,9 +47,13 @@ int	handle_conversion_specifier(va_list ap, char c, int prec)
 		return (handle_integer_hex(ap, false));
 	if (c == 'X')
 		return (handle_integer_hex(ap, true));
+	if (c == 's')
+		return (handle_string(ap));
 	if (c == 'p')
 		return (handle_pointer(ap));
-	return (handle_string(ap));
+	if (c == 'c')
+		return (handle_char(ap));
+	return (0);
 }
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)

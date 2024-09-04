@@ -27,5 +27,15 @@ int	main(void)
 	ft_printf("%.*d", -8, 12);
 	ft_printf("\n");
 	printf("------------------------------\n");
+
+	printf("------------------------------\n");
+	printf("printf(\"%%.8x\\n\", 12): ");
+	printf("%.8x", 12);
+	printf("\n");
+	fflush(stdout);
+	ft_printf("ft_printf(\"%%.*8x\\n\", 12): ");
+	ft_printf("%.8x", 12);
+	ft_printf("\n");
+	printf("------------------------------\n");
 	return (0);
 }

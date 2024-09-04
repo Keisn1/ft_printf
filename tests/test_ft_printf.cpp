@@ -9,17 +9,25 @@ void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("Hello %.d", 0);
+    compare_printf("%.0d", 0);
+    compare_printf("%.0d", 1);
+    compare_printf("%.0d", 12);
     compare_printf("%.4d", 12);
     compare_printf("%.8d", 12);
     compare_printf("%.2d", 1234);
     compare_printf("%.10d", 2);
     compare_printf("%.12d", INT_MAX);
     compare_printf("%.4d", -12);
-
     compare_printf("%.*d", 8, 12);
     compare_printf("%.*d", -8, 12);
 
+    // unsigned integer
     compare_printf("%.*u", 8, 12);
+    compare_printf("%.*u", -8, 12);
+
+    // hex
+    // compare_printf("%.0x", 8, 12);
+
 }
 
 TEST(ft_printf_test, without_arguments) {

@@ -12,20 +12,25 @@
 
 #include "libft.h"
 
-void	ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case)
+int	ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case)
 {
-
 	const char	*hex_chars = "0123456789abcdef";
 	int			pos;
+	int			digits;
+	char		c;
 
+	digits = 1;
 	if (up_case)
 		hex_chars = "0123456789ABCDEF";
-
 	pos = 15;
 	while (pos >= 0)
 	{
-		hex_str[15 - pos] = hex_chars[((long unsigned)d >> (pos * 4)) & 0xF];
+		c = hex_chars[((long unsigned)d >> (pos * 4)) & 0xF];
+		if (c != '0' && digits == 1)
+			digits = pos + 1;
+		hex_str[15 - pos] = c;
 		pos--;
 	}
 	hex_str[16] = '\0'; // Null-terminate the string
+	return (digits);
 }
