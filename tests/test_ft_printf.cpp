@@ -24,6 +24,8 @@ TEST(ft_printf_test, integer_conversions_with_precision) {
     // unsigned integer
     compare_printf("%.*u", 8, 12);
     compare_printf("%.*u", -8, 12);
+    compare_printf("%.0u", 12);
+    compare_printf("%.0u", 0);
 
     // hex
     // compare_printf("%.0x", 8, 12);

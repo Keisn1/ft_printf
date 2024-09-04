@@ -31,11 +31,13 @@ int	handle_unsigned_integer(va_list ap, int prec)
 	unsigned int	d;
 	int				digits;
 
-	if (prec == 0)
-	{
-		return (0);
-	}
 	d = va_arg(ap, unsigned int);
+	if (prec == 0 && d == 0)
+	{
+		if (d == 0)
+			return (0);
+		prec = 1;
+	}
 	digits = 0;
 	digits += ft_num_of_digits_unsigned(d);
 	while (digits < prec)
