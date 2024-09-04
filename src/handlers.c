@@ -46,23 +46,20 @@ int	handle_pointer(va_list ap)
 	return (print_hex_str(hex_str, true));
 }
 
-int	put_prefix(const char *prefix)
-{
-	ft_putstr_fd(prefix, STDOUT_FILENO);
-	return (ft_strlen(prefix));
-}
-
 int	print_hex_str(const char *hex_str, bool with_prefix)
 {
-	int		count;
+	int		digits;
 	int		idx;
 	bool	leading_zero;
 
 	idx = 0;
-	count = 0;
+	digits = 0;
 	leading_zero = true;
 	if (with_prefix)
-		count = put_prefix("0x");
+	{
+		ft_putstr_fd("0x", STDOUT_FILENO);
+		digits = 2;
+	}
 	while (idx < 16)
 	{
 		if (hex_str[idx] == '0' && leading_zero)
@@ -72,12 +69,12 @@ int	print_hex_str(const char *hex_str, bool with_prefix)
 		}
 		leading_zero = false;
 		ft_putchar_fd(hex_str[idx++], STDOUT_FILENO);
-		count++;
+		digits++;
 	}
 	if (leading_zero && !with_prefix)
 	{
 		ft_putchar_fd('0', STDOUT_FILENO);
-		count++;
+		digits++;
 	}
-	return (count);
+	return (digits);
 }
