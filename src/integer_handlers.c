@@ -43,20 +43,21 @@ int	handle_integer(va_list ap, int precision)
 	if (precision == 0) {
 		return 0;
 	}
-
+	d = va_arg(ap, int);
 	digits = 0;
-	if (precision == 4) {
-		ft_putstr_fd("00", STDOUT_FILENO);
-		digits += 2;
+	if (d < 0) {
+		ft_putchar_fd('-', STDOUT_FILENO);
+		digits++;
+		precision++;
+		d = -d;
+	}
+	digits += ft_num_of_digits(d);
+	while (digits < precision) {
+		ft_putchar_fd('0', STDOUT_FILENO);
+		digits++;
 	}
 
-	d = va_arg(ap, int);
 	ft_putnbr_fd(d, STDOUT_FILENO);
-	digits += ft_num_of_digits(d);
-
-
-	if (d < 0)
-		digits++;
 	return (digits);
 }
 

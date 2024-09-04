@@ -9,7 +9,12 @@ void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("Hello %.d", 0);
-    compare_printf("%.4d\n", 12);
+    compare_printf("%.4d", 12);
+    compare_printf("%.8d", 12);
+    compare_printf("%.2d", 1234);
+    compare_printf("%.10d", 2);
+    compare_printf("%.12d", INT_MAX);
+    compare_printf("%.4d", -12);
 }
 
 TEST(ft_printf_test, without_arguments) {
