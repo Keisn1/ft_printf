@@ -43,7 +43,7 @@ int	handle_conversion_specifier(va_list ap, char c, int prec)
 	if (c == 'd' || c == 'i')
 		return (handle_integer(ap, prec));
 	if (c == 'u')
-		return (handle_unsigned_integer(ap));
+		return (handle_unsigned_integer(ap, prec));
 	if (c == 'x')
 		return (handle_integer_hex(ap, false));
 	if (c == 'X')

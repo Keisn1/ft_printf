@@ -14,16 +14,6 @@
 #include "libft.h"
 #include <unistd.h>
 
-int	handle_unsigned_integer(va_list ap)
-{
-	unsigned int	d;
-	int	digits;
-
-	d = va_arg(ap, unsigned int);
-	ft_put_unsigned_int_fd(d, STDOUT_FILENO);
-	digits = ft_num_of_digits_unsigned(d);
-	return (digits);
-}
 
 int	handle_integer_hex(va_list ap, bool up_case)
 {
@@ -33,6 +23,26 @@ int	handle_integer_hex(va_list ap, bool up_case)
 	char hex_str[17];
 	ft_unsigned_to_hex(d, hex_str, up_case);
 	return print_hex_str(hex_str, false);
+}
+
+int	handle_unsigned_integer(va_list ap, int prec)
+{
+	unsigned int	d;
+	int	digits;
+
+	if (prec == 0) {
+		return 0;
+	}
+	d = va_arg(ap, unsigned int);
+	digits = 0;
+	digits += ft_num_of_digits_unsigned(d);
+	while (digits < prec) {
+		ft_putchar_fd('0', STDOUT_FILENO);
+		digits++;
+	}
+
+	ft_put_unsigned_int_fd(d, STDOUT_FILENO);
+	return (digits);
 }
 
 int	handle_integer(va_list ap, int precision)
