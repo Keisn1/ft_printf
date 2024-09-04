@@ -44,9 +44,9 @@ int	handle_conversion_specifier(va_list ap, char c, int prec)
 	if (c == 'u')
 		return (handle_unsigned_integer(ap, prec));
 	if (c == 'x')
-		return (handle_integer_hex(ap, false));
+		return (handle_integer_hex(ap, false, prec));
 	if (c == 'X')
-		return (handle_integer_hex(ap, true));
+		return (handle_integer_hex(ap, true, prec));
 	if (c == 's')
 		return (handle_string(ap));
 	if (c == 'p')

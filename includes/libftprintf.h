@@ -28,10 +28,11 @@ int	handle_string(va_list ap);
 int	handle_char(va_list ap);
 int	handle_integer(va_list ap, int precision);
 int	handle_pointer(va_list ap);
-int	handle_integer_hex(va_list ap, bool up_case);
+int	handle_integer_hex(va_list ap, bool up_case, int prec);
 int	handle_unsigned_integer(va_list ap, int prec);
 
-int	print_hex_str(char *hex_str, bool with_prefix);
+int	print_hex_str(const char *hex_str, bool with_prefix);
+
 #  ifdef __cplusplus
 
 }

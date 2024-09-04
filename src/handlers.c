@@ -52,7 +52,7 @@ int	put_prefix(const char *prefix)
 	return (ft_strlen(prefix));
 }
 
-int	print_hex_str(char *hex_str, bool with_prefix)
+int	print_hex_str(const char *hex_str, bool with_prefix)
 {
 	int		count;
 	int		idx;

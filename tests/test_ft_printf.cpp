@@ -28,8 +28,9 @@ TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("%.0u", 0);
 
     // hex
-    // compare_printf("%.0x", 8, 12);
-
+    compare_printf("%.0x", 0);
+    compare_printf("%.4x", 0);
+    compare_printf("%.*x", 10, INT_MIN);
 }
 
 TEST(ft_printf_test, without_arguments) {
