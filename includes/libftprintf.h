@@ -25,7 +25,7 @@ int ft_printf(const char *fmt_string, ...);
 
 int	handle_string(va_list ap);
 int	handle_char(va_list ap);
-int	handle_integer(va_list ap, bool precision);
+int	handle_integer(va_list ap, int precision);
 int	handle_pointer(va_list ap);
 int	handle_integer_hex(va_list ap, bool up_case);
 int	handle_unsigned_integer(va_list ap);

@@ -7,6 +7,11 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, integer_conversions_with_precision) {
+    compare_printf("Hello %.d", 0);
+    compare_printf("%.4d\n", 12);
+}
+
 TEST(ft_printf_test, without_arguments) {
     compare_printf_wo_args("Hello");
     compare_printf_wo_args("");
@@ -27,7 +32,6 @@ TEST(ft_printf_test, integer_conversions) {
     compare_printf("Hello %d", -976);
     compare_printf("Hello %d", 0);
     compare_printf("Hello %d", -8);
-    compare_printf("Hello %.d", 0);
 
     // with i instead of d
     compare_printf("Hello %i", -8);

@@ -12,17 +12,18 @@
   - [[#va_arg][va_arg]]
     - [[#allowed-types][allowed types]]
   - [[#va_end][va_end]]
-- [[#conversions][conversions]]
-  - [[#string-conversion][string conversion]]
-  - [[#character-conversion][character conversion]]
-  - [[#integer-conversions][integer conversions]]
+- [[#format-string][Format string]]
+- [[#precision-precision][precision [.precision]]]
+- [[#minimum-field-width][minimum field width]]
+- [[#conversion-specifiers][conversion specifiers]]
+  - [[#string-conversion-specifiers][string conversion specifiers]]
+  - [[#character-conversion-specifiers][character conversion specifiers]]
+  - [[#integer-conversions-specifiers][integer conversions specifiers]]
     - [[#d--i][d / i]]
     - [[#x--x][x / X]]
     - [[#u][u]]
-  - [[#pointer-conversion][pointer conversion]]
+  - [[#pointer-conversion-specifiers][pointer conversion specifiers]]
 - [[#flags][flags]]
-  - [[#--precision]['.' = precision]]
-    - [[#]['*']]
 
 * Makefile
 ** Integrating libft into libftprintf
@@ -210,19 +211,45 @@ void va_end(va_list ap);
 - Cleans up the =va_list= variable when done.
 - Should be called after accessing all the variable arguments.
 
-* conversions
-** string conversion
+* Format string
+- Each conversion specification is introduced by the character =%=, and ends with a  ~conversion specifier~.
+- In between there may be (in this order) zero or more flags, an =optional minimum field width=, an =optional precision= and an =optional length modifier=.
+
+=%[$][flags][width][.precision][length modifier]conversion=
+
+- arguments are used in the order given
+- =*= and =conversion specifiers= ask for the next argument
+- what is probably not asked for: Explicitly specifying which argument to use
+  - =m= denotes position in arg-list, indexed with 1...
+  - =%m$=  instead of =%=
+  - =*m$= instead of =*=
+  - example:
+    #+begin_src c
+printf("%2$*1$d", width, num);
+printf("[%2$][*m1$][conversion]", width, num);
+    #+end_src
+
+* precision [.precision]
+- followed by optional decimal string
+- or by '*'
+  - means that the precision is given in the next argument
+  - must by of type =int=
+- if precision given as '.', it equals to 0
+- negative precision is as if precision is omitted
+
+* minimum field width
+* conversion specifiers
+** string conversion specifiers
 - printing with =ft_putstr_fd=
 - getting the length with =ft_strlen=
-** character conversion
+** character conversion specifiers
 - printing with =ft_putchar_fd=
 - always return 1
-** integer conversions
-*** d / i 
-- *precision*: minimum number of digits
-  - default *precision* = 1
-  - zero with explicit precision 0, output is empty
-
+** integer conversions specifiers
+- default *precision* = 1
+- zero with explicit precision 0, output is empty
+- *precision*: minimum number of digits to appear
+*** d / i
 - printing with =ft_putnbr_fd=
 - getting nbr of digits with =ft_num_of_digits= 
 *** x / X
@@ -232,17 +259,11 @@ void va_end(va_list ap);
 *** u
 - printing with =ft_put_unsigned_int_fd=
 - getting nbr of digits with =ft_num_of_digits_unsigned= 
-** pointer conversion
+** pointer conversion specifiers
 - use =ft_putstr_fd= if the pointer is =NULL=
 - using =ft_ptr_to_hex=, which sets a string to the hexadecimal representation of the argument (a pointer in this case)
 - using =print_hex_str= to print this string
 * flags
+
 The character % is followed by zero or more of the following flags:
-** '.' = precision
-- followed by optional decimal string
-- or by '*'
-- if precision given as '.', it equals to 0
-*** '*'
-- means that the precision is given in the next argument
-- must by of type =int=
-- '*m$' doesn't seem to be asked for
+Each conversion specification is

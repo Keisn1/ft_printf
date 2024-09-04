@@ -15,7 +15,7 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
-int	handle_conversion(va_list ap, char c, bool precision)
+int	handle_conversion(va_list ap, char c, int precision)
 {
 	if (c == '%')
 	{
@@ -42,7 +42,7 @@ int	ft_printf(const char *fmt_string, ...)
 	int			count;
 	va_list		ap;
 	const char	*p = fmt_string;
-	bool precision = false;
+	int precision = 1;
 
 	count = 0;
 	va_start(ap, fmt_string);
@@ -52,8 +52,12 @@ int	ft_printf(const char *fmt_string, ...)
 		{
 			p++;
 			if (*p == '.') {
-				precision = true;
 				p++;
+				precision = 0;
+				if (ft_isdigit(*p)) {
+					precision = 4;
+					p++;
+				}
 			}
 			count += handle_conversion(ap, *p, precision);
 			p++;
