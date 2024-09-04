@@ -23,6 +23,7 @@ extern "C"
 #endif
 int ft_printf(const char *fmt_string, ...);
 
+const char *handle_conversion(va_list ap, const char *p, int *count);
 int	handle_string(va_list ap);
 int	handle_char(va_list ap);
 int	handle_integer(va_list ap, int precision);

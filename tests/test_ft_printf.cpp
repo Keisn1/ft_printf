@@ -15,6 +15,11 @@ TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("%.10d", 2);
     compare_printf("%.12d", INT_MAX);
     compare_printf("%.4d", -12);
+
+    compare_printf("%.*d", 8, 12);
+    compare_printf("%.*d", -8, 12);
+
+    compare_printf("%.*u", 8, 12);
 }
 
 TEST(ft_printf_test, without_arguments) {
