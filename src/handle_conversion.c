@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "libftprintf.h"
+#include <stdio.h>
 #include <unistd.h>
 
 const char	*jump_digits(const char *p)
@@ -23,7 +24,6 @@ const char	*jump_digits(const char *p)
 
 const char	*extract_decimal_string(va_list ap, const char *p, int *nbr)
 {
-	p++;
 	if (*p == '*')
 	{
 		*nbr = va_arg(ap, unsigned int);
@@ -33,15 +33,26 @@ const char	*extract_decimal_string(va_list ap, const char *p, int *nbr)
 	return (jump_digits(p));
 }
 
-int	handle_conversion_specifier(va_list ap, char c, int prec)
+
+int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec)
 {
 	if (c == '%')
 	{
 		ft_putstr_fd("%%", STDOUT_FILENO);
 		return (2);
 	}
-	if (c == 'd' || c == 'i')
-		return (handle_integer(ap, prec));
+	if (c == 'd' || c == 'i') {
+		char* str =  (handle_integer(ap, prec));
+		int width = ft_strlen(str);
+		while (width < min_width) {
+			ft_putchar_fd(' ', STDOUT_FILENO);
+			width++;
+		}
+		ft_putstr_fd(str, STDOUT_FILENO);
+		free(str);
+		return width;
+	}
+
 	if (c == 'u')
 		return (handle_unsigned_integer(ap, prec));
 	if (c == 'x')
@@ -68,8 +79,8 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	if (ft_isdigit(*p))
 		p = extract_decimal_string(ap, p, &min_width);
 	if (*p == '.')
-		p = extract_decimal_string(ap, p, &prec);
-	*count += handle_conversion_specifier(ap, *p, prec);
+		p = extract_decimal_string(ap, ++p, &prec);
+	*count += handle_conversion_specifier(ap, *p, min_width, prec);
 	p++;
 	return (p);
 }

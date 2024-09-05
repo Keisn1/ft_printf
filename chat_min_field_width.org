@@ -5,30 +5,6 @@
 :GPTEL_BOUNDS: ((304 . 681) (735 . 1214) (1271 . 1760) (1806 . 2316) (2381 . 3269) (3432 . 3821))
 :END:
 
-*** what's INT_MAX in c?
-
-In C, the constant =INT_MAX= is defined in the =<limits.h>= header file and represents the maximum value that an =int= type can hold. The exact value of =INT_MAX= can vary depending on the system and compiler, but it is typically =2147483647= for a 32-bit integer. To use it, include the header as follows:
-
-#+begin_src c
-#include <limits.h>
-
-int max_value = INT_MAX;
-#+end_src
-
-*** may i have printf print out stuff synchronous?
-
-In C, the standard library's =printf= function is generally synchronous, meaning it will print out the content as soon as it is called. However, the output may be buffered, especially when printing to a file or a terminal. To ensure immediate output, you can flush the output buffer using =fflush(stdout)= right after your =printf= call. Here's an example:
-
-#+begin_src c
-#include <stdio.h>
-
-int main() {
-    printf("Hello, World!");
-    fflush(stdout);
-    return 0;
-}
-#+end_src
-
 *** in c, with printf, what is the "-" flag used for?
 
 In C, when using =printf=, the ='-'= flag is used to left-justify the output within the specified field width. By default, output is right-justified. Here is an example:

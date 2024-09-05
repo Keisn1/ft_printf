@@ -71,8 +71,8 @@ bear: $(TEST_TARGET) $(OBJ_FILES)
 test: $(TEST_TARGET)
 	- $(TEST_TARGET)
 
-examples: $(NAME)
-	@$(CC) $(CFLAGS) $(INCLUDES) -I$(LIBFT_DIR) $(TESTS_DIR)/examples.c -o $(TESTS_DIR)/examples.out $(NAME)
+examples: $(NAME) 
+	$(CC) -g $(CFLAGS) $(INCLUDES) -I$(LIBFT_DIR) $(TESTS_DIR)/examples.c -o $(TESTS_DIR)/examples.out $(NAME)
 	- @$(TESTS_DIR)/examples.out
 
 libft:

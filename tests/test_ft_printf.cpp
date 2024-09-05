@@ -8,7 +8,9 @@ template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, field_width) {
-    // compare_printf("Hello %10d", 0);
+    compare_printf("Hello %10d", 0);
+    compare_printf("Hello %10d", 1234);
+    compare_printf("Hello %10d", -12);
 }
 
 TEST(ft_printf_test, integer_conversions_with_precision) {

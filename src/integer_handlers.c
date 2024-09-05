@@ -12,7 +12,7 @@
 
 #include "libft.h"
 #include "libftprintf.h"
-#include <unistd.h>
+#include <stdio.h>
 
 int	handle_integer_hex(va_list ap, bool up_case, int prec)
 {
@@ -58,30 +58,60 @@ int	handle_unsigned_integer(va_list ap, int prec)
 	return (digits);
 }
 
-int	handle_integer(va_list ap, int prec)
+char	*ft_zero_str(size_t n)
 {
-	int	d;
-	int	digits;
+	size_t	idx;
+	char	*res;
+
+	res = (char *)malloc((n + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	res[n] = '\0';
+	idx = 0;
+	while (idx < n)
+		((char *)res)[idx++] = '0';
+	return (res);
+}
+
+char	*handle_integer(va_list ap, int prec)
+{
+	int		d;
+	int		width;
 
 	d = va_arg(ap, int);
 	if (prec == 0 && d == 0)
-		return (0);
-	if (prec == 0)
+		return ft_get_empty_str();
+	if (prec <= 0)
 		prec = 1;
-	digits = 0;
+
+	width = 0;
+
+	char* sign = "";
 	if (d < 0)
 	{
-		ft_putchar_fd('-', STDOUT_FILENO);
-		digits++;
 		prec++;
+        sign = "-";
 		d = -d;
+		width++;
 	}
-	digits += ft_num_of_digits(d);
-	while (digits < prec)
-	{
-		ft_putchar_fd('0', STDOUT_FILENO);
-		digits++;
-	}
-	ft_putnbr_fd(d, STDOUT_FILENO);
-	return (digits);
+
+	width += ft_num_of_digits(d);
+
+	/* printf("\n width: %d %d\n ", width, prec); */
+	/* fflush(stdout); */
+
+    char* zeros;
+	if (width >= prec)
+		zeros = ft_get_empty_str();
+	else
+		zeros = ft_zero_str(prec-width);
+	char* tmp = ft_strjoin(sign, zeros);
+	free(zeros);
+	char* tmp2 = ft_itoa(d);
+	char* ret = ft_strjoin(tmp, tmp2);
+	free(tmp);
+	free(tmp2);
+	/* free(ret); */
+	/* ft_putnbr_fd(d, STDOUT_FILENO); */
+	return (ret);
 }

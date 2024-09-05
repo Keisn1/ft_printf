@@ -15,6 +15,8 @@
 - [[#format-string][Format string]]
 - [[#precision-precision][precision [.precision]]]
 - [[#minimum-field-width][minimum field width]]
+  - [[#--dash][=-=: =dash=]]
+  - [[#0-zero-flag][=0=: zero-flag]]
 - [[#conversion-specifiers][conversion specifiers]]
   - [[#string-conversion-specifiers][string conversion specifiers]]
   - [[#character-conversion-specifiers][character conversion specifiers]]
@@ -236,16 +238,24 @@ printf("[%2$][*m1$][conversion]", width, num);
   - must by of type =int=
 - if precision given as '.', it equals to 0
 - negative precision is as if precision is omitted
-
 * minimum field width
 =%[$][flags][width][.precision][length modifier]conversion=
-- the width in which stuff is printed
-- padding on left if converted value has fewer chararcters than field width
 - minimum number of characters to be printed for a given value
-- same behavior as with =*=
-- negative field-width:
-  A negative field width is  taken as  a '-' flag  followed by  a positive  field width.
+- independent of format string -> only effects the conversion
+- padding on left if converted value has fewer chararcters than field width
+  - Value: |      text|
 - if a conversion is wider than the field width, the field is expanded to contain the conversion (non-existant or too small therefore don't lead to truncation)
+- value can be given with =*=
+** =-=: =dash=
+- negative field-width
+- A negative field width is  taken as  a '-' flag  followed by  a positive  field width.
+  - value is to be left adjusted on  the field boundary
+  -
+** =0=: zero-flag
+- value shall be zero padded
+- *for integer*: left with zeros rather than blanks
+- =0= and =-= than =0= is ignored
+- if precision is given than =0= flag is ignored
 
 * conversion specifiers
 ** string conversion specifiers
@@ -275,4 +285,3 @@ printf("[%2$][*m1$][conversion]", width, num);
 * flags
 
 The character % is followed by zero or more of the following flags:
-Each conversion specification is
