@@ -12,9 +12,6 @@
 
 #include "libft.h"
 #include "libftprintf.h"
-#include <cstdarg>
-#include <stdio.h>
-#include <unistd.h>
 
 const char	*jump_digits(const char *p)
 {
@@ -47,7 +44,7 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec,
 	}
 	if (c == 'd' || c == 'i')
 	{
-		str = (handle_integer(ap, prec));
+		str = handle_integer(ap, prec);
 		width = ft_strlen(str);
 		if (padded_left)
 		{
@@ -69,8 +66,18 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec,
 		free(str);
 		return (width);
 	}
-	if (c == 'u')
-		return (handle_unsigned_integer(ap, prec));
+	if (c == 'u') {
+		str = handle_unsigned_integer(ap, prec);
+		width = ft_strlen(str);
+		while (width < min_width)
+		{
+			ft_putchar_fd(' ', STDOUT_FILENO);
+			width++;
+		}
+		ft_putstr_fd(str, STDOUT_FILENO);
+		free(str);
+		return (width);
+	}
 	if (c == 'x')
 		return (handle_integer_hex(ap, false, prec));
 	if (c == 'X')

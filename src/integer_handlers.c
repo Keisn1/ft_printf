@@ -13,6 +13,7 @@
 #include "libft.h"
 #include "libftprintf.h"
 
+
 int	handle_integer_hex(va_list ap, bool up_case, int prec)
 {
 	unsigned int	d;
@@ -36,25 +37,26 @@ int	handle_integer_hex(va_list ap, bool up_case, int prec)
 	return (digits + nbr_of_zeros);
 }
 
-int	handle_unsigned_integer(va_list ap, int prec)
+char*	handle_unsigned_integer(va_list ap, int prec)
 {
 	unsigned int	d;
-	int				digits;
+	/* int				digits; */
 
 	d = va_arg(ap, unsigned int);
 	if (prec == 0 && d == 0)
-		return (0);
+		return (ft_get_empty_str(1));
 	if (prec == 0)
 		prec = 1;
-	digits = 0;
-	digits += ft_num_of_digits_unsigned(d);
-	while (digits < prec)
-	{
-		ft_putchar_fd('0', STDOUT_FILENO);
-		digits++;
-	}
-	ft_put_unsigned_int_fd(d, STDOUT_FILENO);
-	return (digits);
+	return (create_int_str_unsigned(d, prec));
+	/* digits = 0; */
+	/* digits += ft_num_of_digits_unsigned(d); */
+	/* while (digits < prec) */
+	/* { */
+	/* 	ft_putchar_fd('0', STDOUT_FILENO); */
+	/* 	digits++; */
+	/* } */
+	/* ft_put_unsigned_int_fd(d, STDOUT_FILENO); */
+	/* return (digits); */
 }
 
 char	*handle_integer(va_list ap, int prec)

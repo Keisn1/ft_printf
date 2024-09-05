@@ -33,6 +33,8 @@ extern "C"
 	/* helper */
 	char *ft_get_empty_str(size_t n);
 	int ft_abs(int x);
+	void	ft_rev_char_tab(char *tab, int size);
+
 
 	/* mandatory */
 	int ft_tolower(int c);

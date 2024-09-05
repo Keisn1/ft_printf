@@ -13,6 +13,9 @@ TEST(ft_printf_test, field_width) {
     compare_printf("Hello %10d", -12);
     compare_printf("Hello %*d", 20, -12);
     compare_printf("Hello %-10d", 0);
+
+    // unsigned integer
+    compare_printf("Hello %10u", 0);
 }
 
 TEST(ft_printf_test, integer_conversions_with_precision) {
@@ -68,7 +71,7 @@ TEST(ft_printf_test, integer_conversions) {
     compare_printf("Hello %i", -8);
 
     // with unsigned decimal (u)
-    uint d = (uint)INT_MAX  + 10;
+    unsigned int d = (unsigned int)INT_MAX  + 10;
     compare_printf("Hello %u", d);
     compare_printf("Hello %u", -10);
     compare_printf("Hello %u", 0);
