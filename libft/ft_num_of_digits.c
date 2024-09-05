@@ -17,7 +17,8 @@ int	ft_num_of_digits(int d)
 	int	count;
 
 	count = 1;
-	if (d < -10) {
+	if (d < -10)
+	{
 		d /= -10;
 		count++;
 	}

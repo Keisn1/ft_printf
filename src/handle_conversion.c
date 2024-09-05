@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "libftprintf.h"
+#include <unistd.h>
 
 const char	*jump_digits(const char *p)
 {
@@ -20,15 +21,15 @@ const char	*jump_digits(const char *p)
 	return (p);
 }
 
-const char	*handle_prec(va_list ap, const char *p, int *prec)
+const char	*extract_decimal_string(va_list ap, const char *p, int *nbr)
 {
 	p++;
 	if (*p == '*')
 	{
-		*prec = va_arg(ap, unsigned int);
+		*nbr = va_arg(ap, unsigned int);
 		return (++p);
 	}
-	*prec = ft_atoi(p);
+	*nbr = ft_atoi(p);
 	return (jump_digits(p));
 }
 
@@ -58,12 +59,16 @@ int	handle_conversion_specifier(va_list ap, char c, int prec)
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)
 {
+	int	min_width;
 	int	prec;
 
 	prec = 1;
+	min_width = 0;
 	p++;
+	if (ft_isdigit(*p))
+		p = extract_decimal_string(ap, p, &min_width);
 	if (*p == '.')
-		p = handle_prec(ap, p, &prec);
+		p = extract_decimal_string(ap, p, &prec);
 	*count += handle_conversion_specifier(ap, *p, prec);
 	p++;
 	return (p);

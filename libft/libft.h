@@ -58,9 +58,9 @@ extern "C"
 	char *ft_substr(char const *s, unsigned int start, size_t len);
 	char **ft_split(char *str, char c);
 	void ft_putchar_fd(char c, int fd);
-	void ft_putstr_fd(const char *s, int fd);
+	void ft_putstr_fd(char *s, int fd);
 	void ft_putendl_fd(const char *s, int fd);
-	void ft_ptr_to_hex(void *p, char *hex_str);
+	int ft_ptr_to_hex(void *p, char *hex_str);
 	int ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case);
 	int ft_num_of_digits(int d);
 	int ft_num_of_digits_unsigned(unsigned int d);

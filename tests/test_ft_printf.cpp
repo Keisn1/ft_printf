@@ -7,6 +7,10 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, field_width) {
+    // compare_printf("Hello %10d", 0);
+}
+
 TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("Hello %.d", 0);
     compare_printf("%.0d", 0);
@@ -31,6 +35,7 @@ TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("%.0x", 0);
     compare_printf("%.4x", 0);
     compare_printf("%.*x", 10, INT_MIN);
+    compare_printf("%.*x", 20, INT_MIN);
 }
 
 TEST(ft_printf_test, without_arguments) {

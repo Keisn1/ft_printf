@@ -35,6 +35,7 @@ int	handle_pointer(va_list ap)
 {
 	void	*p;
 	char	hex_str[17];
+	int		digits;
 
 	p = va_arg(ap, void *);
 	if (p == NULL)
@@ -42,39 +43,9 @@ int	handle_pointer(va_list ap)
 		ft_putstr_fd("(nil)", STDOUT_FILENO);
 		return (5);
 	}
-	ft_ptr_to_hex(p, hex_str);
-	return (print_hex_str(hex_str, true));
-}
-
-int	print_hex_str(const char *hex_str, bool with_prefix)
-{
-	int		digits;
-	int		idx;
-	bool	leading_zero;
-
-	idx = 0;
-	digits = 0;
-	leading_zero = true;
-	if (with_prefix)
-	{
-		ft_putstr_fd("0x", STDOUT_FILENO);
-		digits = 2;
-	}
-	while (idx < 16)
-	{
-		if (hex_str[idx] == '0' && leading_zero)
-		{
-			idx++;
-			continue ;
-		}
-		leading_zero = false;
-		ft_putchar_fd(hex_str[idx++], STDOUT_FILENO);
-		digits++;
-	}
-	if (leading_zero && !with_prefix)
-	{
-		ft_putchar_fd('0', STDOUT_FILENO);
-		digits++;
-	}
+	digits = ft_ptr_to_hex(p, hex_str);
+	ft_putstr_fd("0x", STDOUT_FILENO);
+	ft_putstr_fd(hex_str + 16 - digits, STDOUT_FILENO);
+	digits += 2;
 	return (digits);
 }

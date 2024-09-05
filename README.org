@@ -230,7 +230,7 @@ printf("[%2$][*m1$][conversion]", width, num);
     #+end_src
 
 * precision [.precision]
-- followed by optional decimal string
+- =.= followed by optional decimal string
 - or by '*'
   - means that the precision is given in the next argument
   - must by of type =int=
@@ -238,6 +238,15 @@ printf("[%2$][*m1$][conversion]", width, num);
 - negative precision is as if precision is omitted
 
 * minimum field width
+=%[$][flags][width][.precision][length modifier]conversion=
+- the width in which stuff is printed
+- padding on left if converted value has fewer chararcters than field width
+- minimum number of characters to be printed for a given value
+- same behavior as with =*=
+- negative field-width:
+  A negative field width is  taken as  a '-' flag  followed by  a positive  field width.
+- if a conversion is wider than the field width, the field is expanded to contain the conversion (non-existant or too small therefore don't lead to truncation)
+
 * conversion specifiers
 ** string conversion specifiers
 - printing with =ft_putstr_fd=

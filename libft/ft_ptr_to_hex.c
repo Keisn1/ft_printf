@@ -12,16 +12,23 @@
 
 #include "libft.h"
 
-void	ft_ptr_to_hex(void *p, char *hex_str)
+int	ft_ptr_to_hex(void *p, char *hex_str)
 {
 	const char	*hex_chars = "0123456789abcdef";
 	int			pos;
+	int			digits;
+	char		c;
 
+	digits = 1;
 	pos = 15;
 	while (pos >= 0)
 	{
-		hex_str[15 - pos] = hex_chars[((long unsigned)p >> (pos * 4)) & 0xF];
+		c = hex_chars[((long unsigned)p >> (pos * 4)) & 0xF];
+		if (c != '0' && digits == 1)
+			digits = pos + 1;
+		hex_str[15 - pos] = c;
 		pos--;
 	}
-	hex_str[16] = '\0'; // Null-terminate the string
+	hex_str[16] = '\0';
+	return (digits);
 }

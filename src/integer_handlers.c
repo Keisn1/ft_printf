@@ -19,6 +19,7 @@ int	handle_integer_hex(va_list ap, bool up_case, int prec)
 	unsigned int	d;
 	int				digits;
 	char			hex_str[17];
+	int				nbr_of_zeros;
 
 	d = va_arg(ap, unsigned int);
 	if (prec == 0 && d == 0)
@@ -26,13 +27,14 @@ int	handle_integer_hex(va_list ap, bool up_case, int prec)
 	if (prec == 0)
 		prec = 1;
 	digits = ft_unsigned_to_hex(d, hex_str, up_case);
-	while (digits < prec)
+	nbr_of_zeros = 0;
+	while (nbr_of_zeros < (prec - digits))
 	{
 		ft_putchar_fd('0', STDOUT_FILENO);
-		digits++;
+		nbr_of_zeros++;
 	}
-	print_hex_str(hex_str, false);
-	return (digits);
+	ft_putstr_fd(hex_str + 16 - digits, STDOUT_FILENO);
+	return (digits + nbr_of_zeros);
 }
 
 int	handle_unsigned_integer(va_list ap, int prec)

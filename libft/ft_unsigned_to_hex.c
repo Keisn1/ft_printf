@@ -31,6 +31,6 @@ int	ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case)
 		hex_str[15 - pos] = c;
 		pos--;
 	}
-	hex_str[16] = '\0'; // Null-terminate the string
+	hex_str[16] = '\0';
 	return (digits);
 }

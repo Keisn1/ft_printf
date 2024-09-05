@@ -1,0 +1,119 @@
+:PROPERTIES:
+:GPTEL_MODEL: gpt-4o
+:GPTEL_BACKEND: ChatGPT
+:GPTEL_SYSTEM: You are a large language model living in Emacs and a helpful assistant. Try to avoid long answers.
+:GPTEL_BOUNDS: ((304 . 681) (735 . 1214) (1271 . 1760) (1806 . 2316) (2381 . 3269) (3432 . 3821))
+:END:
+
+*** what's INT_MAX in c?
+
+In C, the constant =INT_MAX= is defined in the =<limits.h>= header file and represents the maximum value that an =int= type can hold. The exact value of =INT_MAX= can vary depending on the system and compiler, but it is typically =2147483647= for a 32-bit integer. To use it, include the header as follows:
+
+#+begin_src c
+#include <limits.h>
+
+int max_value = INT_MAX;
+#+end_src
+
+*** may i have printf print out stuff synchronous?
+
+In C, the standard library's =printf= function is generally synchronous, meaning it will print out the content as soon as it is called. However, the output may be buffered, especially when printing to a file or a terminal. To ensure immediate output, you can flush the output buffer using =fflush(stdout)= right after your =printf= call. Here's an example:
+
+#+begin_src c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!");
+    fflush(stdout);
+    return 0;
+}
+#+end_src
+
+*** in c, with printf, what is the "-" flag used for?
+
+In C, when using =printf=, the ='-'= flag is used to left-justify the output within the specified field width. By default, output is right-justified. Here is an example:
+
+#+begin_src c
+#include <stdio.h>
+
+int main() {
+    printf("|%10s|\n", "text");   // Right-justified within 10 characters
+    printf("|%-10s|\n", "text");  // Left-justified within 10 characters
+    return 0;
+}
+#+end_src
+
+This would produce the following output:
+
+#+begin_example
+|      text|
+|text      |
+#+end_example
+
+*** what if there is no field-width given?
+
+If the ='-'= flag is used with =printf= but no field width is specified, it has no effect because there is no minimum field width to left-justify within. The output will be printed as normal. Here’s an example:
+
+#+begin_src c
+#include <stdio.h>
+
+int main() {
+    printf("|%s|\n", "text");   // No field width specified
+    printf("|%-s|\n", "text");  // '-' flag specified, but no field width
+    return 0;
+}
+#+end_src
+
+Both statements will produce the same result:
+
+#+begin_example
+|text|
+|text|
+#+end_example
+
+*** is the format string itself dependent on the field width?
+
+No, the format string itself is not dependent on the field width. The field width specifies the minimum number of characters to be printed for a given value, and it is independent of the literal text within the format string.
+
+For example:
+
+#+begin_src c
+#include <stdio.h>
+
+int main() {
+    // No field width specified
+    printf("Value: |%s|\n", "text");
+
+    // Field width specified, right-justified
+    printf("Value: |%10s|\n", "text");
+
+    // Field width specified, left-justified
+    printf("Value: |%-10s|\n", "text");
+
+    return 0;
+}
+#+end_src
+
+This would produce the following output:
+
+#+begin_example
+Value: |text|
+Value: |      text|
+Value: |text      |
+#+end_example
+
+As you can see, the format string "Value: |%s|" remains the same. The field width and alignment (left or right justification) only affect the portion within the format specifier (e.g., =%10s= or =%-10s=).
+
+*** what does aq stand for?
+#+begin_example
+  A negative field width is  taken as  a \[aq]-\[aq]  flag  followed by  a positive  field width.
+#+end_example
+
+
+In the context of GNU documentation and manuals, =\[aq]= stands for a single quotation mark ('). It is often used in plain text documentation to clearly represent quote characters.
+
+Your example sentence, with =\[aq]= replaced by the single quote character, would read as:
+
+#+begin_example
+  A negative field width is taken as a '-' flag followed by a positive field width.
+#+end_example
