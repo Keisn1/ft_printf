@@ -24,9 +24,6 @@ extern "C"
 int ft_printf(const char *fmt_string, ...);
 
 const char *handle_conversion(va_list ap, const char *p, int *count);
-int	handle_string(va_list ap);
-int	handle_char(va_list ap);
-int	handle_pointer(va_list ap);
 int	handle_integer_hex(va_list ap, bool up_case, int prec);
 
 int	print_hex_str(const char *hex_str, bool with_prefix);
@@ -35,6 +32,7 @@ char*	handle_integer(va_list ap, int prec);
 char*	handle_unsigned_integer(va_list ap, int prec);
 char	*create_int_str(int d, int prec);
 char	*create_int_str_unsigned(unsigned int d, int prec);
+char*	handle_pointer(va_list ap);
 
 #  ifdef __cplusplus
 

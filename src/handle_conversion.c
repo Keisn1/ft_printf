@@ -66,7 +66,8 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec,
 		free(str);
 		return (width);
 	}
-	if (c == 'u') {
+	if (c == 'u')
+	{
 		str = handle_unsigned_integer(ap, prec);
 		width = ft_strlen(str);
 		while (width < min_width)
@@ -83,11 +84,28 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec,
 	if (c == 'X')
 		return (handle_integer_hex(ap, true, prec));
 	if (c == 's')
-		return (handle_string(ap));
+	{
+		str = va_arg(ap, char *);
+		width = ft_strlen(str);
+		ft_putstr_fd(str, STDOUT_FILENO);
+		return (width);
+	}
 	if (c == 'p')
-		return (handle_pointer(ap));
+	{
+		str = handle_pointer(ap);
+		width = ft_strlen(str);
+		ft_putstr_fd(str, STDOUT_FILENO);
+		free(str);
+		return (width);
+	}
+
 	if (c == 'c')
-		return (handle_char(ap));
+	{
+		char c = (char)va_arg(ap, int);
+		width = 1;
+		ft_putchar_fd(c, STDOUT_FILENO);
+		return (width);
+	}
 	return (0);
 }
 
