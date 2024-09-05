@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "libftprintf.h"
+#include <cstdarg>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -33,7 +34,8 @@ const char	*extract_int_arg(va_list ap, const char *p, int *nbr)
 	return (jump_digits(p));
 }
 
-int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec)
+int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec,
+		bool padded_left)
 {
 	char	*str;
 	int		width;
@@ -47,12 +49,23 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec)
 	{
 		str = (handle_integer(ap, prec));
 		width = ft_strlen(str);
-		while (width < min_width)
+		if (padded_left)
 		{
-			ft_putchar_fd(' ', STDOUT_FILENO);
-			width++;
+			while (width < min_width)
+			{
+				ft_putchar_fd(' ', STDOUT_FILENO);
+				width++;
+			}
 		}
 		ft_putstr_fd(str, STDOUT_FILENO);
+		if (!padded_left)
+		{
+			while (width < min_width)
+			{
+				ft_putchar_fd(' ', STDOUT_FILENO);
+				width++;
+			}
+		}
 		free(str);
 		return (width);
 	}
@@ -73,16 +86,23 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec)
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)
 {
-	int	min_width;
-	int	prec;
+	int		min_width;
+	int		prec;
+	bool	padded_left;
 
+	padded_left = true;
 	prec = 1;
 	min_width = 0;
 	p++;
+	if (*p == '-')
+	{
+		padded_left = false;
+		p++;
+	}
 	p = extract_int_arg(ap, p, &min_width);
 	if (*p == '.')
 		p = extract_int_arg(ap, ++p, &prec);
-	*count += handle_conversion_specifier(ap, *p, min_width, prec);
+	*count += handle_conversion_specifier(ap, *p, min_width, prec, padded_left);
 	p++;
 	return (p);
 }
