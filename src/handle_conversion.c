@@ -79,10 +79,21 @@ int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec,
 		free(str);
 		return (width);
 	}
-	if (c == 'x')
-		return (handle_integer_hex(ap, false, prec));
-	if (c == 'X')
-		return (handle_integer_hex(ap, true, prec));
+	if (c == 'x') {
+		str = handle_integer_hex(ap, false, prec);
+		width = ft_strlen(str);
+		ft_putstr_fd(str, STDOUT_FILENO);
+		free(str);
+		return (width);
+	}
+	if (c == 'X') {
+
+		str = handle_integer_hex(ap, true, prec);
+		width = ft_strlen(str);
+		ft_putstr_fd(str, STDOUT_FILENO);
+		free(str);
+		return (width);
+	}
 	if (c == 's')
 	{
 		str = va_arg(ap, char *);
