@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include "libftprintf.h"
-#include <stdio.h>
 
 int	handle_integer_hex(va_list ap, bool up_case, int prec)
 {
@@ -58,83 +57,14 @@ int	handle_unsigned_integer(va_list ap, int prec)
 	return (digits);
 }
 
-char	*ft_zero_str(size_t n)
-{
-	size_t	idx;
-	char	*res;
-
-	res = (char *)malloc((n + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	res[n] = '\0';
-	idx = 0;
-	while (idx < n)
-		((char *)res)[idx++] = '0';
-	return (res);
-}
-
 char	*handle_integer(va_list ap, int prec)
 {
-	int		d;
-	int		nbr_of_digits;
-	int		size;
-	char	*sign;
-	char	*ret;
-	char	*nbr;
+	int	d;
 
 	d = va_arg(ap, int);
 	if (prec == 0 && d == 0)
-		return (ft_get_empty_str());
+		return (ft_get_empty_str(1));
 	if (prec <= 0)
 		prec = 1;
-
-	nbr_of_digits = ft_num_of_digits(d);
-	if (nbr_of_digits >= prec)
-		prec = nbr_of_digits;
-
-	sign = "";
-	if (d < 0)
-	{
-		sign = "-";
-		d = -d;
-	}
-
-	size = prec + ft_strlen(sign) + 1;
-	ret = (char *)malloc(size);
-	if (ret == NULL)
-		return (NULL);
-	*ret = '\0';
-
-	ft_strlcat(ret, sign, size);
-	/* printf("\n\nHere: %s\n\n", ret); */
-	while (nbr_of_digits < prec)
-	{
-		ft_strlcat(ret, "0", size);
-		nbr_of_digits++;
-	}
-	nbr = ft_itoa(d);
-	ft_strlcat(ret, nbr, size);
-	free(nbr);
-	return (ret);
+	return (create_int_str(d, prec));
 }
-/* width = 0; */
-/* sign = ""; */
-/* if (d < 0) */
-/* { */
-/* 	prec++; */
-/* 	sign = "-"; */
-/* 	d = -d; */
-/* 	width++; */
-/* } */
-/* width += ft_num_of_digits(d); */
-/* if (width >= prec) */
-/* 	zeros = ft_get_empty_str(); */
-/* else */
-/* 	zeros = ft_zero_str(prec - width); */
-/* tmp = ft_strjoin(sign, zeros); */
-/* free(zeros); */
-/* abs_nbr = ft_itoa(d); */
-/* ret = ft_strjoin(tmp, abs_nbr); */
-/* free(tmp); */
-/* free(abs_nbr); */
-/* return (ret); */

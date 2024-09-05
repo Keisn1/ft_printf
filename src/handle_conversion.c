@@ -22,7 +22,7 @@ const char	*jump_digits(const char *p)
 	return (p);
 }
 
-const char	*extract_decimal_string(va_list ap, const char *p, int *nbr)
+const char	*extract_int_arg(va_list ap, const char *p, int *nbr)
 {
 	if (*p == '*')
 	{
@@ -33,26 +33,29 @@ const char	*extract_decimal_string(va_list ap, const char *p, int *nbr)
 	return (jump_digits(p));
 }
 
-
 int	handle_conversion_specifier(va_list ap, char c, int min_width, int prec)
 {
+	char	*str;
+	int		width;
+
 	if (c == '%')
 	{
 		ft_putstr_fd("%%", STDOUT_FILENO);
 		return (2);
 	}
-	if (c == 'd' || c == 'i') {
-		char* str =  (handle_integer(ap, prec));
-		int width = ft_strlen(str);
-		while (width < min_width) {
+	if (c == 'd' || c == 'i')
+	{
+		str = (handle_integer(ap, prec));
+		width = ft_strlen(str);
+		while (width < min_width)
+		{
 			ft_putchar_fd(' ', STDOUT_FILENO);
 			width++;
 		}
 		ft_putstr_fd(str, STDOUT_FILENO);
 		free(str);
-		return width;
+		return (width);
 	}
-
 	if (c == 'u')
 		return (handle_unsigned_integer(ap, prec));
 	if (c == 'x')
@@ -76,10 +79,9 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	prec = 1;
 	min_width = 0;
 	p++;
-	if (ft_isdigit(*p))
-		p = extract_decimal_string(ap, p, &min_width);
+	p = extract_int_arg(ap, p, &min_width);
 	if (*p == '.')
-		p = extract_decimal_string(ap, ++p, &prec);
+		p = extract_int_arg(ap, ++p, &prec);
 	*count += handle_conversion_specifier(ap, *p, min_width, prec);
 	p++;
 	return (p);

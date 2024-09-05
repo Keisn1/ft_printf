@@ -31,7 +31,7 @@ extern "C"
 {
 # endif
 	/* helper */
-	char *ft_get_empty_str(void);
+	char *ft_get_empty_str(size_t n);
 	int ft_abs(int x);
 
 	/* mandatory */

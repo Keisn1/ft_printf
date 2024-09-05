@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-char *ft_get_empty_str() {
-	char* ret = (char*)malloc(1);
+char *ft_get_empty_str(size_t n) {
+	char* ret = (char*)malloc(n);
 	if (ret == NULL)
 		return NULL;
 	*ret = '\0';
