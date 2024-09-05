@@ -26,6 +26,7 @@ TEST(ft_printf_test, integer_conversions_with_precision) {
     compare_printf("%.4d", -12);
     compare_printf("%.*d", 8, 12);
     compare_printf("%.*d", -8, 12);
+    // compare_printf("%d", INT_MIN);
 
     // unsigned integer
     compare_printf("%.*u", 8, 12);
