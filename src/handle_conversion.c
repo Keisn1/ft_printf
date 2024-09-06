@@ -34,27 +34,20 @@ char	*handle_conversion_specifier(va_list ap, char specifier, int prec)
 	return (ft_strdup(""));
 }
 
-int	print_char(char *str, t_flags flags)
+int	print_conversion(char *str, char specifier, t_flags flags)
 {
 	int	width;
 
-	width = 1;
+	if (specifier == 'c')
+		width = 1;
+	else
+		width = ft_strlen(str);
 	if (flags.pad_right)
 		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	ft_putchar_fd(*str, STDOUT_FILENO);
-	if (!flags.pad_right)
-		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	return (width);
-}
-
-int	print_str(char *str, t_flags flags)
-{
-	int	width;
-
-	width = ft_strlen(str);
-	if (flags.pad_right)
-		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	ft_putstr_fd(str, STDOUT_FILENO);
+	if (specifier == 'c')
+		ft_putchar_fd(*str, STDOUT_FILENO);
+	else
+		ft_putstr_fd(str, STDOUT_FILENO);
 	if (!flags.pad_right)
 		width = pad(width, flags.min_width, flags.pad_with_zeros);
 	return (width);
@@ -69,10 +62,7 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	p = handle_flags(ap, p, &flags);
 	specifier = *p;
 	str = handle_conversion_specifier(ap, specifier, flags.prec);
-	if (specifier == 'c')
-		*count += print_char(str, flags);
-	else
-		*count += print_str(str, flags);
+	*count += print_conversion(str, specifier, flags);
 	free(str);
 	p++;
 	return (p);
