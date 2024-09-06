@@ -60,29 +60,6 @@ int	print_str(char *str, t_flags flags)
 	return (width);
 }
 
-void	init_flags(t_flags *flags)
-{
-	flags->prec = 1;
-	flags->min_width = 0;
-	flags->pad_right = true;
-	flags->pad_with_zeros = false;
-}
-
-const char *handle_flags(va_list ap, const char *p, t_flags *flags) {
-
-	init_flags(flags);
-	p = check_zero_padding(flags, p);
-	p = check_padded_right(flags, p);
-	p = extract_int_arg(ap, p, &(flags->min_width));
-	check_field_width(flags);
-	if (*p == '.')
-		p = extract_int_arg(ap, ++p, &(flags->prec));
-	if (is_integer_conversion(*p) && flags->prec != 1)
-		flags->pad_with_zeros = false;
-	return p;
-
-}
-
 const char	*handle_conversion(va_list ap, const char *p, int *count)
 {
 	t_flags	flags;
