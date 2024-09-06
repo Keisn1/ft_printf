@@ -32,7 +32,7 @@ extern "C"
 	char *handle_integer(va_list ap, int prec);
 	char *handle_unsigned_integer(va_list ap, int prec);
 	char *handle_integer_hex(va_list ap, bool up_case, int prec);
-	char *handle_pointer(va_list ap);
+	char *handle_pointer(va_list ap, int prec);
 	char *create_int_str(int d, int prec);
 	char *create_int_str_unsigned(unsigned int d, int prec);
 

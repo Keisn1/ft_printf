@@ -115,7 +115,7 @@ int	handle_conversion_specifier(va_list ap, char specifier, int min_width, int p
 	}
 	if (specifier == 'p')
 	{
-		str = handle_pointer(ap);
+		str = handle_pointer(ap, prec);
 		width = ft_strlen(str);
 		if (padded_left)
 			width = pad(width, min_width);

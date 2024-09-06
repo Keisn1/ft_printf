@@ -51,15 +51,8 @@ TEST(ft_printf_test, field_width) {
     int d = 123;
     compare_printf("Hello %20p",  &d);
     compare_printf("Hello %*.5p", -20,  0);
-    // compare_printf("Hello %*.5p", -20,  1);
-    // compare_printf("Hello %*.5p", -20,  -1);
-    // compare_printf("Hello %*c", -10,  'b');
-    // compare_printf("Hello %*c", -10, 'b');
-
-    // compare_printf("Hello %p", &d);
-    // compare_printf("Hello %p", 0);
-    // compare_printf("Hello %p", 1);
-    // compare_printf("Hello %p", -1);
+    compare_printf("Hello %*.5p", -20,  1);
+    compare_printf("Hello %*.5p", -20,  -1);
 }
 
 TEST(ft_printf_test, integer_conversions_with_precision) {
