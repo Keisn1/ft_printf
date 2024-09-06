@@ -41,102 +41,33 @@ int pad(int width, int min_width) {
 	return width;
 }
 
-int	handle_conversion_specifier(va_list ap, char specifier, int min_width, int prec,
-		bool padded_left)
+/* char*	handle_conversion_specifier(va_list ap, char specifier, int min_width, int prec, bool padded_left) */
+char*	handle_conversion_specifier(va_list ap, char specifier,  int prec)
 {
-	char	*str;
-	int		width;
 	char	c2;
 
 	if (specifier == '%')
-	{
-		ft_putstr_fd("%%", STDOUT_FILENO);
-		return (2);
-	}
+		return ft_strdup("%%");
 	if (specifier == 'd' || specifier == 'i')
-	{
-		str = handle_integer(ap, prec);
-		width = ft_strlen(str);
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putstr_fd(str, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-
-		free(str);
-		return (width);
-	}
+		return handle_integer(ap, prec);
 	if (specifier == 'u')
-	{
-		str = handle_unsigned_integer(ap, prec);
-		width = ft_strlen(str);
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putstr_fd(str, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-		free(str);
-		return (width);
-	}
+		return  handle_unsigned_integer(ap, prec);
 	if (specifier == 'x')
-	{
-		str = handle_integer_hex(ap, false, prec);
-		width = ft_strlen(str);
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putstr_fd(str, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-		free(str);
-		return (width);
-	}
+		return handle_integer_hex(ap, false, prec);
 	if (specifier == 'X')
-	{
-		str = handle_integer_hex(ap, true, prec);
-		width = ft_strlen(str);
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putstr_fd(str, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-		free(str);
-		return (width);
-	}
+		return handle_integer_hex(ap, true, prec);
 	if (specifier == 's')
-	{
-		str = va_arg(ap, char *);
-		width = ft_strlen(str);
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putstr_fd(str, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-		return (width);
-	}
+		return ft_strdup(va_arg(ap, char *));
 	if (specifier == 'p')
-	{
-		str = handle_pointer(ap, prec);
-		width = ft_strlen(str);
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putstr_fd(str, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-		free(str);
-		return (width);
-	}
+		return  handle_pointer(ap, prec);
 	if (specifier == 'c')
 	{
 		c2 = (char)va_arg(ap, int);
-		width = 1;
-		if (padded_left)
-			width = pad(width, min_width);
-		ft_putchar_fd(c2, STDOUT_FILENO);
-		if (!padded_left)
-			width = pad(width, min_width);
-		return (width);
+		char* s = ft_strdup(" ");
+		s[0] = c2;
+		return s;
 	}
-	return (0);
+	return ft_get_empty_str(0);
 }
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)
@@ -144,6 +75,7 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	int		min_width;
 	int		prec;
 	bool	padded_left;
+	int width;
 
 	prec = 1;
 	min_width = 0;
@@ -162,7 +94,18 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	}
 	if (*p == '.')
 		p = extract_int_arg(ap, ++p, &prec);
-	*count += handle_conversion_specifier(ap, *p, min_width, prec, padded_left);
+	/* *count += handle_conversion_specifier(ap, *p, min_width, prec, padded_left); */
+
+	char* str = handle_conversion_specifier(ap, *p,  prec);
+	width = ft_strlen(str);
+	if (padded_left)
+		width = pad(width, min_width);
+	ft_putstr_fd(str, STDOUT_FILENO);
+	if (!padded_left)
+		width = pad(width, min_width);
+	free(str);
+
+	*count += width;
 	p++;
 	return (p);
 }
