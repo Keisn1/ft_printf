@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_get_empty_str.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 21:48/44 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/07/31 21:50:27 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/09/05 20:11/36 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/09/05 20:11:36 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+char	*ft_get_empty_str(size_t n)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	char	*ret;
+
+	ret = (char *)malloc(n);
+	if (ret == NULL)
+		return (NULL);
+	*ret = '\0';
+	return (ret);
 }

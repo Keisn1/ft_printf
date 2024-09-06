@@ -10,41 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include "libft.h"
-#include <unistd.h>
 
-int	handle_unsigned_integer(va_list ap)
-{
-	unsigned int	d;
-	int	digits;
-
-	d = va_arg(ap, unsigned int);
-	ft_put_unsigned_int_fd(d, STDOUT_FILENO);
-	digits = ft_num_of_digits_unsigned(d);
-	return (digits);
-}
-
-int	handle_integer_hex(va_list ap, bool up_case)
+char	*handle_integer_hex(va_list ap, bool up_case, int prec)
 {
 	unsigned int	d;
 
 	d = va_arg(ap, unsigned int);
-	char hex_str[17];
-	ft_unsigned_to_hex(d, hex_str, up_case);
-	return print_hex_str(hex_str, false);
+	if (prec == 0 && d == 0)
+		return (ft_get_empty_str(1));
+	if (prec == 0)
+		prec = 1;
+	return (create_hex_str_from_unsigned(d, up_case, prec));
 }
 
-int	handle_integer(va_list ap)
+char	*handle_unsigned_integer(va_list ap, int prec)
+{
+	unsigned int	d;
+
+	d = va_arg(ap, unsigned int);
+	if (prec == 0 && d == 0)
+		return (ft_get_empty_str(1));
+	if (prec == 0)
+		prec = 1;
+	return (create_int_str_unsigned(d, prec));
+}
+
+char	*handle_integer(va_list ap, int prec)
 {
 	int	d;
-	int	digits;
 
 	d = va_arg(ap, int);
-	ft_putnbr_fd(d, STDOUT_FILENO);
-	digits = ft_num_of_digits(d);
-	if (d < 0)
-		digits++;
-	return (digits);
+	if (prec == 0 && d == 0)
+		return (ft_get_empty_str(1));
+	if (prec <= 0)
+		prec = 1;
+	return (create_int_str(d, prec));
 }
-

@@ -17,7 +17,7 @@ int	ft_num_of_digits_unsigned(unsigned int d)
 	int	count;
 
 	count = 1;
-	while (d > 10)
+	while (d >= 10)
 	{
 		d /= 10;
 		count++;
