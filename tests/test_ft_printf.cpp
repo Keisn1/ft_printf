@@ -7,6 +7,14 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, ZeroPadding) {
+    compare_printf("Hello %010d", 1);
+    compare_printf("Hello %010d", 0);
+    compare_printf("Hello %0-10d", 1);
+    compare_printf("Hello %0*d", -10, 1);
+
+    compare_printf("Hello %0*.*d", 10, 5, 1);
+}
 TEST(ft_printf_test, field_width) {
     compare_printf("Hello %10d", 0);
     compare_printf("Hello %10d", 1234);

@@ -35,7 +35,8 @@ extern "C"
 	char *handle_pointer(va_list ap, int prec);
 	char *create_int_str(int d, int prec);
 	char *create_int_str_unsigned(unsigned int d, int prec);
-
+	char *create_hex_str_from_pointer(void* p, int prec);
+char *create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec );
 # ifdef __cplusplus
 }
 # endif

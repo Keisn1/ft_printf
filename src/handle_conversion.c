@@ -32,10 +32,13 @@ const char	*extract_int_arg(va_list ap, const char *p, int *nbr)
 	return (jump_digits(p));
 }
 
-int pad(int width, int min_width) {
+int pad(int width, int min_width, bool zero_padding) {
 	while (width < min_width)
 	{
-		ft_putchar_fd(' ', STDOUT_FILENO);
+		if (zero_padding)
+			ft_putchar_fd('0', STDOUT_FILENO);
+		else
+			ft_putchar_fd(' ', STDOUT_FILENO);
 		width++;
 	}
 	return width;
@@ -75,34 +78,45 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	int		min_width;
 	int		prec;
 	bool	padded_left;
+	bool zero_padding;
 	int width;
 
 	prec = 1;
 	min_width = 0;
 	padded_left = true;
+	zero_padding = false;
 	p++;
+
+	if (*p == '0') {
+		zero_padding = true;
+		p++;
+	}
+
 	if (*p == '-')
 	{
 		padded_left = false;
+		zero_padding = false;
 		p++;
 	}
 	p = extract_int_arg(ap, p, &min_width);
 	if (min_width < 0)
 	{
 		padded_left = false;
+		zero_padding = false;
 		min_width = -min_width;
 	}
 	if (*p == '.')
 		p = extract_int_arg(ap, ++p, &prec);
-	/* *count += handle_conversion_specifier(ap, *p, min_width, prec, padded_left); */
 
+	if (*p == 'd' && prec != 1)
+		zero_padding = false;
 	char* str = handle_conversion_specifier(ap, *p,  prec);
 	width = ft_strlen(str);
 	if (padded_left)
-		width = pad(width, min_width);
+		width = pad(width, min_width, zero_padding);
 	ft_putstr_fd(str, STDOUT_FILENO);
 	if (!padded_left)
-		width = pad(width, min_width);
+		width = pad(width, min_width, zero_padding);
 	free(str);
 
 	*count += width;

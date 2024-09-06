@@ -29,7 +29,7 @@ char	*ft_itoa_unsigned(unsigned int n)
 	while (n > 0)
 	{
 		ret[idx++] = n % 10 + '0';
-		n /=  10;
+		n /= 10;
 	}
 	ret[idx] = '\0';
 	ft_rev_char_tab(ret, length);
@@ -101,5 +101,44 @@ char	*create_int_str_unsigned(unsigned int d, int prec)
 	nbr = ft_itoa_unsigned(d);
 	ft_strlcat(ret, nbr, size);
 	free(nbr);
+	return (ret);
+}
+
+char	*create_hex_str_from_pointer(void *p, int prec)
+{
+	char	hex_str[17];
+	int		digits;
+	int		nbr_of_zeros;
+	int		size;
+	char	*ret;
+
+	digits = ft_ptr_to_hex(p, hex_str);
+	nbr_of_zeros = 0;
+	while (nbr_of_zeros < (prec - digits))
+		nbr_of_zeros++;
+	size = nbr_of_zeros + digits + ft_strlen("0x") + 1;
+	ret = ft_get_empty_str(size);
+	ft_strlcat(ret, "0x", size);
+	add_zeros_to_str(ret, nbr_of_zeros, size);
+	ft_strlcat(ret, hex_str + 16 - digits, size);
+	return (ret);
+}
+
+char	*create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec)
+{
+	char	hex_str[17];
+	int		digits;
+	int		nbr_of_zeros;
+	int		size;
+	char	*ret;
+
+	digits = ft_unsigned_to_hex(d, hex_str, up_case);
+	nbr_of_zeros = 0;
+	while (nbr_of_zeros < (prec - digits))
+		nbr_of_zeros++;
+	size = nbr_of_zeros + digits + 1;
+	ret = ft_get_empty_str(size);
+	add_zeros_to_str(ret, nbr_of_zeros, size);
+	ft_strlcat(ret, hex_str + 16 - digits, size);
 	return (ret);
 }

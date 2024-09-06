@@ -72,7 +72,7 @@ test: $(TEST_TARGET)
 	- $(TEST_TARGET)
 
 examples: $(NAME) 
-	$(CC) -g $(CFLAGS) $(INCLUDES) -I$(LIBFT_DIR) $(TESTS_DIR)/examples.c -o $(TESTS_DIR)/examples.out $(NAME)
+	$(CC) -g $(INCLUDES) -I$(LIBFT_DIR) $(TESTS_DIR)/examples.c -o $(TESTS_DIR)/examples.out $(NAME)
 	- @$(TESTS_DIR)/examples.out
 
 libft:

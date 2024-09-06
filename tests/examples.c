@@ -80,6 +80,17 @@ int	main(void)
 	ft_printf("Hello %*u", -10, 0);
 	ft_printf("\n");
 
+	/* zero padding examples */
+	printf("zero padding examples\n");
+	printf("------------------------------\n");
+	printf("(\"Hello %%*u\", -10, 0): ");
+	printf("Hello %0*.*d", 10, 5, 1);
+	printf("\n");
+	printf("(\"Hello %%*u\", -10, 0): ");
+	fflush(stdout);
+	ft_printf("Hello %0*.*d", 10, 5, 1);
+	ft_printf("\n");
+
 
 	/* /\* left justification examples *\/ */
 	/* printf("Left justification (flag -):\n"); */
