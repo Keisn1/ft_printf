@@ -258,14 +258,14 @@ printf("[%2$][*m1$][conversion]", width, num);
 - if precision is given than =0= flag is ignored
 - behavior undefined for other conversions
 
-
 * conversion specifiers
 ** string conversion specifiers
 - printing with =ft_putstr_fd=
 - getting the length with =ft_strlen=
 ** character conversion specifiers
 - printing with =ft_putchar_fd=
-- always return 1
+- expect that always returns 1
+
 ** integer conversions specifiers
 - default *precision* = 1
 - zero with explicit precision 0, output is empty

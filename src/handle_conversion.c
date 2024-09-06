@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "ft_printf.h"
+#include <unistd.h>
 
 bool is_integer_conversion(char c) {
 	if (c == 'd' || c == 'u' || c == 'x' || c == 'X')
@@ -70,9 +71,9 @@ char*	handle_conversion_specifier(va_list ap, char specifier,  int prec)
 	if (specifier == 'c')
 	{
 		c2 = (char)va_arg(ap, int);
-		char* s = ft_strdup(" ");
-		s[0] = c2;
-		return s;
+		char* ret = (char*)malloc(1);
+		*ret = c2;
+		return ret;
 	}
 	return ft_strdup("");
 }
@@ -114,11 +115,20 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	if (is_integer_conversion(*p) && prec != 1)
 		zero_padding = false;
 
+	bool was_char = false;
+	if (*p == 'c')
+		was_char = true;
 	char* str = handle_conversion_specifier(ap, *p,  prec);
-	width = ft_strlen(str);
+	if (was_char)
+		width = 1;
+	else
+		width = ft_strlen(str);
 	if (padded_left)
 		width = pad(width, min_width, zero_padding);
-	ft_putstr_fd(str, STDOUT_FILENO);
+	if (was_char)
+		ft_putchar_fd(*str,STDOUT_FILENO);
+	else
+		ft_putstr_fd(str, STDOUT_FILENO);
 	if (!padded_left)
 		width = pad(width, min_width, zero_padding);
 	free(str);

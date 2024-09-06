@@ -95,7 +95,7 @@ int	main(void)
 	printf("%%%% examples");
 	printf("------------------------------\n");
 	printf("(\"Hello %%*u\", -10, 0): ");
-	printf("Hello %0*.*d", 10, 5, 1);
+	printf("%");
 	printf("\n");
 	printf("(\"Hello %%*u\", -10, 0): ");
 	fflush(stdout);
