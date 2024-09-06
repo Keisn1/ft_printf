@@ -12,10 +12,13 @@
 
 #include "libft.h"
 
-char *ft_get_empty_str(size_t n) {
-	char* ret = (char*)malloc(n);
+char	*ft_get_empty_str(size_t n)
+{
+	char	*ret;
+
+	ret = (char *)malloc(n);
 	if (ret == NULL)
-		return NULL;
+		return (NULL);
 	*ret = '\0';
-	return ret;
+	return (ret);
 }

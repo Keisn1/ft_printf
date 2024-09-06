@@ -45,9 +45,9 @@ int			pad(int width, int min_width, bool zero_padding);
 bool		is_integer_conversion(char c);
 const char	*extract_int_arg(va_list ap, const char *p, int *nbr);
 
-# ifdef __cplusplus
+#  ifdef __cplusplus
 
 }
-#endif
+#  endif
 
 # endif
