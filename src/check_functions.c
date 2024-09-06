@@ -12,34 +12,33 @@
 
 #include "ft_printf.h"
 
-const char	*check_zero_padding(bool *zero_padding, const char *p)
+const char	*check_zero_padding(t_flags *flags, const char *p)
 {
 	if (*p == '0')
 	{
-		*zero_padding = true;
+		flags->pad_with_zeros= true;
 		p++;
 	}
 	return (p);
 }
 
-const char	*check_padded_right(bool *padded_left, bool *zero_padding,
-		const char *p)
+const char	*check_padded_right(t_flags *flags, const char *p)
 {
 	if (*p == '-')
 	{
-		*padded_left = false;
-		*zero_padding = false;
+		flags->pad_right = false;
+		flags->pad_with_zeros = false;
 		p++;
 	}
 	return (p);
 }
 
-void	check_field_width(int *min_width, bool *padded_left, bool *zero_padding)
+void	check_field_width(t_flags *flags)
 {
-	if (*min_width < 0)
+	if (flags->min_width < 0)
 	{
-		*padded_left = false;
-		*zero_padding = false;
-		*min_width = -(*min_width);
+		flags->pad_right = false;
+		flags->pad_with_zeros = false;
+		flags->min_width = -(flags->min_width);
 	}
 }

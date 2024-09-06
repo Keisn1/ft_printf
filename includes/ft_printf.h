@@ -17,6 +17,13 @@
 # include <stdbool.h>
 # include <stddef.h>
 
+typedef struct s_flags {
+	bool pad_with_zeros;
+	bool pad_right;
+	int min_width;
+	int prec;
+} t_flags ;
+
 # ifdef __cplusplus
 
 extern "C"
@@ -43,10 +50,10 @@ char		*ft_itoa_abs(int d);
 void		add_zeros_to_str(char *str, int n, size_t size);
 int			pad(int width, int min_width, bool zero_padding);
 bool		is_integer_conversion(char c);
-void		check_field_width(int *min_w, bool *p_left, bool *zero_pad);
+void	check_field_width(t_flags *flags);
 const char	*extract_int_arg(va_list ap, const char *p, int *nbr);
-const char	*check_zero_padding(bool *zero_padding, const char *p);
-const char	*check_padded_right(bool *p_left, bool *z_pad, const char *p);
+const char	*check_zero_padding(t_flags *flags, const char *p);
+const char	*check_padded_right(t_flags *flags, const char *p);
 
 #  ifdef __cplusplus
 
