@@ -47,10 +47,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	len_s1 = ft_strlen(s1);
 	if (!len_s1)
-		return (ft_get_empty_str());
+		return (ft_get_empty_str(1));
 	start = find_start(s1, set);
 	if (!*start)
-		return (ft_get_empty_str());
+		return (ft_get_empty_str(1));
 	end = find_end(s1 + (len_s1 - 1), set);
 	end++;
 	res_o = (char *)malloc((end - start + 1) * sizeof(char));
