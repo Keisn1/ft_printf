@@ -34,61 +34,46 @@ char	*handle_conversion_specifier(va_list ap, char specifier, int prec)
 	return (ft_strdup(""));
 }
 
-int	print_char_and_free(char *str, bool padded_left, int min_width,
-		bool zero_padding)
+int	print_char(char *str, t_flags flags)
 {
 	int	width;
 
 	width = 1;
-	if (padded_left)
-		width = pad(width, min_width, zero_padding);
+	if (flags.pad_right)
+		width = pad(width, flags.min_width, flags.pad_with_zeros);
 	ft_putchar_fd(*str, STDOUT_FILENO);
-	if (!padded_left)
-		width = pad(width, min_width, zero_padding);
-	free(str);
+	if (!flags.pad_right)
+		width = pad(width, flags.min_width, flags.pad_with_zeros);
 	return (width);
 }
 
-int	print_str_and_free(char *str, bool padded_left, int min_width,
-		bool zero_padding)
+int	print_str(char *str, t_flags flags)
 {
 	int	width;
 
 	width = ft_strlen(str);
-	if (padded_left)
-		width = pad(width, min_width, zero_padding);
+	if (flags.pad_right)
+		width = pad(width, flags.min_width, flags.pad_with_zeros);
 	ft_putstr_fd(str, STDOUT_FILENO);
-	if (!padded_left)
-		width = pad(width, min_width, zero_padding);
-	free(str);
+	if (!flags.pad_right)
+		width = pad(width, flags.min_width, flags.pad_with_zeros);
 	return (width);
 }
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)
 {
-	int		min_width;
-	int		prec;
-	bool	padded_left;
-	bool	zero_padding;
+	t_flags	flags;
+	char	specifier;
+	char	*str;
 
-	prec = 1;
-	min_width = 0;
-	padded_left = true;
-	zero_padding = false;
-	p = check_zero_padding(&zero_padding, p);
-	p = check_padded_right(&padded_left, &zero_padding, p);
-	p = extract_int_arg(ap, p, &min_width);
-	check_field_width(&min_width, &padded_left, &zero_padding);
-	if (*p == '.')
-		p = extract_int_arg(ap, ++p, &prec);
-	if (is_integer_conversion(*p) && prec != 1)
-		zero_padding = false;
-	if (*p == 'c')
-		*count += print_char_and_free(handle_conversion_specifier(ap, *p, prec),
-				padded_left, min_width, zero_padding);
+	p = handle_flags(ap, p, &flags);
+	specifier = *p;
+	str = handle_conversion_specifier(ap, specifier, flags.prec);
+	if (specifier == 'c')
+		*count += print_char(str, flags);
 	else
-		*count += print_str_and_free(handle_conversion_specifier(ap, *p, prec),
-				padded_left, min_width, zero_padding);
+		*count += print_str(str, flags);
+	free(str);
 	p++;
 	return (p);
 }
