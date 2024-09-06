@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*handle_integer_hex(va_list ap, bool up_case, int prec)
 {

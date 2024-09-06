@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *fmt_string, ...)
 {
@@ -25,6 +25,9 @@ int	ft_printf(const char *fmt_string, ...)
 	{
 		if (*p == '%')
 		{
+			p++;
+			if (!*p)
+				return -1;
 			p = handle_conversion(ap, p, &count);
 			continue ;
 		}

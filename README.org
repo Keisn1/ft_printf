@@ -256,6 +256,8 @@ printf("[%2$][*m1$][conversion]", width, num);
 - *for integer*: left with zeros rather than blanks
 - =0= and =-= than =0= is ignored
 - if precision is given than =0= flag is ignored
+- behavior undefined for other conversions
+
 
 * conversion specifiers
 ** string conversion specifiers

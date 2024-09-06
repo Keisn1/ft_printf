@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include <stdbool.h>
@@ -24,7 +24,6 @@ extern "C"
 # endif
 	int ft_printf(const char *fmt_string, ...);
 
-
 	int print_hex_str(const char *hex_str, bool with_prefix);
 	void add_zeros_to_str(char *str, int n, size_t size);
 
@@ -35,8 +34,9 @@ extern "C"
 	char *handle_pointer(va_list ap, int prec);
 	char *create_int_str(int d, int prec);
 	char *create_int_str_unsigned(unsigned int d, int prec);
-	char *create_hex_str_from_pointer(void* p, int prec);
-char *create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec );
+	char *create_hex_str_from_pointer(void *p, int prec);
+	char *create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec);
+
 # ifdef __cplusplus
 }
 # endif

@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include "limits.h"
 #include <gtest/gtest.h>
 #include <unistd.h>
@@ -12,8 +12,11 @@ TEST(ft_printf_test, ZeroPadding) {
     compare_printf("Hello %010d", 0);
     compare_printf("Hello %0-10d", 1);
     compare_printf("Hello %0*d", -10, 1);
-
     compare_printf("Hello %0*.*d", 10, 5, 1);
+
+    compare_printf("Hello %0*.*u", 10, 5, 1);
+    compare_printf("Hello %0*.*x", 10, 5, 1);
+    compare_printf("Hello %0*.*X", 10, 5, 1);
 }
 TEST(ft_printf_test, field_width) {
     compare_printf("Hello %10d", 0);
@@ -95,6 +98,12 @@ TEST(ft_printf_test, without_arguments) {
     compare_printf_wo_args("Hello");
     compare_printf_wo_args("");
     compare_printf_wo_args("Hello %%");
+    compare_printf_wo_args("%");
+    compare_printf_wo_args(" %% ");
+    compare_printf_wo_args(" %%%%");
+    compare_printf_wo_args(" %% %% %% ");
+    compare_printf_wo_args(" %%  %%  %% ");
+    // compare_printf_wo_args(" %%  %%  %% %");
 }
 
 TEST(ft_printf_test, string_conversion) {
@@ -145,7 +154,7 @@ TEST(ft_printf_test, conversion_combos) {
 
 void compare_printf_wo_args(const char* fmt_string) {
     testing::internal::CaptureStdout();
-    int want_return = printf("%s", fmt_string);
+    int want_return = printf(fmt_string);
     std::string stdPrintfResult = testing::internal::GetCapturedStdout();
 
     testing::internal::CaptureStdout();

@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 int	main(void)
@@ -83,6 +83,17 @@ int	main(void)
 	/* zero padding examples */
 	printf("zero padding examples\n");
 	printf("------------------------------\n");
+	printf("\"Hello %%0*.*d\", 10, 5, 1\"");
+	printf("Hello %0*.*d", 10, 5, 1);
+	printf("\n");
+	printf("\"Hello %%0*.*d\", 10, 5, 1\"");
+	fflush(stdout);
+	ft_printf("Hello %0*.*d", 10, 5, 1);
+	ft_printf("\n");
+
+	/* %% examples */
+	printf("%%%% examples");
+	printf("------------------------------\n");
 	printf("(\"Hello %%*u\", -10, 0): ");
 	printf("Hello %0*.*d", 10, 5, 1);
 	printf("\n");
@@ -91,17 +102,5 @@ int	main(void)
 	ft_printf("Hello %0*.*d", 10, 5, 1);
 	ft_printf("\n");
 
-
-	/* /\* left justification examples *\/ */
-	/* printf("Left justification (flag -):\n"); */
-	/* printf("------------------------------\n"); */
-	/* printf("\"%%-.12d\": "); */
-	/* printf("%-.12d", 1234); */
-	/* printf("\n"); */
-	/* fflush(stdout); */
-	/* ft_printf("\"%%-.12d\": "); */
-	/* ft_printf("%-.12d", 1234); */
-	/* ft_printf("\n"); */
-	/* printf("------------------------------\n"); */
 	return (0);
 }

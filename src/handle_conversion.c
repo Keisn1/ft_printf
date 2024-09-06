@@ -11,9 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
+bool is_integer_conversion(char c) {
+	if (c == 'd' || c == 'u' || c == 'x' || c == 'X')
+		return true;
+	return false;
+}
 const char	*jump_digits(const char *p)
 {
 	while (ft_isdigit(*p))
@@ -50,7 +54,7 @@ char*	handle_conversion_specifier(va_list ap, char specifier,  int prec)
 	char	c2;
 
 	if (specifier == '%')
-		return ft_strdup("%%");
+		return ft_strdup("%");
 	if (specifier == 'd' || specifier == 'i')
 		return handle_integer(ap, prec);
 	if (specifier == 'u')
@@ -70,7 +74,7 @@ char*	handle_conversion_specifier(va_list ap, char specifier,  int prec)
 		s[0] = c2;
 		return s;
 	}
-	return ft_get_empty_str(0);
+	return ft_strdup("");
 }
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)
@@ -85,7 +89,6 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	min_width = 0;
 	padded_left = true;
 	zero_padding = false;
-	p++;
 
 	if (*p == '0') {
 		zero_padding = true;
@@ -108,8 +111,9 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	if (*p == '.')
 		p = extract_int_arg(ap, ++p, &prec);
 
-	if (*p == 'd' && prec != 1)
+	if (is_integer_conversion(*p) && prec != 1)
 		zero_padding = false;
+
 	char* str = handle_conversion_specifier(ap, *p,  prec);
 	width = ft_strlen(str);
 	if (padded_left)
