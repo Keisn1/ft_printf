@@ -71,6 +71,16 @@ int	main(void)
 	fflush(stdout);
 	ft_printf("%-10d", 0);
 	ft_printf("\n");
+	printf("------------------------------\n");
+	printf("(\"Hello %%*u\", -10, 0): ");
+	printf("Hello %*u", -10, 0);
+	printf("\n");
+	printf("(\"Hello %%*u\", -10, 0): ");
+	fflush(stdout);
+	ft_printf("Hello %*u", -10, 0);
+	ft_printf("\n");
+
+
 	/* /\* left justification examples *\/ */
 	/* printf("Left justification (flag -):\n"); */
 	/* printf("------------------------------\n"); */
