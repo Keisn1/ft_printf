@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
+#include "libft.h"
 
 char	*handle_integer_hex(va_list ap, bool up_case, int prec)
 {
@@ -22,7 +22,7 @@ char	*handle_integer_hex(va_list ap, bool up_case, int prec)
 		return (ft_get_empty_str(1));
 	if (prec == 0)
 		prec = 1;
-	return create_hex_str_from_unsigned(d, up_case, prec);
+	return (create_hex_str_from_unsigned(d, up_case, prec));
 }
 
 char	*handle_unsigned_integer(va_list ap, int prec)

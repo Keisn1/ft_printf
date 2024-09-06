@@ -265,7 +265,6 @@ printf("[%2$][*m1$][conversion]", width, num);
 ** character conversion specifiers
 - printing with =ft_putchar_fd=
 - expect that always returns 1
-
 ** integer conversions specifiers
 - default *precision* = 1
 - zero with explicit precision 0, output is empty

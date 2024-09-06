@@ -42,6 +42,7 @@ extern "C"
 	int ft_isalpha(char c);
 	int ft_isalnum(int c);
 	int ft_isdigit(char c);
+	const char	*ft_jump_digits(const char *p);
 	int ft_isascii(int c);
 	int ft_isprint(int c);
 	size_t ft_strlen(const char *s);

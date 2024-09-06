@@ -7,9 +7,30 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, PercentageFlag) {
+    compare_printf_wo_args("Hello");
+    compare_printf_wo_args("");
+    compare_printf_wo_args("Hello %%");
+    compare_printf_wo_args("%");
+    compare_printf_wo_args(" %% ");
+    compare_printf_wo_args(" %%%%");
+    compare_printf_wo_args(" %% %% %% ");
+    compare_printf_wo_args(" %%  %%  %% ");
+    // TODO: This is not implemented yet
+    // compare_printf_wo_args(" %%  %%  %% %");
+}
+
 TEST(ft_printf_test, string_conversion) {
     compare_printf("Hello %s", "World");
     compare_printf("Hello %s", "");
+
+    // string
+    compare_printf("Hello %10s", "hello");
+    compare_printf("Hello %*s", -10, "hello");
+    compare_printf("Hello %*.5s", -10, "hello");
+
+    // NULL
+    compare_printf("Hello %s", NULL);
 }
 
 TEST(ft_printf_test, character_conversion) {
@@ -23,6 +44,11 @@ TEST(ft_printf_test, character_conversion) {
     compare_printf(" %c %c %c ", '0', 6, '1');
     compare_printf(" %c %c %c ", '0', 127, '1');
     compare_printf(" %c %c %c ", '0', 0, '1');
+
+    // char with precision and width
+    compare_printf("Hello %10c",  'b');
+    compare_printf("Hello %*c", -10, 'b');
+    compare_printf("Hello %*.5c", -10,  'b');
 }
 
 TEST(ft_printf_test, IntegerConversions) {
@@ -70,97 +96,59 @@ TEST(ft_printf_test, IntegerConversions) {
     compare_printf("Hello %0*.*d", 10, 5, 1);
 }
 
-TEST(ft_printf_test, ZeroPadding) {
+TEST(ft_printf_test, UnsignedIntegerConversions) {
+    compare_printf(" %u ", 10);
+    compare_printf(" %u ", 100);
+    compare_printf(" %u ", 101);
 
-    compare_printf("Hello %0*.*u", 10, 5, 1);
-    compare_printf("Hello %0*.*x", 10, 5, 1);
-    compare_printf("Hello %0*.*X", 10, 5, 1);
-}
-TEST(ft_printf_test, field_width) {
+    unsigned int d = (unsigned int)INT_MAX  + 10;
+    compare_printf("Hello %u", d);
+    compare_printf("Hello %u", -10);
+    compare_printf("Hello %u", 0);
+    compare_printf("Hello %u", ((unsigned int)INT_MAX)+((unsigned int)INT_MAX));
 
-    // unsigned integer
-    compare_printf("Hello %10u", 0);
-    compare_printf("Hello %*.5u", -10, 0);
-    compare_printf("Hello %*.5u", -10, ((unsigned int)INT_MAX)+10);
-    compare_printf("Hello %*u", -10, 0);
-    compare_printf("Hello %*u", -10, ((unsigned int)INT_MAX)+10);
-
-    // hex
-    compare_printf("Hello %10x", 0);
-    compare_printf("Hello %*.5x", -10, 0);
-    compare_printf("Hello %*.5x", -10, ((unsigned int)INT_MAX)+10);
-    compare_printf("Hello %*x", -10, 0);
-    compare_printf("Hello %*x", -10, ((unsigned int)INT_MAX)+10);
-
-    // hex
-    compare_printf("Hello %10X", 0);
-    compare_printf("Hello %*.5X", -10, 0);
-    compare_printf("Hello %*.5X", -10, ((unsigned int)INT_MAX)+10);
-    compare_printf("Hello %*X", -10, 0);
-    compare_printf("Hello %*X", -10, ((unsigned int)INT_MAX)+10);
-
-    // string
-    compare_printf("Hello %10s", "hello");
-    compare_printf("Hello %*s", -10, "hello");
-    compare_printf("Hello %*.5s", -10, "hello");
-
-    // char
-    compare_printf("Hello %10c",  'b');
-    compare_printf("Hello %*c", -10, 'b');
-    compare_printf("Hello %*.5c", -10,  'b');
-
-    // pointer
-    int d = 123;
-    compare_printf("Hello %20p",  &d);
-    compare_printf("Hello %*.5p", -20,  0);
-    compare_printf("Hello %*.5p", -20,  1);
-    compare_printf("Hello %*.5p", -20,  -1);
-}
-
-TEST(ft_printf_test, integer_conversions_with_precision) {
-    // unsigned integer
+    // unsigned integer with precision
     compare_printf("%.*u", 8, 12);
     compare_printf("%.*u", -8, 12);
     compare_printf("%.0u", 12);
     compare_printf("%.0u", 0);
 
+    // unsigned integer with width
+    compare_printf("Hello %10u", 0);
+    compare_printf("Hello %*u", -10, 0);
+    compare_printf("Hello %*u", -10, ((unsigned int)INT_MAX)+10);
+
+    // zero padding, width and precision
+    compare_printf("Hello %0*.*u", 10, 5, 1);
+    compare_printf("Hello %*.5u", -10, 0);
+    compare_printf("Hello %*.5u", -10, ((unsigned int)INT_MAX)+10);
+}
+
+TEST(ft_printf_test, ZeroPadding) {
+    compare_printf("Hello %0*.*x", 10, 5, 1);
+    compare_printf("Hello %0*.*X", 10, 5, 1);
+}
+
+TEST(ft_printf_test, HexadecimalUnsignedIntegerConversions) {
     // hex
-    compare_printf("%.0x", 0);
-    compare_printf("%.4x", 0);
-    compare_printf("%.*x", 10, INT_MIN);
-    compare_printf("%.*x", 20, INT_MIN);
-}
-
-TEST(ft_printf_test, without_arguments) {
-    compare_printf_wo_args("Hello");
-    compare_printf_wo_args("");
-    compare_printf_wo_args("Hello %%");
-    compare_printf_wo_args("%");
-    compare_printf_wo_args(" %% ");
-    compare_printf_wo_args(" %%%%");
-    compare_printf_wo_args(" %% %% %% ");
-    compare_printf_wo_args(" %%  %%  %% ");
-    // compare_printf_wo_args(" %%  %%  %% %");
-}
-
-
-
-
-TEST(ft_printf_test, integer_conversions) {
-
-    // with unsigned decimal (u)
-    unsigned int d = (unsigned int)INT_MAX  + 10;
-    compare_printf("Hello %u", d);
-    compare_printf("Hello %u", -10);
-    compare_printf("Hello %u", 0);
-
-
     compare_printf("Hello %x", 1234);
     compare_printf("Hello %x", 0);
     compare_printf("Hello %x", 16748);
     compare_printf("Hello %x", UINT_MAX);
-
     compare_printf("Hello %X", UINT_MAX);
+
+    // hex with precision
+    compare_printf("%.0x", 0);
+    compare_printf("%.4x", 0);
+    compare_printf("%.*x", 10, INT_MIN);
+    compare_printf("%.*x", 20, INT_MIN);
+
+    // hex with width and precision
+    compare_printf("Hello %10x", 0);
+    compare_printf("Hello %*.5x", -10, 0);
+    compare_printf("Hello %*.5x", -10, ((unsigned int)INT_MAX)+10);
+    compare_printf("Hello %*x", -10, 0);
+    compare_printf("Hello %*x", -10, ((unsigned int)INT_MAX)+10);
 }
 
 TEST(ft_printf_test, pointer_conversion) {
@@ -169,6 +157,14 @@ TEST(ft_printf_test, pointer_conversion) {
     compare_printf("Hello %p", 0);
     compare_printf("Hello %p", 1);
     compare_printf("Hello %p", -1);
+
+    // pointer with precision and width
+    compare_printf("Hello %20p",  &d);
+    compare_printf("Hello %*.5p", -20,  0);
+    compare_printf("Hello %*.5p", -20,  1);
+    compare_printf("Hello %*.5p", -20,  -1);
+
+    // pointer with zero padding is undefined
 }
 
 TEST(ft_printf_test, conversion_combos) {

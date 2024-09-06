@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
+#include "libft.h"
 
 char	*handle_pointer(va_list ap, int prec)
 {
@@ -20,5 +20,5 @@ char	*handle_pointer(va_list ap, int prec)
 	p = va_arg(ap, void *);
 	if (p == NULL)
 		return (ft_strdup("(nil)"));
-	return create_hex_str_from_pointer(p, prec);
+	return (create_hex_str_from_pointer(p, prec));
 }
