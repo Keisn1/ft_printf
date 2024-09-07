@@ -26,6 +26,17 @@
     - [[#u][u]]
   - [[#pointer-conversion-specifiers][pointer conversion specifiers]]
 - [[#flags][flags]]
+- [[#bonus][bonus]]
+  - [[#conversions][conversions]]
+    - [[#n][n]]
+    - [[#f---float--double][f - float / double]]
+    - [[#e---exponential][e - exponential]]
+    - [[#g][g]]
+  - [[#flags-1][flags]]
+    - [[#][#]]
+    - [[#----space][' ' - SPACE]]
+    - [[#-1][+]]
+    - [[#hh][hh]]
 
 * Makefile
 ** Integrating libft into libftprintf
@@ -286,3 +297,82 @@ printf("[%2$][*m1$][conversion]", width, num);
 * flags
 
 The character % is followed by zero or more of the following flags:
+* bonus
+** conversions
+*** n
+- a conversion specifier
+- The number of  characters written so far is stored into the integer pointed to  by  the  corresponding argument
+- argument shall  be an int\*,  or variant whose size matches the _(optionally)_  supplied integer length modifier
+- no argument is converted
+- behavior is undefined if conversion specification includes any flags, a field width or a precision
+*** f - float / double
+=[-]ddd.ddd= : default =6=
+- rounded
+- converted to decimal notation
+- nbr of digits after decimal-point character is equal to the precision spec
+- precision = 0 => no deciaml point
+- at least one digit appears before a decimal-point
+-
+*** e - exponential
+=[-]d.ddde+/-dd= : default =6=
+- rounded
+- one digit before the decimal point
+- nbr of digits after decimal-point is the precision
+- no decimal-point character if precision is missing
+- exponent always contains at least 2 digits
+- if value is zero, exponent is 00
+*** g
+- if precision is 0, it is treated as 1
+- Style [[*e - exponential][e]] is used if exponent is
+  - less than =-4=
+  - greater than or equal to the precision
+- trailing zeros are removed from the fractional part of the result
+- a decimal point appears only if it is followed by at least one digit
+** flags
+*** #
+- "alternate form" conversion
+- 'x': to "0x" or "0X" for nonzero result
+- double: result always contains a decimal-point
+- "g": trailing zeros are not removed
+- for "m", errno contains valid error code
+- for other conversions undefined
+*** ' ' - SPACE
+- (a space)  A blank should  be left before a positive number (or empty string) produced by a signed conversion
+- This is useful for formatting purposes, to ensure that positive numbers align correctly with negative numbers when using a fixed-width format.
+- If the value is negative, the negative sign is placed before the number as usual
+*** +
+- always place a sign before a number
+- placed before  a number produced by a signed conversion.
+- By default, a sign is used only for  negative numbers.
+-  A '+' overrides a space if both are used
+*** hh
+- integer conversion to a signed char or unsigned char
+**** hh what are practical implications?
+
+When using the "hh" flag in printf, the practical implications are:
+1. It tells the printf function that the corresponding argument should be interpreted as a signed char or unsigned char. This can affect how the argument is formatted and displayed.
+2. It can be useful when you want to print the value of a char variable as an integer value, or when you want to ensure that a char argument is treated correctly by printf.
+3. It allows you to control how the argument is converted and displayed in the output, especially when dealing with characters or small integer values.
+
+**** give me examples that illustrate the difference in behavior and output
+
+#+begin_src c
+#include <stdio.h>
+
+int main() {
+    char c = 'A';
+    unsigned char uc = 65;
+
+    // Using %c specifier without hh flag
+    printf("Character c: %c\n", c);
+    printf("Character uc: %c\n", uc);
+
+    // Using %c specifier with hh flag
+    printf("Character c (with hh): %hhd\n", c);
+    printf("Character uc (with hh): %hhu\n", uc);
+
+    return 0;
+}
+#+end_src
+
+In the code above, the first two printf statements without the "hh" flag will interpret both =c= and =uc= as integers and print the corresponding ASCII characters for their values. The second set of printf statements with the "hh" flag will interpret =c= as a char and =uc= as an unsigned char, printing their numerical values instead of the corresponding characters.
