@@ -55,9 +55,23 @@ $(OBJ_DIR):
 $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
+# Bonus target
+BONUS_NAME := bonus_name
+BONUS_INCLUDES := -Iincludes_bonus
+BONUS_SRC_DIR := ./bonus
+BONUS_SRC_FILES := $(wildcard $(BONUS_SRC_DIR)/*.c)
+BONUS_OBJ_FILES := $(BONUS_SRC_FILES:$(BONUS_SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+$(BONUS_NAME): $(BONUS_OBJ_FILES) $(LIBFT_DIR)/libft.a
+	cp $(LIBFT_DIR)/libft.a libftprintf.a
+	ar rc libftprintf.a $(BONUS_OBJ_FILES)
+
+$(OBJ_DIR)/%.o: $(BONUS_SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(BONUS_INCLUDES) -I$(LIBFT_DIR) -c $< -o $@
+
 ############ PHONY ##################
 clean:
-	rm -f $(OBJ_FILES)
+	rm -f $(OBJ_FILES) $(BONUS_OBJ_FILES)
 
 fclean: clean
 	rm -f $(BIN_DIR)/*
@@ -76,9 +90,23 @@ libft:
 norminette:
 	norminette -R CheckForbiddenSourceHeader -R CheckDefine
 
+bonus: $(BONUS_NAME)
+# bonus: SRC_DIR := ./bonus
+# bonus: INCLUDES := -Iincludes_bonus
+# bonus: SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+# bonus: OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+# bonus: all
+# bonus: SRC_DIR := ./bonus
+# bonus: SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+# bonus: OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+# bonus: INCLUDES := -Iincludes_bonus
+
+# bonus:
+# 	$(MAKE) all SRC_DIR="$(SRC_DIR)" SRC_FILES="$(SRC_FILES)" INCLUDES="$(INCLUDES)" OBJ_FILES="$(OBJ_FILES)"
+
 ############ PRINTING ##################
 #Phony targets
-.PHONY: all clean fclean test libft
+.PHONY: all clean fclean test libft bonus
 
 print_test_files:
 	@echo $(TEST_FILES)
