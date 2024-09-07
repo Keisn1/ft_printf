@@ -5,16 +5,16 @@
       "-Wall",
       "-Werror",
       "-Wextra",
-      "-Iincludes",
-      "-Ilibft",
+      "-Iincludes_bonus",
+      "-I./libft",
       "-c",
       "-o",
-      "ft_printf.o",
-      "src/ft_printf.c"
+      "obj/flags_bonus.o",
+      "bonus/flags_bonus.c"
     ],
     "directory": "/home/kay/workspace/ft_printf",
-    "file": "/home/kay/workspace/ft_printf/src/ft_printf.c",
-    "output": "/home/kay/workspace/ft_printf/ft_printf.o"
+    "file": "/home/kay/workspace/ft_printf/bonus/flags_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/flags_bonus.o"
   },
   {
     "arguments": [
@@ -23,17 +23,35 @@
       "-Wall",
       "-Werror",
       "-Wextra",
-      "-Iincludes",
       "-fsanitize=address",
       "-pthread",
       "libftprintf.a",
-      "libft/libft.a",
+      "-Iincludes_bonus",
       "-o",
-      "bin/run_tests",
-      "tests/main.cpp"
+      "bin/run_bonus_tests",
+      "./tests_bonus/main.cpp"
     ],
     "directory": "/home/kay/workspace/ft_printf",
-    "file": "/home/kay/workspace/ft_printf/tests/main.cpp",
-    "output": "/home/kay/workspace/ft_printf/bin/run_tests"
+    "file": "/home/kay/workspace/ft_printf/tests_bonus/main.cpp",
+    "output": "/home/kay/workspace/ft_printf/bin/run_bonus_tests"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-fsanitize=address",
+      "-pthread",
+      "libftprintf.a",
+      "-Iincludes_bonus",
+      "-o",
+      "bin/run_bonus_tests",
+      "./tests_bonus/test_ft_printf.cpp"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/tests_bonus/test_ft_printf.cpp",
+    "output": "/home/kay/workspace/ft_printf/bin/run_bonus_tests"
   }
 ]
