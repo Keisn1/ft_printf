@@ -46,7 +46,7 @@ extern "C"
 	char *create_int_str(int d, int prec);
 	char *create_int_str_unsigned(unsigned int d, int prec);
 	char *create_hex_str_from_pointer(void *p, int prec);
-	char *create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec, bool alt_form);
+	char *create_hex_str_from_unsigned(unsigned long d, bool up_case, int prec, bool alt_form);
 
 	int pad(int width, int min_width, bool zero_padding);
 	bool is_integer_conversion(char c);

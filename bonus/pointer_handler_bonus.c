@@ -20,5 +20,6 @@ char	*handle_pointer(va_list ap, t_flags flags)
 	p = va_arg(ap, void *);
 	if (p == NULL)
 		return (ft_strdup("(nil)"));
-	return (create_hex_str_from_pointer(p, flags.prec));
+	flags.alt_form = true;
+	return create_hex_str_from_unsigned((unsigned long)p, false, flags.prec, flags.alt_form);
 }
