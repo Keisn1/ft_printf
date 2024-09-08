@@ -7,6 +7,10 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, HashFlags) {
+    compare_printf("%#x", 54);
+}
+
 TEST(ft_printf_test, PercentageFlag) {
     compare_printf_wo_args("Hello");
     compare_printf_wo_args("");

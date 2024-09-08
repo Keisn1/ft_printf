@@ -102,5 +102,13 @@ int	main(void)
 	ft_printf("Hello %0*.*d", 10, 5, 1);
 	ft_printf("\n");
 
+
+	/* %% bonus */
+	printf("\n\n");
+	printf("BONUS");
+	printf("------------------------------\n");
+	printf("# - Hash Flag\n");
+	printf("------------------------------\n");
+	printf("%#x", 54);
 	return (0);
 }
