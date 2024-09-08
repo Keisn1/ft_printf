@@ -12,36 +12,84 @@
 
 #include "ft_printf_bonus.h"
 #include "libft.h"
+#include <stdio.h>
 
-char	*handle_string(va_list ap, t_flags flags)
+int handle_string(va_list ap, t_flags flags)
 {
 	char	*s;
 	char	*ret;
+	int ret_val;
 
 	s = va_arg(ap, char *);
-	if (flags.prec == 0 || (flags.prec >= 0 && flags.prec < 6 && !s))
-	/* if (flags.prec == 0) */
-		return (ft_get_empty_str(1));
-	if (!s)
-		return (ft_strdup("(null)"));
-	if (flags.prec < 0)
-		return (ft_strdup(s));
-	if ((size_t)flags.prec > ft_strlen(s))
-		return (ft_strdup(s));
+        if (flags.prec == 0 || (flags.prec >= 0 && flags.prec < 6 && !s)) {
+
+		ret_val = 0;
+		if (flags.pad_right)
+			ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+		if (!flags.pad_right)
+			ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+		return ret_val;
+
+        }
+	if (!s) {
+		ret_val = ft_strlen("(null)");
+		if (flags.pad_right)
+			ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+		ft_putstr_fd("(null)", STDOUT_FILENO);
+		if (!flags.pad_right)
+			ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+		return ret_val;
+	}
+
+	if (flags.prec < 0) {
+
+		ret_val = ft_strlen(s);
+		if (flags.pad_right)
+			ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+		ft_putstr_fd(s, STDOUT_FILENO);
+		if (!flags.pad_right)
+			ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+		return ret_val;
+	}
+	if ((size_t)flags.prec > ft_strlen(s)) {
+		ft_putstr_fd(s, STDOUT_FILENO);
+		return ft_strlen(s);
+	}
+
 	ret = (char *)malloc(flags.prec + 1);
 	if (!ret)
-		return (NULL);
+		return 0;
+
 	ft_strlcpy(ret, s, (size_t)flags.prec + 1);
-	return (ret);
+
+	ret_val = ft_strlen(ret);
+	if (flags.pad_right)
+		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+	ft_putstr_fd(ret, STDOUT_FILENO);
+	if (!flags.pad_right)
+		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+	free(ret);
+
+	return (ret_val);
 }
 
-char	*handle_char(va_list ap)
+int handle_char(va_list ap, t_flags flags)
 {
 	char	c2;
 	char	*ret;
+	int ret_val;
 
 	c2 = (char)va_arg(ap, int);
 	ret = (char *)malloc(1);
 	*ret = c2;
-	return (ret);
+	ret_val = 1;
+	if (flags.pad_right)
+		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+	ft_putchar_fd(c2, STDOUT_FILENO);
+	if (!flags.pad_right)
+		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
+	free(ret);
+
+	return ret_val;
+	/* return (ret); */
 }

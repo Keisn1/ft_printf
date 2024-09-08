@@ -14,10 +14,10 @@
 #include "libft.h"
 #include <unistd.h>
 
-char	*handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
+int handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 {
 	if (specifier == '%')
-		return (ft_strdup("%"));
+		return handle_perc();
 	if (specifier == 'd' || specifier == 'i')
 		return (handle_integer(ap, flags));
 	if (specifier == 'u')
@@ -31,8 +31,8 @@ char	*handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 	if (specifier == 'p')
 		return (handle_pointer(ap, flags));
 	if (specifier == 'c')
-		return (handle_char(ap));
-	return (ft_strdup(""));
+		return (handle_char(ap, flags));
+	return 0;
 }
 
 int	print_char(char *str, t_flags flags)
@@ -64,21 +64,8 @@ int	print_str(char *str, t_flags flags)
 const char	*handle_conversion(va_list ap, const char *p, int *count)
 {
 	t_flags	flags;
-	char	specifier;
-	char	*str;
 
 	p = handle_flags(ap, p, &flags);
-	specifier = *p;
-	str = handle_conversion_specifier(ap, specifier, flags);
-	if (specifier == 'c')
-		*count += print_char(str, flags);
-	else if (specifier == '%') {
-		ft_putchar_fd('%', STDOUT_FILENO);
-		*count += 1;
-	}
-	else
-		*count += print_str(str, flags);
-	free(str);
-	p++;
+	*count += handle_conversion_specifier(ap, *(p++), flags);
 	return (p);
 }

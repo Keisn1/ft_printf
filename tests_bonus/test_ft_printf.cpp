@@ -158,7 +158,6 @@ TEST(ft_printf_test, IntegerConversions) {
     compare_printf(" %014i ", ULONG_MAX);
     compare_printf(" %015i ", 9223372036854775807LL);
     compare_printf(" %09i %010i %011i %012i %013i %014i %015i", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
-    compare_printf(" %01u ", 0);
 
     compare_printf("%08.5i", 34);
 }
@@ -189,6 +188,9 @@ TEST(ft_printf_test, UnsignedIntegerConversions) {
     compare_printf("Hello %0*.*u", 10, 5, 1);
     compare_printf("Hello %*.5u", -10, 0);
     compare_printf("Hello %*.5u", -10, ((unsigned int)INT_MAX)+10);
+    compare_printf(" %01u ", 0);
+    // TODO: not sure if this is doing the right thing
+    // compare_printf("%08.5u", 34);
 }
 
 TEST(ft_printf_test, ZeroPadding) {
