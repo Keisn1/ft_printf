@@ -94,7 +94,7 @@ char	*create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec, bool 
 	if (alt_form)
 		size += 2;
 	ret = ft_get_empty_str(size);
-	if (alt_form)
+	if (alt_form) 
 		ft_strlcat(ret, "0x", size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);

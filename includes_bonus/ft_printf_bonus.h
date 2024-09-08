@@ -34,16 +34,19 @@ extern "C"
 	int ft_printf(const char *fmt_string, ...);
 
 	const char *handle_conversion(va_list ap, const char *p, int *count);
-	char *handle_integer(va_list ap, int prec);
-	char *handle_unsigned_integer(va_list ap, int prec);
-	char *handle_integer_hex(va_list ap, bool up_case, int prec, bool alt_form);
-	char *handle_pointer(va_list ap, int prec);
+
+	/* handler for specifiers */
+	char *handle_integer(va_list ap, t_flags flags);
+	char *handle_unsigned_integer(va_list ap, t_flags flags);
+	char *handle_integer_hex(va_list ap, bool up_case, t_flags flags);
+	char *handle_pointer(va_list ap, t_flags flags);
+	char *handle_string(va_list ap);
+	char *handle_char(va_list ap);
+
 	char *create_int_str(int d, int prec);
 	char *create_int_str_unsigned(unsigned int d, int prec);
 	char *create_hex_str_from_pointer(void *p, int prec);
 	char *create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec, bool alt_form);
-	char *handle_string(va_list ap);
-	char *handle_char(va_list ap);
 
 	int pad(int width, int min_width, bool zero_padding);
 	bool is_integer_conversion(char c);
