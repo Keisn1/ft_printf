@@ -12,9 +12,10 @@
 
 #include "ft_printf_bonus.h"
 #include "libft.h"
+#include <stdio.h>
 
 /* return value needs to be freeed */
-char	*create_int_str(int d, int prec)
+char	*create_int_str(int d, t_flags flags)
 {
 	char	*nbr;
 	char	*ret;
@@ -26,12 +27,17 @@ char	*create_int_str(int d, int prec)
 	if (d < 0)
 		sign = "-";
 	nbr_of_digits = ft_num_of_digits(d);
-	if (nbr_of_digits >= prec)
-		prec = nbr_of_digits;
-	size = prec + ft_strlen(sign) + 1;
+	if (nbr_of_digits >= flags.prec)
+		flags.prec = nbr_of_digits;
+	size = flags.prec + ft_strlen(sign) + 1;
+	if (flags.pad_with_zeros && (flags.min_width >= size))
+		size = flags.min_width + 1;
 	ret = ft_get_empty_str(size);
 	ft_strlcat(ret, sign, size);
-	add_zeros_to_str(ret, prec - nbr_of_digits, size);
+	if (flags.pad_with_zeros)
+		add_zeros_to_str(ret, flags.min_width - (flags.prec + ft_strlen(sign)),
+			size);
+	add_zeros_to_str(ret, flags.prec - nbr_of_digits, size);
 	nbr = ft_itoa_abs(d);
 	ft_strlcat(ret, nbr, size);
 	free(nbr);
@@ -82,7 +88,7 @@ char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
 	if (flags.alt_form)
 		size += 2;
 	ret = ft_get_empty_str(size);
-	if (flags.alt_form)
+	if (flags.alt_form && d != 0)
 		ft_strlcat(ret, get_hex_prefix(up_case), size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);

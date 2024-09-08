@@ -91,17 +91,14 @@ int	main(void)
 	ft_printf("Hello %0*.*d", 10, 5, 1);
 	ft_printf("\n");
 
-	/* %% examples */
-	printf("%%%% examples");
 	printf("------------------------------\n");
-	printf("(\"Hello %%*u\", -10, 0): ");
-	printf("%");
-	printf("\n");
-	printf("(\"Hello %%*u\", -10, 0): ");
+    printf("(\" %%04d \", -14): ");
+    printf(" %04d ", -14);
+    printf("\n");
+    printf("(\" %%04d \", -14): ");
 	fflush(stdout);
-	ft_printf("Hello %0*.*d", 10, 5, 1);
+    ft_printf(" %04d ", -14);
 	ft_printf("\n");
-
 
 	/* %% bonus */
 	printf("\n\n");
@@ -110,5 +107,8 @@ int	main(void)
 	printf("# - Hash Flag\n");
 	printf("------------------------------\n");
 	printf("%#x", 54);
+
+
 	return (0);
+
 }

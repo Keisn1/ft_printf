@@ -7,11 +7,22 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, WeirtInput) {
+    compare_printf("%5%");
+}
+
 TEST(ft_printf_test, HashFlags) {
     compare_printf("%#x", 54);
     compare_printf("%#X", 54);
     compare_printf("%#X", 54);
     compare_printf("Hello %p", ULONG_MAX);
+    compare_printf(" %#x ", 0);
+
+    compare_printf(" %#x ", LONG_MIN);
+    compare_printf(" %#x %#x %#x %#x %#x %#x %#x", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+    compare_printf(" %#X ", 0);
+    compare_printf(" %#X ", LONG_MIN);
+    compare_printf(" %#X %#X %#X %#X %#X %#X %#X", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 }
 
 TEST(ft_printf_test, PercentageFlag) {
@@ -41,6 +52,14 @@ TEST(ft_printf_test, string_conversion) {
 
     // with precision
     compare_printf("%.s", NULL);
+    compare_printf("%.3s", "hello");
+    compare_printf("%.s", "hello");
+    compare_printf("%.0s", "hello");
+    compare_printf("%.3s%.2s", "holla", "welt");
+    compare_printf("%.2s%.7s", "hello", "world");
+    compare_printf("%.7s%.2s", "hello", "world");
+    compare_printf("%7.5s", "bombastic");;
+    compare_printf("%-7.5s", "tubular");
 }
 
 TEST(ft_printf_test, character_conversion) {
@@ -104,6 +123,27 @@ TEST(ft_printf_test, IntegerConversions) {
     compare_printf("Hello %0*d", -10, 1);
     compare_printf("Hello %0100.12d", INT_MIN);
     compare_printf("Hello %0*.*d", 10, 5, 1);
+
+    // 0 and negative values
+    compare_printf(" %04d ", -14);
+    compare_printf(" %05d ", -15);
+    compare_printf(" %06d ", -16);
+
+    compare_printf(" %011d ", LONG_MAX);
+    compare_printf(" %013d ", UINT_MAX);
+    compare_printf(" %014d ", ULONG_MAX);
+    compare_printf(" %015d ", 9223372036854775807LL);
+
+    compare_printf(" %09d %010d %011d %012d %013d %014d %015d", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+
+    compare_printf(" %05i ", -15);
+    compare_printf(" %06i ", -16);
+    compare_printf(" %01i ", -99);
+    compare_printf(" %012i ", LONG_MIN);
+    compare_printf(" %014i ", ULONG_MAX);
+    compare_printf(" %015i ", 9223372036854775807LL);
+    compare_printf(" %09i %010i %011i %012i %013i %014i %015i", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+    compare_printf(" %01u ", 0);
 }
 
 TEST(ft_printf_test, UnsignedIntegerConversions) {

@@ -52,5 +52,5 @@ char	*handle_integer(va_list ap, t_flags flags)
 		return (ft_get_empty_str(1));
 	if (prec <= 0)
 		prec = 1;
-	return (create_int_str(d, prec));
+	return (create_int_str(d, flags));
 }

@@ -43,7 +43,7 @@ char		*handle_pointer(va_list ap, t_flags flags);
 char		*handle_string(va_list ap, t_flags flags);
 char		*handle_char(va_list ap);
 
-char		*create_int_str(int d, int prec);
+char		*create_int_str(int d, t_flags flags);
 char		*create_int_str_unsigned(unsigned int d, int prec);
 char		*create_hex_str_from_unsigned(unsigned long d, bool up_case,
 				t_flags flags);

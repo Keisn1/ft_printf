@@ -106,7 +106,7 @@ bonus: $(BONUS_NAME)
 test-bonus: fclean $(BONUS_TEST_TARGET)
 	- $(BONUS_TEST_TARGET)
 
-examples-bonus: $(NAME) 
+examples-bonus: $(BONUS_NAME)
 	$(CC) -g $(BONUS_INCLUDES) -I$(LIBFT_DIR) $(BONUS_TEST_DIR)/examples_bonus.c -o $(BONUS_TEST_DIR)/examples_bonus.out $(NAME)
 	- @$(BONUS_TEST_DIR)/examples_bonus.out
 
