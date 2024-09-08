@@ -103,7 +103,7 @@ norminette:
 
 bonus: $(BONUS_NAME)
 
-test-bonus: $(BONUS_TEST_TARGET)
+test-bonus: fclean $(BONUS_TEST_TARGET)
 	- $(BONUS_TEST_TARGET)
 
 examples-bonus: $(NAME) 

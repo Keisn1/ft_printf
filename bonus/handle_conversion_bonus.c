@@ -13,7 +13,7 @@
 #include "ft_printf_bonus.h"
 #include "libft.h"
 
-char	*handle_conversion_specifier(va_list ap, char specifier, int prec)
+char	*handle_conversion_specifier(va_list ap, char specifier, int prec, bool alt_form)
 {
 	if (specifier == '%')
 		return (ft_strdup("%"));
@@ -22,9 +22,9 @@ char	*handle_conversion_specifier(va_list ap, char specifier, int prec)
 	if (specifier == 'u')
 		return (handle_unsigned_integer(ap, prec));
 	if (specifier == 'x')
-		return (handle_integer_hex(ap, false, prec));
+		return (handle_integer_hex(ap, false, prec, alt_form));
 	if (specifier == 'X')
-		return (handle_integer_hex(ap, true, prec));
+		return (handle_integer_hex(ap, true, prec, alt_form));
 	if (specifier == 's')
 		return (handle_string(ap));
 	if (specifier == 'p')
@@ -68,7 +68,7 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 
 	p = handle_flags(ap, p, &flags);
 	specifier = *p;
-	str = handle_conversion_specifier(ap, specifier, flags.prec);
+	str = handle_conversion_specifier(ap, specifier, flags.prec, flags.alt_form);
 	if (specifier == 'c')
 		*count += print_char(str, flags);
 	else

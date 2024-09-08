@@ -12,6 +12,16 @@
 
 #include "ft_printf_bonus.h"
 
+const char	*check_alt_form(t_flags *flags, const char *p)
+{
+	if (*p == '#')
+	{
+		flags->alt_form = true;
+		p++;
+	}
+	return (p);
+}
+
 const char	*check_zero_padding(t_flags *flags, const char *p)
 {
 	if (*p == '0')

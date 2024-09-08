@@ -14,6 +14,7 @@
 
 void	init_flags(t_flags *flags)
 {
+	flags->alt_form = false;
 	flags->prec = 1;
 	flags->min_width = 0;
 	flags->pad_right = true;
@@ -23,6 +24,7 @@ void	init_flags(t_flags *flags)
 const char	*handle_flags(va_list ap, const char *p, t_flags *flags)
 {
 	init_flags(flags);
+	p = check_alt_form(flags, p);
 	p = check_zero_padding(flags, p);
 	p = check_padded_right(flags, p);
 	p = extract_int_arg(ap, p, &(flags->min_width));

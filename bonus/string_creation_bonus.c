@@ -78,7 +78,7 @@ char	*create_hex_str_from_pointer(void *p, int prec)
 	return (ret);
 }
 
-char	*create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec)
+char	*create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec, bool alt_form)
 {
 	char	hex_str[17];
 	int		digits;
@@ -91,7 +91,11 @@ char	*create_hex_str_from_unsigned(unsigned int d, bool up_case, int prec)
 	while (nbr_of_zeros < (prec - digits))
 		nbr_of_zeros++;
 	size = nbr_of_zeros + digits + 1;
+	if (alt_form)
+		size += 2;
 	ret = ft_get_empty_str(size);
+	if (alt_form)
+		ft_strlcat(ret, "0x", size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);
 	return (ret);
