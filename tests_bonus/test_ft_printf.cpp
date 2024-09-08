@@ -8,9 +8,12 @@ template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, WeirtInput) {
-    compare_printf("%5%");      // TODO
+    compare_printf("%5%");
     compare_printf("%-5%");
     compare_printf("%-05%");
+
+    compare_printf("percent 2 %12%");
+    compare_printf("percent 3 %-12%");
 }
 
 TEST(ft_printf_test, HashFlags) {
@@ -53,7 +56,6 @@ TEST(ft_printf_test, string_conversion) {
     compare_printf("Hello %s", NULL);
 
     // with precision
-    compare_printf("%.s", NULL);
     compare_printf("%.3s", "hello");
     compare_printf("%.s", "hello");
     compare_printf("%.0s", "hello");
@@ -62,6 +64,17 @@ TEST(ft_printf_test, string_conversion) {
     compare_printf("%.7s%.2s", "hello", "world");
     compare_printf("%7.5s", "bombastic");;
     compare_printf("%-7.5s", "tubular");
+    compare_printf("%.s", NULL);
+    compare_printf("%.06s", NULL);
+    compare_printf("%.05s", NULL);
+    compare_printf("%.03s", NULL);
+    compare_printf("%3.1s", NULL);
+    compare_printf("%9.1s", NULL);
+    compare_printf("%-3.1s", NULL);
+    compare_printf("%-9.1s", NULL);
+
+    compare_printf("p3 %.4s\n", NULL);
+    compare_printf("%50.2s", NULL);
 }
 
 TEST(ft_printf_test, character_conversion) {
@@ -146,6 +159,8 @@ TEST(ft_printf_test, IntegerConversions) {
     compare_printf(" %015i ", 9223372036854775807LL);
     compare_printf(" %09i %010i %011i %012i %013i %014i %015i", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
     compare_printf(" %01u ", 0);
+
+    compare_printf("%08.5i", 34);
 }
 
 TEST(ft_printf_test, UnsignedIntegerConversions) {

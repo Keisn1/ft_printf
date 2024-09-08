@@ -19,7 +19,8 @@ char	*handle_string(va_list ap, t_flags flags)
 	char	*ret;
 
 	s = va_arg(ap, char *);
-	if (flags.prec == 0)
+	if (flags.prec == 0 || (flags.prec >= 0 && flags.prec < 6 && !s))
+	/* if (flags.prec == 0) */
 		return (ft_get_empty_str(1));
 	if (!s)
 		return (ft_strdup("(null)"));

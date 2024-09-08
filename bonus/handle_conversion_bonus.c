@@ -76,7 +76,6 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 		ft_putchar_fd('%', STDOUT_FILENO);
 		*count += 1;
 	}
-
 	else
 		*count += print_str(str, flags);
 	free(str);
