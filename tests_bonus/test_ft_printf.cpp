@@ -1,5 +1,5 @@
 #include "ft_printf_bonus.h"
-#include "limits.h"
+#include <limits.h>
 #include <gtest/gtest.h>
 #include <unistd.h>
 
@@ -10,6 +10,8 @@ void compare_printf(const char* fmt_string, Args... args);
 TEST(ft_printf_test, HashFlags) {
     compare_printf("%#x", 54);
     compare_printf("%#X", 54);
+    compare_printf("%#X", 54);
+    compare_printf("Hello %p", ULONG_MAX);
 }
 
 TEST(ft_printf_test, PercentageFlag) {
@@ -36,6 +38,9 @@ TEST(ft_printf_test, string_conversion) {
 
     // NULL
     compare_printf("Hello %s", NULL);
+
+    // with precision
+    compare_printf("%.s", NULL);
 }
 
 TEST(ft_printf_test, character_conversion) {

@@ -26,7 +26,7 @@ char	*handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 	if (specifier == 'X')
 		return (handle_integer_hex(ap, true, flags));
 	if (specifier == 's')
-		return (handle_string(ap));
+		return (handle_string(ap, flags));
 	if (specifier == 'p')
 		return (handle_pointer(ap, flags));
 	if (specifier == 'c')

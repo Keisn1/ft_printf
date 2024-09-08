@@ -67,7 +67,8 @@ void				ft_putendl_fd(char *s, int fd);
 int					ft_ptr_to_hex(void *p, char *hex_str);
 int					ft_unsigned_to_hex(unsigned int d, char *hex_str,
 						bool up_case);
-int	ft_unsigned_long_to_hex(unsigned long d, char *hex_str, bool up_case);
+int					ft_unsigned_long_to_hex(unsigned long d, char *hex_str,
+						bool up_case);
 int					ft_num_of_digits(int d);
 int					ft_num_of_digits_unsigned(unsigned int d);
 void				ft_putnbr_fd(int nb, int fd);

@@ -15,7 +15,7 @@
 void	init_flags(t_flags *flags)
 {
 	flags->alt_form = false;
-	flags->prec = 1;
+	flags->prec = -1;
 	flags->min_width = 0;
 	flags->pad_right = true;
 	flags->pad_with_zeros = false;
@@ -31,7 +31,7 @@ const char	*handle_flags(va_list ap, const char *p, t_flags *flags)
 	check_field_width(flags);
 	if (*p == '.')
 		p = extract_int_arg(ap, ++p, &(flags->prec));
-	if (is_integer_conversion(*p) && flags->prec != 1)
+	if (is_integer_conversion(*p) && flags->prec != -1)
 		flags->pad_with_zeros = false;
 	return (p);
 }

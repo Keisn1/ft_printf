@@ -336,6 +336,7 @@ The character % is followed by zero or more of the following flags:
 - "g": trailing zeros are not removed
 - for "m", errno contains valid error code
 - for other conversions undefined
+
 *** ' ' - SPACE
 - (a space)  A blank should  be left before a positive number (or empty string) produced by a signed conversion
 - This is useful for formatting purposes, to ensure that positive numbers align correctly with negative numbers when using a fixed-width format.
