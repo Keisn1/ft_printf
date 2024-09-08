@@ -21,5 +21,5 @@ char	*handle_pointer(va_list ap, t_flags flags)
 	if (p == NULL)
 		return (ft_strdup("(nil)"));
 	flags.alt_form = true;
-	return create_hex_str_from_unsigned((unsigned long)p, false, flags);
+	return (create_hex_str_from_unsigned((unsigned long)p, false, flags));
 }

@@ -9,6 +9,7 @@ void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, HashFlags) {
     compare_printf("%#x", 54);
+    compare_printf("%#X", 54);
 }
 
 TEST(ft_printf_test, PercentageFlag) {

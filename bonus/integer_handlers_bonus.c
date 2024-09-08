@@ -16,11 +16,10 @@
 char	*handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 {
 	unsigned int	d;
-	int prec;
+	int				prec;
 
 	d = va_arg(ap, unsigned int);
 	prec = flags.prec;
-
 	if (prec == 0 && d == 0)
 		return (ft_get_empty_str(1));
 	if (prec == 0)
@@ -31,7 +30,7 @@ char	*handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 char	*handle_unsigned_integer(va_list ap, t_flags flags)
 {
 	unsigned int	d;
-	int prec;
+	int				prec;
 
 	d = va_arg(ap, unsigned int);
 	prec = flags.prec;
@@ -45,7 +44,7 @@ char	*handle_unsigned_integer(va_list ap, t_flags flags)
 char	*handle_integer(va_list ap, t_flags flags)
 {
 	int	d;
-	int prec;
+	int	prec;
 
 	d = va_arg(ap, int);
 	prec = flags.prec;

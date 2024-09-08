@@ -58,7 +58,15 @@ char	*create_int_str_unsigned(unsigned int d, int prec)
 	return (ret);
 }
 
-char	*create_hex_str_from_unsigned(unsigned long d, bool up_case, t_flags flags)
+const char	*get_hex_prefix(bool up_case)
+{
+	if (up_case)
+		return ("0X");
+	return ("0x");
+}
+
+char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
+		t_flags flags)
 {
 	char	hex_str[17];
 	int		digits;
@@ -75,7 +83,7 @@ char	*create_hex_str_from_unsigned(unsigned long d, bool up_case, t_flags flags)
 		size += 2;
 	ret = ft_get_empty_str(size);
 	if (flags.alt_form)
-		ft_strlcat(ret, "0x", size);
+		ft_strlcat(ret, get_hex_prefix(up_case), size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);
 	return (ret);
