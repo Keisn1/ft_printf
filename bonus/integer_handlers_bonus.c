@@ -25,7 +25,7 @@ char	*handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 		return (ft_get_empty_str(1));
 	if (prec == 0)
 		prec = 1;
-	return (create_hex_str_from_unsigned(d, up_case, prec, flags.alt_form)); /* TODO: change signature */
+	return (create_hex_str_from_unsigned(d, up_case, flags));
 }
 
 char	*handle_unsigned_integer(va_list ap, t_flags flags)
