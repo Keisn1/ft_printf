@@ -12,6 +12,7 @@
 
 #include "ft_printf_bonus.h"
 #include "libft.h"
+#include <unistd.h>
 
 char	*handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 {
@@ -71,6 +72,11 @@ const char	*handle_conversion(va_list ap, const char *p, int *count)
 	str = handle_conversion_specifier(ap, specifier, flags);
 	if (specifier == 'c')
 		*count += print_char(str, flags);
+	else if (specifier == '%') {
+		ft_putchar_fd('%', STDOUT_FILENO);
+		*count += 1;
+	}
+
 	else
 		*count += print_str(str, flags);
 	free(str);

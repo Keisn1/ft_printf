@@ -8,7 +8,9 @@ template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, WeirtInput) {
-    compare_printf("%5%");
+    compare_printf("%5%");      // TODO
+    compare_printf("%-5%");
+    compare_printf("%-05%");
 }
 
 TEST(ft_printf_test, HashFlags) {
