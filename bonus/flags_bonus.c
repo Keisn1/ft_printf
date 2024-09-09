@@ -36,7 +36,8 @@ const char	*extract_flags(const char *p, t_flags *flags)
 {
 	while (is_flag(*p))
 	{
-		if (*p == 'h') {
+		if (*p == 'h')
+		{
 			p++;
 			if (*p == 'h')
 				flags->hh = true;

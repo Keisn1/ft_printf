@@ -324,7 +324,7 @@ The character % is followed by zero or more of the following flags:
 *** ll
 *** l
 *** h
-*** hh
+*** DONE hh
 - integer conversion to a signed char or unsigned char
 
 - A following integer conversion  corresponds to a signed char or unsigned  char argument
