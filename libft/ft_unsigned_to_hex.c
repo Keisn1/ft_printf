@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case)
+int	ft_unsigned_long_to_hex(unsigned long d, char *hex_str, bool up_case)
 {
 	const char	*hex_chars = "0123456789abcdef";
 	int			pos;
@@ -25,7 +25,7 @@ int	ft_unsigned_to_hex(unsigned int d, char *hex_str, bool up_case)
 	pos = 15;
 	while (pos >= 0)
 	{
-		c = hex_chars[((long unsigned)d >> (pos * 4)) & 0xF];
+		c = hex_chars[(d >> (pos * 4)) & 0xF];
 		if (c != '0' && digits == 1)
 			digits = pos + 1;
 		hex_str[15 - pos] = c;

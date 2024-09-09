@@ -11,40 +11,53 @@
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
-#include "libft.h"
 
-char	*handle_integer_hex(va_list ap, bool up_case, int prec)
+int	handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 {
 	unsigned int	d;
+	char			*s;
+	int				width;
 
 	d = va_arg(ap, unsigned int);
-	if (prec == 0 && d == 0)
-		return (ft_get_empty_str(1));
-	if (prec == 0)
-		prec = 1;
-	return (create_hex_str_from_unsigned(d, up_case, prec));
+	if (flags.prec == 0 && d == 0)
+		return (0);
+	if (flags.alt_form)
+		s = create_hex_str_from_unsigned_alt(d, up_case, flags);
+	else
+		s = create_hex_str_from_unsigned(d, up_case, flags);
+	width = pad_and_print_str(s, flags);
+	free(s);
+	return (width);
 }
 
-char	*handle_unsigned_integer(va_list ap, int prec)
+int	handle_unsigned_integer(va_list ap, t_flags flags)
 {
 	unsigned int	d;
+	char			*s;
+	int				width;
 
 	d = va_arg(ap, unsigned int);
-	if (prec == 0 && d == 0)
-		return (ft_get_empty_str(1));
-	if (prec == 0)
-		prec = 1;
-	return (create_int_str_unsigned(d, prec));
+	if (flags.prec == 0 && d == 0)
+		return (0);
+	s = create_int_str_unsigned(d, flags);
+	width = pad_and_print_str(s, flags);
+	free(s);
+	return (width);
 }
 
-char	*handle_integer(va_list ap, int prec)
+int	handle_integer(va_list ap, t_flags flags)
 {
-	int	d;
+	int		d;
+	char	*s;
+	int		width;
 
 	d = va_arg(ap, int);
-	if (prec == 0 && d == 0)
-		return (ft_get_empty_str(1));
-	if (prec <= 0)
-		prec = 1;
-	return (create_int_str(d, prec));
+	if (flags.prec == 0 && d == 0)
+		return (0);
+	if (flags.prec_given)
+		flags.pad_with_zeros = false;
+	s = create_int_str(d, flags);
+	width = pad_and_print_str(s, flags);
+	free(s);
+	return (width);
 }

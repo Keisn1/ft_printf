@@ -12,17 +12,46 @@
 #include "ft_printf_bonus.h"
 #include "libft.h"
 
+int	pad_and_print_char(char c, t_flags flags)
+{
+	int	width;
+
+	width = 1;
+	if (flags.pad_right)
+		width += pad(width, flags.min_width, flags.pad_with_zeros);
+	ft_putchar_fd(c, STDOUT_FILENO);
+	if (!flags.pad_right)
+		width += pad(width, flags.min_width, flags.pad_with_zeros);
+	return (width);
+}
+
+int	pad_and_print_str(char *s, t_flags flags)
+{
+	int	width;
+
+	width = ft_strlen(s);
+	if (flags.pad_right)
+		width += pad(width, flags.min_width, flags.pad_with_zeros);
+	ft_putstr_fd(s, STDOUT_FILENO);
+	if (!flags.pad_right)
+		width += pad(width, flags.min_width, flags.pad_with_zeros);
+	return (width);
+}
+
 int	pad(int width, int min_width, bool zero_padding)
 {
+	int	count;
+
+	count = 0;
 	while (width < min_width)
 	{
 		if (zero_padding)
-			ft_putchar_fd('0', STDOUT_FILENO);
+			count += ft_putchar_fd('0', STDOUT_FILENO);
 		else
-			ft_putchar_fd(' ', STDOUT_FILENO);
+			count += ft_putchar_fd(' ', STDOUT_FILENO);
 		width++;
 	}
-	return (width);
+	return (count);
 }
 
 bool	is_integer_conversion(char c)

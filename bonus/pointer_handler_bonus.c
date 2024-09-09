@@ -11,14 +11,18 @@
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
-#include "libft.h"
 
-char	*handle_pointer(va_list ap, int prec)
+int	handle_pointer(va_list ap, t_flags flags)
 {
 	void	*p;
+	char	*s;
+	int		width;
 
 	p = va_arg(ap, void *);
 	if (p == NULL)
-		return (ft_strdup("(nil)"));
-	return (create_hex_str_from_pointer(p, prec));
+		return (pad_and_print_str("(nil)", flags));
+	s = create_hex_str_from_pointer(p, false, flags);
+	width = pad_and_print_str(s, flags);
+	free(s);
+	return (width);
 }
