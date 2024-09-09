@@ -24,6 +24,18 @@ int pad_and_print_char(char c, int min_width, bool pad_right,
 	return width;
 }
 
+int pad_and_print_str(char* s, int min_width, bool pad_right,
+                       bool pad_with_zeros) {
+
+	int width = ft_strlen(s);
+	if (pad_right)
+		width += new_pad(width, min_width, pad_with_zeros);
+	ft_putstr_fd(s, STDOUT_FILENO);
+	if (!pad_right)
+		width += new_pad(width, min_width, pad_with_zeros);
+	return width;
+}
+
 int	new_pad(int width, int min_width, bool zero_padding)
 {
 	int count = 0;

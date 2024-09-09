@@ -75,6 +75,10 @@ TEST(ft_printf_test, string_conversion) {
 
     compare_printf("p3 %.4s\n", NULL);
     compare_printf("%50.2s", NULL);
+
+
+    compare_printf("%1.20s", NULL);
+    compare_printf("%1.4s", "string longer that 5");
 }
 
 TEST(ft_printf_test, character_conversion) {
