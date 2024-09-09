@@ -12,12 +12,11 @@
 
 #include "ft_printf_bonus.h"
 #include "libft.h"
-#include <unistd.h>
 
 int handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 {
 	if (specifier == '%')
-		return handle_perc();
+		return ft_putchar_fd('%', STDOUT_FILENO);
 	if (specifier == 'd' || specifier == 'i')
 		return (handle_integer(ap, flags));
 	if (specifier == 'u')
@@ -33,32 +32,6 @@ int handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 	if (specifier == 'c')
 		return (handle_char(ap, flags));
 	return 0;
-}
-
-int	print_char(char *str, t_flags flags)
-{
-	int	width;
-
-	width = 1;
-	if (flags.pad_right)
-		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	ft_putchar_fd(*str, STDOUT_FILENO);
-	if (!flags.pad_right)
-		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	return (width);
-}
-
-int	print_str(char *str, t_flags flags)
-{
-	int	width;
-
-	width = ft_strlen(str);
-	if (flags.pad_right)
-		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	ft_putstr_fd(str, STDOUT_FILENO);
-	if (!flags.pad_right)
-		width = pad(width, flags.min_width, flags.pad_with_zeros);
-	return (width);
 }
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)

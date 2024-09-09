@@ -61,8 +61,8 @@ void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				**ft_split(char *str, char c);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
+size_t				ft_putchar_fd(char c, int fd);
+size_t				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 int					ft_ptr_to_hex(void *p, char *hex_str);
 int					ft_unsigned_to_hex(unsigned int d, char *hex_str,
