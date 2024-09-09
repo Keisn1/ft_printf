@@ -1,5 +1,47 @@
 #+title: Ft_Printf
 
+* Table of contents :TOC_3:
+- [[#makefile][Makefile]]
+  - [[#integrating-libft-into-libftprintf][Integrating libft into libftprintf]]
+  - [[#bear][bear]]
+- [[#testing][Testing]]
+  - [[#capturing-output][Capturing output]]
+  - [[#variadic-arguments][variadic arguments]]
+- [[#va_][va_*]]
+  - [[#va_start][va_start]]
+  - [[#va_arg][va_arg]]
+    - [[#allowed-types][allowed types]]
+  - [[#va_end][va_end]]
+- [[#format-string][Format string]]
+- [[#precision-precision][precision [.precision]]]
+- [[#minimum-field-width][minimum field width]]
+  - [[#--dash][=-=: =dash=]]
+  - [[#0-zero-flag][=0=: zero-flag]]
+- [[#conversion-specifiers][conversion specifiers]]
+  - [[#string-conversion-specifiers][string conversion specifiers]]
+  - [[#character-conversion-specifiers][character conversion specifiers]]
+  - [[#integer-conversions-specifiers][integer conversions specifiers]]
+    - [[#d--i][d / i]]
+    - [[#x--x][x / X]]
+    - [[#u][u]]
+  - [[#pointer-conversion-specifiers][pointer conversion specifiers]]
+- [[#flags][flags]]
+- [[#bonus][bonus]]
+  - [[#flags-1][flags]]
+    - [[#][#]]
+    - [[#----space][' ' - SPACE]]
+    - [[#-1][+]]
+  - [[#length-modifier][length modifier]]
+    - [[#ll][ll]]
+    - [[#l][l]]
+    - [[#h][h]]
+    - [[#hh][hh]]
+  - [[#conversions][conversions]]
+    - [[#n][n]]
+    - [[#f---float--double][f - float / double]]
+    - [[#e---exponential][e - exponential]]
+    - [[#g][g]]
+
 * Makefile
 ** Integrating libft into libftprintf
 The archive =libftprintf.a= that we are building needs to incorporate =libft.a=.
@@ -67,7 +109,41 @@ you can generate the compile_commands.json as follows
 #+begin_src shell
 bear -- make bear
 #+end_src
+* Testing
+We are dealing with two problems testing a function like ft_prinft.
+** Capturing output
+Since we need to verify that we're printing the right thing to stdout, we need to capture what is actually printed to stdout.
 
+Gtest has a feature that allows us to do that. The syntax is as follows.
+#+begin_src cpp
+testing::internal::CaptureStdout();
+ft_printf(fmt_string, args...);
+std::string ftPrintfResult = testing::internal::GetCapturedStdout();
+#+end_src
+
+** variadic arguments
+Variadic arguments, also known as variadic functions, are functions in C (and other languages) that can accept a variable number of arguments.
+
+In C, variadic functions are defined using the ellipsis (...) syntax in the function parameter list.
+
+Actually there is no big problem, it is just so that we are not able to do parametrized tests easily. But the layout that I found I think is compelling and easy enough.
+#+begin_src c
+
+template<typename... Args>
+void compare_printf(const char* fmt_string, Args... args) {
+	...
+}
+
+TEST(ft_printf_test, without_arguments) {
+    compare_printf("Hello", "");
+	...
+}
+
+
+TEST(ft_printf_test, string_conversions) {
+    compare_printf("Hello %s", "World");
+}
+#+end_src
 * va_*
 The =va_arg=, =va_start=, and =va_end= macros are part of the C standard library and are used to handle functions with a variable number of arguments. They are defined in the =<stdarg.h>= header.
 
@@ -152,6 +228,162 @@ void va_end(va_list ap);
 - Cleans up the =va_list= variable when done.
 - Should be called after accessing all the variable arguments.
 
-* conversions
+* Format string
+- Each conversion specification is introduced by the character =%=, and ends with a  ~conversion specifier~.
+- In between there may be (in this order) zero or more flags, an =optional minimum field width=, an =optional precision= and an =optional length modifier=.
+
+=%[$][flags][width][.precision][length modifier]conversion=
+
+- arguments are used in the order given
+- =*= and =conversion specifiers= ask for the next argument
+- what is probably not asked for: Explicitly specifying which argument to use
+  - =m= denotes position in arg-list, indexed with 1...
+  - =%m$=  instead of =%=
+  - =*m$= instead of =*=
+  - example:
+    #+begin_src c
+printf("%2$*1$d", width, num);
+printf("[%2$][*m1$][conversion]", width, num);
+    #+end_src
+
+* precision [.precision]
+- =.= followed by optional decimal string
+- or by '*'
+  - means that the precision is given in the next argument
+  - must by of type =int=
+- if precision given as '.', it equals to 0
+- negative precision is as if precision is omitted
+* minimum field width
+=%[$][flags][width][.precision][length modifier]conversion=
+- minimum number of characters to be printed for a given value
+- independent of format string -> only effects the conversion
+- padding on left if converted value has fewer chararcters than field width
+  - Value: |      text|
+- if a conversion is wider than the field width, the field is expanded to contain the conversion (non-existant or too small therefore don't lead to truncation)
+- value can be given with =*=
+** =-=: =dash=
+- negative field-width
+- A negative field width is  taken as  a '-' flag  followed by  a positive  field width.
+  - value is to be left adjusted on  the field boundary
+  -
+** =0=: zero-flag
+- value shall be zero padded
+- *for integer*: left with zeros rather than blanks
+- =0= and =-= than =0= is ignored
+- if precision is given than =0= flag is ignored
+- behavior undefined for other conversions
+
+* conversion specifiers
+** string conversion specifiers
+- printing with =ft_putstr_fd=
+- getting the length with =ft_strlen=
+** character conversion specifiers
+- printing with =ft_putchar_fd=
+- expect that always returns 1
+** integer conversions specifiers
+- default *precision* = 1
+- zero with explicit precision 0, output is empty
+- *precision*: minimum number of digits to appear
+*** d / i
+- printing with =ft_putnbr_fd=
+- getting nbr of digits with =ft_num_of_digits= 
+*** x / X
+- using =ft_unsigned_to_hex=, which sets a string to the hexadecimal representation of the argument
+- using =print_hex_str= to print this string
+  - has an extra parameter to set if lower or upper_case
+*** u
+- printing with =ft_put_unsigned_int_fd=
+- getting nbr of digits with =ft_num_of_digits_unsigned= 
+** pointer conversion specifiers
+- use =ft_putstr_fd= if the pointer is =NULL=
+- using =ft_ptr_to_hex=, which sets a string to the hexadecimal representation of the argument (a pointer in this case)
+- using =print_hex_str= to print this string
 * flags
-* Testing
+The character % is followed by zero or more of the following flags:
+* bonus
+** DONE flags
+*** DONE #
+- "alternate form" conversion
+- 'x': to "0x" or "0X" for nonzero result
+- double: result always contains a decimal-point
+- "g": trailing zeros are not removed
+- for "m", errno contains valid error code
+- for other conversions undefined
+
+*** DONE ' ' - SPACE
+- only signed conversion (or empty string)
+- (a space)  A blank should  be left before a positive number (or empty string) produced by a signed conversion
+- This is useful for formatting purposes, to ensure that positive numbers align correctly with negative numbers when using a fixed-width format.
+- If the value is negative, the negative sign is placed before the number as usual
+*** DONE +
+- always place a sign before a number
+- placed before  a number produced by a signed conversion.
+- By default, a sign is used only for  negative numbers.
+-  A '+' overrides a space if both are used
+** length modifier
+*** ll
+*** l
+*** h
+*** DONE hh
+- integer conversion to a signed char or unsigned char
+
+- A following integer conversion  corresponds to a signed char or unsigned  char argument
+**** hh what are practical implications?
+
+When using the "hh" flag in printf, the practical implications are:
+1. It tells the printf function that the corresponding argument should be interpreted as a signed char or unsigned char. This can affect how the argument is formatted and displayed.
+2. It can be useful when you want to print the value of a char variable as an integer value, or when you want to ensure that a char argument is treated correctly by printf.
+3. It allows you to control how the argument is converted and displayed in the output, especially when dealing with characters or small integer values.
+
+**** give me examples that illustrate the difference in behavior and output
+
+#+begin_src c
+#include <stdio.h>
+
+int main() {
+    char c = 'A';
+    unsigned char uc = 65;
+
+    // Using %c specifier without hh flag
+    printf("Character c: %c\n", c);
+    printf("Character uc: %c\n", uc);
+
+    // Using %c specifier with hh flag
+    printf("Character c (with hh): %hhd\n", c);
+    printf("Character uc (with hh): %hhu\n", uc);
+
+    return 0;
+}
+#+end_src
+
+In the code above, the first two printf statements without the "hh" flag will interpret both =c= and =uc= as integers and print the corresponding ASCII characters for their values. The second set of printf statements with the "hh" flag will interpret =c= as a char and =uc= as an unsigned char, printing their numerical values instead of the corresponding characters.
+** conversions
+*** n
+- a conversion specifier
+- The number of  characters written so far is stored into the integer pointed to  by  the  corresponding argument
+- argument shall  be an int\*,  or variant whose size matches the _(optionally)_  supplied integer length modifier
+- no argument is converted
+- behavior is undefined if conversion specification includes any flags, a field width or a precision
+*** f - float / double
+=[-]ddd.ddd= : default =6=
+- rounded
+- converted to decimal notation
+- nbr of digits after decimal-point character is equal to the precision spec
+- precision = 0 => no deciaml point
+- at least one digit appears before a decimal-point
+-
+*** e - exponential
+=[-]d.ddde+/-dd= : default =6=
+- rounded
+- one digit before the decimal point
+- nbr of digits after decimal-point is the precision
+- no decimal-point character if precision is missing
+- exponent always contains at least 2 digits
+- if value is zero, exponent is 00
+*** g
+- if precision is 0, it is treated as 1
+- Style [[*e - exponential][e]] is used if exponent is
+  - less than =-4=
+  - greater than or equal to the precision
+- trailing zeros are removed from the fractional part of the result
+- a decimal point appears only if it is followed by at least one digit
