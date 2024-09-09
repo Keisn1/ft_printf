@@ -74,8 +74,8 @@ $(OBJ_DIR)/%.o: $(BONUS_SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(BONUS_INCLUDES) -I$(LIBFT_DIR) -c $< -o $@
 
 $(BONUS_TEST_TARGET): $(BONUS_TEST_FILES) $(BONUS_NAME) | $(BIN_DIR)
-	# $(CXX) $(CXX_FLAGS) $(FSANITIZE) -o $@ $(BONUS_TEST_FILES) $(LDFLAGS) libftprintf.a $(BONUS_INCLUDES)
-	$(CXX) $(FSANITIZE) -o $@ $(BONUS_TEST_FILES) $(LDFLAGS) libftprintf.a $(BONUS_INCLUDES)
+	$(CXX) $(CXX_FLAGS) $(FSANITIZE) -o $@ $(BONUS_TEST_FILES) $(LDFLAGS) libftprintf.a $(BONUS_INCLUDES)
+	# $(CXX) $(FSANITIZE) -o $@ $(BONUS_TEST_FILES) $(LDFLAGS) libftprintf.a $(BONUS_INCLUDES)
 
 ############ PHONY ##################
 clean:

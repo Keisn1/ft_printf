@@ -11,8 +11,65 @@ TEST(ft_printf_test, nFlag) {
     int count_printf;
     int count_ft_printf;
     printf("Hello World%n\n", &count_printf);
-    ft_printf("Hello World%n\n", &count_printf);
+    ft_printf("Hello World%n\n", &count_ft_printf);
     EXPECT_EQ(count_printf, count_ft_printf);
+
+    int count1, count2, count1_ft, count2_ft;
+    printf("Hello%n, World%n!\n", &count1, &count2);
+    ft_printf("Hello%n, World%n!\n", &count1_ft, &count2_ft);
+    EXPECT_EQ(count1, count1_ft);
+    EXPECT_EQ(count2, count2_ft);
+
+
+    int count3, count3_ft;
+    printf("Number: %d is here%n\n", 123, &count3);
+    ft_printf("Number: %d is here%n\n", 123, &count3_ft);
+    EXPECT_EQ(count3, count3_ft);
+
+    int count4, count4_ft;
+    printf("Start %s and %d end.%n\n", "test", 42, &count4);
+    ft_printf("Start %s and %d end.%n\n", "test", 42, &count4_ft);
+    EXPECT_EQ(count4, count4_ft);
+
+    int count5 = -1;
+    int count5_ft = -1;
+    printf("%n", &count5);
+    ft_printf("%n", &count5_ft);
+    EXPECT_EQ(count5, count5_ft);
+
+    signed char count_hh;
+    signed char count_hh_ft;
+    printf("Hello, world!%hhn\n", &count_hh);
+    ft_printf("Hello, world!%hhn\n", &count_hh_ft);
+    EXPECT_EQ(count_hh, count_hh_ft);
+
+    signed char count_hh1;
+    signed char count_hh1_ft;
+    printf("ABCD%hhn\n", &count_hh1);
+    ft_printf("ABCD%hhn\n", &count_hh1_ft);
+    EXPECT_EQ(count_hh, count_hh_ft);
+
+    signed char count_hh2, count_hh2_ft;
+    signed char count_hh3, count_hh3_ft;
+    printf("1234%hhn56789%hhn\n", &count_hh2, &count_hh3);
+    ft_printf("1234%hhn56789%hhn\n", &count_hh2_ft, &count_hh3_ft);
+    EXPECT_EQ(count_hh2, count_hh2_ft);
+    EXPECT_EQ(count_hh3, count_hh3_ft);
+
+    signed char count_hh4, count_hh4_ft;
+    printf("Number: %d is here%hhn\n", 5678, &count_hh4);
+    ft_printf("Number: %d is here%hhn\n", 5678, &count_hh4_ft);
+    EXPECT_EQ(count_hh4, count_hh4_ft);
+
+    signed char count_hh5, count_hh5_ft;
+    printf("%hhn", &count_hh5);
+    ft_printf("%hhn", &count_hh5_ft);
+    EXPECT_EQ(count_hh5, count_hh5_ft);
+
+    signed char count_hh6, count_hh6_ft;
+    printf("Line 1\nLine 2\t%hhnLine 3\n", &count_hh6);
+    ft_printf("Line 1\nLine 2\t%hhnLine 3\n", &count_hh6_ft);
+    EXPECT_EQ(count_hh6, count_hh6_ft);
 }
 
 TEST(ft_printf_test, HHFlag) {
@@ -47,11 +104,11 @@ TEST(ft_printf_test, HHFlag) {
     signed char neg_char = -20;
     compare_printf("Expect -20: %hhd\n", neg_char);
 
-    unsigned char overflow = 260;
-    compare_printf("Expect 4: %hhu\n", overflow);
+    // unsigned char overflow = 260;
+    // compare_printf("Expect 4: %hhu\n", overflow);
 
-    signed char overflow_signed = 130;
-    compare_printf("Expect -126: %hhd\n", overflow_signed);
+    // signed char overflow_signed = 130;
+    // compare_printf("Expect -126: %hhd\n", overflow_signed);
 }
 
 TEST(ft_printf_test, ft_printf_test) {

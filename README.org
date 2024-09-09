@@ -1,6 +1,6 @@
 #+title: Ft_Printf
 
-* Table of contents :TOC_3:
+* Table of contents :TOC_2:
 - [[#makefile][Makefile]]
   - [[#integrating-libft-into-libftprintf][Integrating libft into libftprintf]]
   - [[#bear][bear]]
@@ -10,10 +10,9 @@
 - [[#va_][va_*]]
   - [[#va_start][va_start]]
   - [[#va_arg][va_arg]]
-    - [[#allowed-types][allowed types]]
   - [[#va_end][va_end]]
 - [[#format-string][Format string]]
-- [[#precision-precision][precision [.precision]]]
+- [[#precision][precision]]
 - [[#minimum-field-width][minimum field width]]
   - [[#--dash][=-=: =dash=]]
   - [[#0-zero-flag][=0=: zero-flag]]
@@ -21,26 +20,11 @@
   - [[#string-conversion-specifiers][string conversion specifiers]]
   - [[#character-conversion-specifiers][character conversion specifiers]]
   - [[#integer-conversions-specifiers][integer conversions specifiers]]
-    - [[#d--i][d / i]]
-    - [[#x--x][x / X]]
-    - [[#u][u]]
   - [[#pointer-conversion-specifiers][pointer conversion specifiers]]
-- [[#flags][flags]]
 - [[#bonus][bonus]]
-  - [[#flags-1][flags]]
-    - [[#][#]]
-    - [[#----space][' ' - SPACE]]
-    - [[#-1][+]]
+  - [[#flags][flags]]
   - [[#length-modifier][length modifier]]
-    - [[#ll][ll]]
-    - [[#l][l]]
-    - [[#h][h]]
-    - [[#hh][hh]]
   - [[#conversions][conversions]]
-    - [[#n][n]]
-    - [[#f---float--double][f - float / double]]
-    - [[#e---exponential][e - exponential]]
-    - [[#g][g]]
 
 * Makefile
 ** Integrating libft into libftprintf
@@ -246,7 +230,7 @@ printf("%2$*1$d", width, num);
 printf("[%2$][*m1$][conversion]", width, num);
     #+end_src
 
-* precision [.precision]
+* precision
 - =.= followed by optional decimal string
 - or by '*'
   - means that the precision is given in the next argument
@@ -265,7 +249,6 @@ printf("[%2$][*m1$][conversion]", width, num);
 - negative field-width
 - A negative field width is  taken as  a '-' flag  followed by  a positive  field width.
   - value is to be left adjusted on  the field boundary
-  -
 ** =0=: zero-flag
 - value shall be zero padded
 - *for integer*: left with zeros rather than blanks
@@ -298,8 +281,6 @@ printf("[%2$][*m1$][conversion]", width, num);
 - use =ft_putstr_fd= if the pointer is =NULL=
 - using =ft_ptr_to_hex=, which sets a string to the hexadecimal representation of the argument (a pointer in this case)
 - using =print_hex_str= to print this string
-* flags
-The character % is followed by zero or more of the following flags:
 * bonus
 ** DONE flags
 *** DONE #

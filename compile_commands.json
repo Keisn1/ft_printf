@@ -1,6 +1,176 @@
 [
   {
     "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/check_functions.o",
+      "src/check_functions.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/check_functions.c",
+    "output": "/home/kay/workspace/ft_printf/obj/check_functions.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/flags.o",
+      "src/flags.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/flags.c",
+    "output": "/home/kay/workspace/ft_printf/obj/flags.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/ft_printf.o",
+      "src/ft_printf.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/ft_printf.c",
+    "output": "/home/kay/workspace/ft_printf/obj/ft_printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/handle_conversion.o",
+      "src/handle_conversion.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/handle_conversion.c",
+    "output": "/home/kay/workspace/ft_printf/obj/handle_conversion.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/helper2.o",
+      "src/helper2.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/helper2.c",
+    "output": "/home/kay/workspace/ft_printf/obj/helper2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/helper.o",
+      "src/helper.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/helper.c",
+    "output": "/home/kay/workspace/ft_printf/obj/helper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/integer_handlers.o",
+      "src/integer_handlers.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/integer_handlers.c",
+    "output": "/home/kay/workspace/ft_printf/obj/integer_handlers.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/pointer_handler.o",
+      "src/pointer_handler.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/pointer_handler.c",
+    "output": "/home/kay/workspace/ft_printf/obj/pointer_handler.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/string_creation.o",
+      "src/string_creation.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/string_creation.c",
+    "output": "/home/kay/workspace/ft_printf/obj/string_creation.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/string_handler.o",
+      "src/string_handler.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/src/string_handler.c",
+    "output": "/home/kay/workspace/ft_printf/obj/string_handler.o"
+  },
+  {
+    "arguments": [
       "/usr/bin/g++",
       "-c",
       "-Wall",
@@ -39,8 +209,198 @@
   },
   {
     "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/check_functions_bonus.o",
+      "bonus/check_functions_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/check_functions_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/check_functions_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/create_hex_string.o",
+      "bonus/create_hex_string.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/create_hex_string.c",
+    "output": "/home/kay/workspace/ft_printf/obj/create_hex_string.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/create_int_str.o",
+      "bonus/create_int_str.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/create_int_str.c",
+    "output": "/home/kay/workspace/ft_printf/obj/create_int_str.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/flags_bonus.o",
+      "bonus/flags_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/flags_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/flags_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/ft_printf_bonus.o",
+      "bonus/ft_printf_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/ft_printf_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/ft_printf_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/handle_conversion_bonus.o",
+      "bonus/handle_conversion_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/handle_conversion_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/handle_conversion_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/helper2_bonus.o",
+      "bonus/helper2_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/helper2_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/helper2_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/helper_bonus.o",
+      "bonus/helper_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/helper_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/helper_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/integer_handlers_bonus.o",
+      "bonus/integer_handlers_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/integer_handlers_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/integer_handlers_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/pointer_handler_bonus.o",
+      "bonus/pointer_handler_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/pointer_handler_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/pointer_handler_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Iincludes_bonus",
+      "-I./libft",
+      "-c",
+      "-o",
+      "obj/string_handler_bonus.o",
+      "bonus/string_handler_bonus.c"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/bonus/string_handler_bonus.c",
+    "output": "/home/kay/workspace/ft_printf/obj/string_handler_bonus.o"
+  },
+  {
+    "arguments": [
       "/usr/bin/g++",
       "-c",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
       "-fsanitize=address",
       "-pthread",
       "libftprintf.a",
@@ -57,6 +417,9 @@
     "arguments": [
       "/usr/bin/g++",
       "-c",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
       "-fsanitize=address",
       "-pthread",
       "libftprintf.a",

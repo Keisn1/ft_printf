@@ -118,46 +118,54 @@ int	main(void)
 	/* printf("Hello %.5p",  &d); */
 	/* printf("Hello %*.5p", -20,  1); */
 
-    // Using %c specifier without hh flag
-	printf("BONUS: hh flag");
-	printf("------------------------------\n");
-    signed char sc = 'A'; // ASCII value 65
-    signed char sc_neg = -65;
+    /* // Using %c specifier without hh flag */
+	/* printf("BONUS: hh flag"); */
+	/* printf("------------------------------\n"); */
+    /* signed char sc = 'A'; // ASCII value 65 */
+    /* signed char sc_neg = -65; */
 
-    // Example with unsigned char
-    unsigned char uc = 200;
+    /* // Example with unsigned char */
+    /* unsigned char uc = 200; */
 
-    // Signed char with `d` specifier
-    printf("Signed char (d): %hhd\n", sc);       // Output: 65
-    printf("Signed char (d neg): %hhd\n", sc_neg); // Output: -65
+    /* // Signed char with `d` specifier */
+    /* printf("Signed char (d): %hhd\n", sc);       // Output: 65 */
+    /* printf("Signed char (d neg): %hhd\n", sc_neg); // Output: -65 */
 
-    // Signed char with `i` specifier
-    printf("Signed char (i): %hhi\n", sc);       // Output: 65
-    printf("Signed char (i neg): %hhi\n", sc_neg); // Output: -65
+    /* // Signed char with `i` specifier */
+    /* printf("Signed char (i): %hhi\n", sc);       // Output: 65 */
+    /* printf("Signed char (i neg): %hhi\n", sc_neg); // Output: -65 */
 
-    // Unsigned char with `u` specifier
-    printf("Unsigned char (u): %hhu\n", uc);     // Output: 200
+    /* // Unsigned char with `u` specifier */
+    /* printf("Unsigned char (u): %hhu\n", uc);     // Output: 200 */
 
-    // Unsigned char with `o` specifier (octal)
-    printf("Unsigned char (o): %hho\n", uc);     // Output: 310
+    /* // Unsigned char with `o` specifier (octal) */
+    /* printf("Unsigned char (o): %hho\n", uc);     // Output: 310 */
 
-    // Unsigned char with `x` specifier (hexadecimal)
-    printf("Unsigned char (x): %hhx\n", uc);     // Output: c8
+    /* // Unsigned char with `x` specifier (hexadecimal) */
+    /* printf("Unsigned char (x): %hhx\n", uc);     // Output: c8 */
 
-    // Unsigned char with `X` specifier (hexadecimal uppercase)
-    printf("Unsigned char (X): %hhX\n", uc);     // Output: C8
+    /* // Unsigned char with `X` specifier (hexadecimal uppercase) */
+    /* printf("Unsigned char (X): %hhX\n", uc);     // Output: C8 */
 
-    // Edge case with maximum value of signed char
-    sc = 127; // Max value for signed char
-    printf("Max signed char (d): %hhd\n", sc);   // Output: 127
+    /* // Edge case with maximum value of signed char */
+    /* sc = 127; // Max value for signed char */
+    /* printf("Max signed char (d): %hhd\n", sc);   // Output: 127 */
 
-    // Edge case with minimum value of signed char
-    sc = -128; // Min value for signed char
-    printf("Min signed char (d): %hhd\n", sc);   // Output: -128
+    /* // Edge case with minimum value of signed char */
+    /* sc = -128; // Min value for signed char */
+    /* printf("Min signed char (d): %hhd\n", sc);   // Output: -128 */
 
-    // Edge case with maximum value of unsigned char
-    uc = 255; // Max value for unsigned char
-    printf("Max unsigned char (u): %hhu\n", uc); // Output: 255
+    /* // Edge case with maximum value of unsigned char */
+    /* uc = 255; // Max value for unsigned char */
+    /* printf("Max unsigned char (u): %hhu\n", uc); // Output: 255 */
+
+	int count;
+	printf("Hello World%n\n", &count);
+	printf("Expect 11: %d\n", count);
+
+	int count2;
+	ft_printf("Hello World%n\n", &count2);
+	ft_printf("Expect 11: %d\n", count2);
 	return (0);
 
 }
