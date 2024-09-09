@@ -7,6 +7,35 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, ft_printf_test) {
+    // integer conversion
+    compare_printf("%5.i", 0);
+    compare_printf("%-5.0i", 0);
+    compare_printf("%-5.i", 0);
+    compare_printf("%5.0d", 0);
+    compare_printf("%5.d", 0);
+    compare_printf("%-5.0d", 0);
+    compare_printf("%-5.d", 0);
+
+    // unsigned conversion
+    compare_printf("%5.0u", 0);
+    compare_printf("%5.u", 0);
+    compare_printf("%-5.0u", 0);
+    compare_printf("%-5.u", 0);
+
+    // unsigned hex
+    compare_printf("%5.0x", 0);
+    compare_printf("%5.x", 0);
+    compare_printf("%-5.0x", 0);
+    compare_printf("%-5.x", 0);
+    compare_printf("%5.0x", 0);
+    compare_printf("%5.x", 0);
+    compare_printf("%-5.0x", 0);
+    compare_printf("%-5.x", 0);
+
+    compare_printf("%--120.50d%-%%-112.167X%-32.65u" ,-1355834522,3814946551u,404243169u);
+}
+
 TEST(ft_printf_test, PlusFlag) {
     compare_printf("%+d", 42);
 }
