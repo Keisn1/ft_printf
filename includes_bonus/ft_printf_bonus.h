@@ -49,6 +49,9 @@ extern "C"
 	int create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		t_flags flags);
 
+	int pad_and_print_char(char c, int min_width, bool pad_right,
+						   bool pad_with_zeros);
+	int new_pad(int width, int min_width, bool zero_padding);
 	int pad(int width, int min_width, bool zero_padding);
 	bool is_integer_conversion(char c);
 	void check_field_width(t_flags *flags);

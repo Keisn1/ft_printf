@@ -75,21 +75,8 @@ int handle_string(va_list ap, t_flags flags)
 
 int handle_char(va_list ap, t_flags flags)
 {
-	char	c2;
-	char	*ret;
-	int ret_val;
+	char	c;
 
-	c2 = (char)va_arg(ap, int);
-	ret = (char *)malloc(1);
-	*ret = c2;
-	ret_val = 1;
-	if (flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	ft_putchar_fd(c2, STDOUT_FILENO);
-	if (!flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	free(ret);
-
-	return ret_val;
-	/* return (ret); */
+	c = (char)va_arg(ap, int);
+	return pad_and_print_char(c, flags.min_width, flags.pad_right, flags.pad_with_zeros);
 }
