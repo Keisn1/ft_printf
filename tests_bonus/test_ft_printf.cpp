@@ -7,6 +7,14 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, nFlag) {
+    int count_printf;
+    int count_ft_printf;
+    printf("Hello World%n\n", &count_printf);
+    ft_printf("Hello World%n\n", &count_printf);
+    EXPECT_EQ(count_printf, count_ft_printf);
+}
+
 TEST(ft_printf_test, HHFlag) {
     signed char sc = 'A'; // ASCII value 65
     signed char sc_neg = -65;

@@ -1,20 +1,22 @@
 [
   {
     "arguments": [
-      "/usr/bin/cc",
+      "/usr/bin/g++",
+      "-c",
       "-Wall",
       "-Werror",
       "-Wextra",
-      "-Iincludes_bonus",
-      "-I./libft",
-      "-c",
+      "-fsanitize=address",
+      "-pthread",
+      "libftprintf.a",
+      "-Iincludes",
       "-o",
-      "obj/flags_bonus.o",
-      "bonus/flags_bonus.c"
+      "bin/run_tests",
+      "./tests/main.cpp"
     ],
     "directory": "/home/kay/workspace/ft_printf",
-    "file": "/home/kay/workspace/ft_printf/bonus/flags_bonus.c",
-    "output": "/home/kay/workspace/ft_printf/obj/flags_bonus.o"
+    "file": "/home/kay/workspace/ft_printf/tests/main.cpp",
+    "output": "/home/kay/workspace/ft_printf/bin/run_tests"
   },
   {
     "arguments": [
@@ -23,6 +25,22 @@
       "-Wall",
       "-Werror",
       "-Wextra",
+      "-fsanitize=address",
+      "-pthread",
+      "libftprintf.a",
+      "-Iincludes",
+      "-o",
+      "bin/run_tests",
+      "./tests/test_ft_printf.cpp"
+    ],
+    "directory": "/home/kay/workspace/ft_printf",
+    "file": "/home/kay/workspace/ft_printf/tests/test_ft_printf.cpp",
+    "output": "/home/kay/workspace/ft_printf/bin/run_tests"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
       "-fsanitize=address",
       "-pthread",
       "libftprintf.a",
@@ -39,9 +57,6 @@
     "arguments": [
       "/usr/bin/g++",
       "-c",
-      "-Wall",
-      "-Werror",
-      "-Wextra",
       "-fsanitize=address",
       "-pthread",
       "libftprintf.a",
