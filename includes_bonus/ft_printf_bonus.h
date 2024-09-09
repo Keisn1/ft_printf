@@ -49,6 +49,8 @@ extern "C"
 	char* create_int_str_unsigned(unsigned int d, t_flags flags);
 	char* create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		t_flags flags);
+	char	*create_hex_str_from_unsigned_pointer(unsigned long d, bool up_case,
+												  t_flags flags);
 
 	int pad_and_print_char(char c, t_flags flags);
 	int pad_and_print_str(char* s, t_flags flags);

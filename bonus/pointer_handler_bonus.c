@@ -22,7 +22,7 @@ int	handle_pointer(va_list ap, t_flags flags)
 	if (p == NULL)
 		return (pad_and_print_str("(nil)", flags));
 	flags.alt_form = true;
-	s = create_hex_str_from_unsigned((unsigned long)p, false, flags);
+	s = create_hex_str_from_unsigned_pointer((unsigned long)p, false, flags);
 	width = pad_and_print_str(s, flags);
 	free(s);
 	return (width);
