@@ -338,6 +338,7 @@ The character % is followed by zero or more of the following flags:
 - for other conversions undefined
 
 *** ' ' - SPACE
+- only signed conversion (or empty string)
 - (a space)  A blank should  be left before a positive number (or empty string) produced by a signed conversion
 - This is useful for formatting purposes, to ensure that positive numbers align correctly with negative numbers when using a fixed-width format.
 - If the value is negative, the negative sign is placed before the number as usual

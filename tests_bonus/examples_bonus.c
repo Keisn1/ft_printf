@@ -111,7 +111,9 @@ int	main(void)
 	/* ft_printf(" %c %c %c ", '0', 0, '1'); */
 	/* ft_printf("Hello %10s", "hello"); */
 	/* ft_printf("Hello %s", NULL); */
-	ft_printf("%3.1s", NULL);
+	/* ft_printf("%3.1s", NULL); */
+	/* printf("% d",42); */
+	printf("%0#30x", 42);
 	return (0);
 
 }
