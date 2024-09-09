@@ -21,7 +21,11 @@ int	handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 	d = va_arg(ap, unsigned int);
 	if (flags.prec == 0 && d == 0)
 		return (0);
-	s = create_hex_str_from_unsigned(d, up_case, flags);
+	if (flags.alt_form)
+		s = create_hex_str_from_unsigned_alt(d, up_case, flags);
+	else
+		s = create_hex_str_from_unsigned(d, up_case, flags);
+
 	width = pad_and_print_str(s, flags);
 	free(s);
 	return (width);

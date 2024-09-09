@@ -20,14 +20,50 @@ void	init_flags(t_flags *flags)
 	flags->min_width = 0;
 	flags->pad_right = true;
 	flags->pad_with_zeros = false;
+	flags->blank = false;
+}
+
+bool	is_flag(char c)
+{
+	if (c == '#' || c == '0' || c == '-' || c == ' ')
+		return (true);
+	return (false);
+}
+
+const char	*extract_flags(const char *p, t_flags *flags)
+{
+	while (is_flag(*p))
+	{
+		if (*p == '#')
+			flags->alt_form = true;
+		if (*p == '0')
+			flags->pad_with_zeros = true;
+		if (*p == ' ')
+			flags->blank = true;
+		if (*p == '-')
+		{
+			flags->pad_with_zeros = false;
+			flags->pad_right = false;
+		}
+		p++;
+	}
+	return (p);
+}
+
+void	check_field_width(t_flags *flags)
+{
+	if (flags->min_width < 0)
+	{
+		flags->pad_right = false;
+		flags->pad_with_zeros = false;
+		flags->min_width = -(flags->min_width);
+	}
 }
 
 const char	*handle_flags(va_list ap, const char *p, t_flags *flags)
 {
 	init_flags(flags);
-	p = check_alt_form(flags, p);
-	p = check_zero_padding(flags, p);
-	p = check_padded_right(flags, p);
+	p = extract_flags(p, flags);
 	p = extract_int_arg(ap, p, &(flags->min_width));
 	check_field_width(flags);
 	if (*p == '.')

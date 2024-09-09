@@ -8,8 +8,8 @@ template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
 TEST(ft_printf_test, FlagCombinations) {
-    // compare_printf("% d", 42);
-    // compare_printf("%0#30x", 42);
+    compare_printf("% d", 42);
+    compare_printf("%0#30x", 42);
     compare_printf("%#030x", 42);
 }
 
@@ -238,12 +238,14 @@ TEST(ft_printf_test, pointer_conversion) {
     compare_printf("Hello %p", -1);
 
     // pointer with precision and width
+    // precision is undefined behavior
     compare_printf("Hello %20p",  &d);
     compare_printf("Hello %*.5p", -20,  0);
     compare_printf("Hello %*.5p", -20,  1);
-    compare_printf("Hello %*.5p", -20,  -1);
+    // compare_printf("Hello %*.5p", -20,  -1);
 
     // pointer with zero padding is undefined
+    // compare_printf("Hello %.5p",  &d);
 }
 
 TEST(ft_printf_test, conversion_combos) {

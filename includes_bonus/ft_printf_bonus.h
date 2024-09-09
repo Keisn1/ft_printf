@@ -20,6 +20,7 @@
 
 typedef struct s_flags
 {
+	bool blank;
 	bool	alt_form;
 	bool	pad_with_zeros;
 	bool	pad_right;
@@ -45,23 +46,20 @@ extern "C"
 	int handle_string(va_list ap, t_flags flags);
 	int handle_char(va_list ap, t_flags flags);
 
-	char* create_int_str(int d, t_flags flags);
-	char* create_int_str_unsigned(unsigned int d, t_flags flags);
-	char* create_hex_str_from_unsigned(unsigned long d, bool up_case,
+	char *create_int_str(int d, t_flags flags);
+	char *create_int_str_unsigned(unsigned int d, t_flags flags);
+	char *create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		t_flags flags);
-	char	*create_hex_str_from_unsigned_pointer(unsigned long d, bool up_case,
-												  t_flags flags);
+	char *create_hex_str_from_unsigned_alt(unsigned long d, bool up_case,
+		t_flags flags);
+	char *create_hex_str_from_pointer(void *p, bool up_case, t_flags flags);
 
 	int pad_and_print_char(char c, t_flags flags);
-	int pad_and_print_str(char* s, t_flags flags);
+	int pad_and_print_str(char *s, t_flags flags);
 	int new_pad(int width, int min_width, bool zero_padding);
 	int pad(int width, int min_width, bool zero_padding);
 	bool is_integer_conversion(char c);
-	void check_field_width(t_flags *flags);
 	const char *extract_int_arg(va_list ap, const char *p, int *nbr);
-	const char *check_zero_padding(t_flags *flags, const char *p);
-	const char *check_padded_right(t_flags *flags, const char *p);
-	const char *check_alt_form(t_flags *flags, const char *p);
 
 	void init_flags(t_flags *flags);
 	const char *handle_flags(va_list ap, const char *p, t_flags *flags);

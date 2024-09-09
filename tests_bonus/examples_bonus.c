@@ -113,7 +113,10 @@ int	main(void)
 	/* ft_printf("Hello %s", NULL); */
 	/* ft_printf("%3.1s", NULL); */
 	/* printf("% d",42); */
-	printf("%0#30x", 42);
+	/* printf("%0#30x", 42); */
+	/* int d = 1234; */
+	/* printf("Hello %.5p",  &d); */
+	/* printf("Hello %*.5p", -20,  1); */
 	return (0);
 
 }

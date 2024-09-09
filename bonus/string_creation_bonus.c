@@ -24,6 +24,8 @@ char	*create_int_str(int d, t_flags flags)
 	sign = "";
 	if (d < 0)
 		sign = "-";
+	if (flags.blank && d >= 0)
+		sign = " ";
 	nbr_of_digits = ft_num_of_digits(d);
 	if (nbr_of_digits >= flags.prec)
 		flags.prec = nbr_of_digits;
@@ -61,6 +63,34 @@ char	*create_int_str_unsigned(unsigned int d, t_flags flags)
 	return (ret);
 }
 
+char	*create_hex_str_from_unsigned_alt(unsigned long d, bool up_case,
+										  t_flags flags)
+{
+	char	hex_str[17];
+	int		digits;
+	int		nbr_of_zeros;
+	int		size;
+	char	*ret;
+
+	if (d == 0)
+		return (ft_strdup("0"));
+	digits = ft_unsigned_long_to_hex(d, hex_str, up_case);
+	nbr_of_zeros = 0;
+	while (nbr_of_zeros < (flags.prec - digits))
+		nbr_of_zeros++;
+	size = nbr_of_zeros + digits + 2 + 1;
+	if (size < flags.min_width)
+		size = flags.min_width + 1;
+	ret = ft_get_empty_str(size);
+	if (up_case)
+		ft_strlcat(ret, "0X", size);
+	else
+		ft_strlcat(ret, "0x", size);
+	add_zeros_to_str(ret, size - 2 - digits - 1, size);
+	ft_strlcat(ret, hex_str + 16 - digits, size);
+	return (ret);
+}
+
 char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		t_flags flags)
 {
@@ -75,28 +105,13 @@ char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
 	while (nbr_of_zeros < (flags.prec - digits))
 		nbr_of_zeros++;
 	size = nbr_of_zeros + digits + 1;
-	if (flags.alt_form) {
-		size += 2;
-		if (d == 0)
-			return ft_strdup("0");
-		if (size < flags.min_width)
-			size = flags.min_width+1;
-		ret = ft_get_empty_str(size);
-		if (up_case)
-			ft_strlcat(ret, "0X", size);
-		else
-			ft_strlcat(ret, "0x", size);
-		add_zeros_to_str(ret, size-2-digits-1, size);
-		ft_strlcat(ret, hex_str + 16 - digits, size);
-		return ret;
-	}
 	ret = ft_get_empty_str(size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);
 	return (ret);
 }
 
-char	*create_hex_str_from_unsigned_pointer(unsigned long d, bool up_case,
+char	*create_hex_str_from_pointer(void* p, bool up_case,
 		t_flags flags)
 {
 	char	hex_str[17];
@@ -105,18 +120,13 @@ char	*create_hex_str_from_unsigned_pointer(unsigned long d, bool up_case,
 	int		size;
 	char	*ret;
 
-	digits = ft_unsigned_long_to_hex(d, hex_str, up_case);
+	digits = ft_unsigned_long_to_hex((unsigned long)p, hex_str, up_case);
 	nbr_of_zeros = 0;
 	while (nbr_of_zeros < (flags.prec - digits))
 		nbr_of_zeros++;
-	size = nbr_of_zeros + digits + 1;
-	if (flags.alt_form)
-		size += 2;
+	size = nbr_of_zeros + digits + 2 + 1;
 	ret = ft_get_empty_str(size);
-		if (up_case)
-			ft_strlcat(ret, "0X", size);
-		else
-			ft_strlcat(ret, "0x", size);
+	ft_strlcat(ret, "0x", size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);
 	return (ret);
