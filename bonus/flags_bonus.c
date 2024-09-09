@@ -30,7 +30,8 @@ const char	*handle_flags(va_list ap, const char *p, t_flags *flags)
 	p = check_padded_right(flags, p);
 	p = extract_int_arg(ap, p, &(flags->min_width));
 	check_field_width(flags);
-	if (*p == '.') {
+	if (*p == '.')
+	{
 		flags->prec_given = true;
 		p = extract_int_arg(ap, ++p, &(flags->prec));
 	}

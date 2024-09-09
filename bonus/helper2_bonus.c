@@ -12,31 +12,37 @@
 #include "ft_printf_bonus.h"
 #include "libft.h"
 
-int pad_and_print_char(char c, t_flags flags)
-	{
+int	pad_and_print_char(char c, t_flags flags)
+{
+	int	width;
 
-	int width = 1;
+	width = 1;
 	if (flags.pad_right)
 		width += new_pad(width, flags.min_width, flags.pad_with_zeros);
 	ft_putchar_fd(c, STDOUT_FILENO);
 	if (!flags.pad_right)
 		width += new_pad(width, flags.min_width, flags.pad_with_zeros);
-	return width;
+	return (width);
 }
 
-int pad_and_print_str(char* s, t_flags flags) {
-	int width = ft_strlen(s);
+int	pad_and_print_str(char *s, t_flags flags)
+{
+	int	width;
+
+	width = ft_strlen(s);
 	if (flags.pad_right)
 		width += new_pad(width, flags.min_width, flags.pad_with_zeros);
 	ft_putstr_fd(s, STDOUT_FILENO);
 	if (!flags.pad_right)
 		width += new_pad(width, flags.min_width, flags.pad_with_zeros);
-	return width;
+	return (width);
 }
 
 int	new_pad(int width, int min_width, bool zero_padding)
 {
-	int count = 0;
+	int	count;
+
+	count = 0;
 	while (width < min_width)
 	{
 		if (zero_padding)

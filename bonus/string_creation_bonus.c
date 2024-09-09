@@ -13,18 +13,14 @@
 #include "ft_printf_bonus.h"
 #include "libft.h"
 
-/* return value needs to be freeed */
-int	create_int_str(int d, t_flags flags)
+char	*create_int_str(int d, t_flags flags)
 {
 	char	*nbr;
 	char	*ret;
 	int		size;
 	int		nbr_of_digits;
 	char	*sign;
-	int		ret_val;
 
-	if (flags.prec_given)
-		flags.pad_with_zeros = false;
 	sign = "";
 	if (d < 0)
 		sign = "-";
@@ -43,23 +39,15 @@ int	create_int_str(int d, t_flags flags)
 	nbr = ft_itoa_abs(d);
 	ft_strlcat(ret, nbr, size);
 	free(nbr);
-	ret_val = ft_strlen(ret);
-	if (flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	ft_putstr_fd(ret, STDOUT_FILENO);
-	if (!flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	free(ret);
-	return (ret_val);
+	return (ret);
 }
 
-int	create_int_str_unsigned(unsigned int d, t_flags flags)
+char	*create_int_str_unsigned(unsigned int d, t_flags flags)
 {
 	char	*nbr;
 	char	*ret;
 	int		size;
 	int		nbr_of_digits;
-	int		ret_val;
 
 	nbr_of_digits = ft_num_of_digits_unsigned(d);
 	if (nbr_of_digits >= flags.prec)
@@ -69,22 +57,8 @@ int	create_int_str_unsigned(unsigned int d, t_flags flags)
 	add_zeros_to_str(ret, flags.prec - nbr_of_digits, size);
 	nbr = ft_itoa_unsigned(d);
 	ft_strlcat(ret, nbr, size);
-	ret_val = ft_strlen(ret);
-	if (flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	ft_putstr_fd(ret, STDOUT_FILENO);
-	if (!flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
 	free(nbr);
-	free(ret);
-	return (ret_val);
-}
-
-const char	*get_hex_prefix(bool up_case)
-{
-	if (up_case)
-		return ("0X");
-	return ("0x");
+	return (ret);
 }
 
 char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
@@ -105,7 +79,12 @@ char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		size += 2;
 	ret = ft_get_empty_str(size);
 	if (flags.alt_form && d != 0)
-		ft_strlcat(ret, get_hex_prefix(up_case), size);
+	{
+		if (up_case)
+			ft_strlcat(ret, "0X", size);
+		else
+			ft_strlcat(ret, "0x", size);
+	}
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);
 	return (ret);

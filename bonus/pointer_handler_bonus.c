@@ -12,19 +12,18 @@
 
 #include "ft_printf_bonus.h"
 
-int handle_pointer(va_list ap, t_flags flags)
+int	handle_pointer(va_list ap, t_flags flags)
 {
 	void	*p;
-	char *s;
-	int width;
+	char	*s;
+	int		width;
 
 	p = va_arg(ap, void *);
 	if (p == NULL)
-		return pad_and_print_str("(nil)", flags);
+		return (pad_and_print_str("(nil)", flags));
 	flags.alt_form = true;
-
 	s = create_hex_str_from_unsigned((unsigned long)p, false, flags);
 	width = pad_and_print_str(s, flags);
 	free(s);
-	return width;
+	return (width);
 }

@@ -13,10 +13,10 @@
 #include "ft_printf_bonus.h"
 #include "libft.h"
 
-int handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
+int	handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 {
 	if (specifier == '%')
-		return ft_putchar_fd('%', STDOUT_FILENO);
+		return (ft_putchar_fd('%', STDOUT_FILENO));
 	if (specifier == 'd' || specifier == 'i')
 		return (handle_integer(ap, flags));
 	if (specifier == 'u')
@@ -31,7 +31,7 @@ int handle_conversion_specifier(va_list ap, char specifier, t_flags flags)
 		return (handle_pointer(ap, flags));
 	if (specifier == 'c')
 		return (handle_char(ap, flags));
-	return 0;
+	return (0);
 }
 
 const char	*handle_conversion(va_list ap, const char *p, int *count)
