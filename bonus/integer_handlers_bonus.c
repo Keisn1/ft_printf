@@ -12,18 +12,19 @@
 
 #include "ft_printf_bonus.h"
 
-int handle_integer_hex(va_list ap, bool up_case, t_flags flags)
+int	handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 {
 	unsigned int	d;
-	int				prec;
+	char			*s;
+	int				width;
 
 	d = va_arg(ap, unsigned int);
-	prec = flags.prec;
-	if (prec == 0 && d == 0)
-		return 0;
-	if (prec == 0)
-		prec = 1;
-	return (create_hex_str_from_unsigned(d, up_case, flags));
+	if (flags.prec == 0 && d == 0)
+		return (0);
+	s = create_hex_str_from_unsigned(d, up_case, flags);
+	width = pad_and_print_str(s, flags);
+	free(s);
+	return (width);
 }
 
 int	handle_unsigned_integer(va_list ap, t_flags flags)
@@ -34,7 +35,7 @@ int	handle_unsigned_integer(va_list ap, t_flags flags)
 	d = va_arg(ap, unsigned int);
 	prec = flags.prec;
 	if (prec == 0 && d == 0)
-		return 0;
+		return (0);
 	if (prec == 0)
 		prec = 1;
 	return (create_int_str_unsigned(d, flags));
@@ -46,7 +47,7 @@ int	handle_integer(va_list ap, t_flags flags)
 
 	d = va_arg(ap, int);
 	if (flags.prec == 0 && d == 0)
-		return 0;
+		return (0);
 	if (flags.prec <= 0)
 		flags.prec = 1;
 	return (create_int_str(d, flags));

@@ -12,7 +12,6 @@
 
 #include "ft_printf_bonus.h"
 #include "libft.h"
-#include <stdio.h>
 
 /* return value needs to be freeed */
 int	create_int_str(int d, t_flags flags)
@@ -22,7 +21,7 @@ int	create_int_str(int d, t_flags flags)
 	int		size;
 	int		nbr_of_digits;
 	char	*sign;
-	int ret_val;
+	int		ret_val;
 
 	if (flags.prec_given)
 		flags.pad_with_zeros = false;
@@ -44,8 +43,6 @@ int	create_int_str(int d, t_flags flags)
 	nbr = ft_itoa_abs(d);
 	ft_strlcat(ret, nbr, size);
 	free(nbr);
-
-
 	ret_val = ft_strlen(ret);
 	if (flags.pad_right)
 		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
@@ -53,16 +50,16 @@ int	create_int_str(int d, t_flags flags)
 	if (!flags.pad_right)
 		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
 	free(ret);
-	return ret_val;
+	return (ret_val);
 }
 
-int create_int_str_unsigned(unsigned int d, t_flags flags)
+int	create_int_str_unsigned(unsigned int d, t_flags flags)
 {
 	char	*nbr;
 	char	*ret;
 	int		size;
 	int		nbr_of_digits;
-	int ret_val;
+	int		ret_val;
 
 	nbr_of_digits = ft_num_of_digits_unsigned(d);
 	if (nbr_of_digits >= flags.prec)
@@ -71,7 +68,6 @@ int create_int_str_unsigned(unsigned int d, t_flags flags)
 	ret = ft_get_empty_str(size);
 	add_zeros_to_str(ret, flags.prec - nbr_of_digits, size);
 	nbr = ft_itoa_unsigned(d);
-
 	ft_strlcat(ret, nbr, size);
 	ret_val = ft_strlen(ret);
 	if (flags.pad_right)
@@ -91,7 +87,7 @@ const char	*get_hex_prefix(bool up_case)
 	return ("0x");
 }
 
-int create_hex_str_from_unsigned(unsigned long d, bool up_case,
+char	*create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		t_flags flags)
 {
 	char	hex_str[17];
@@ -99,7 +95,6 @@ int create_hex_str_from_unsigned(unsigned long d, bool up_case,
 	int		nbr_of_zeros;
 	int		size;
 	char	*ret;
-	int ret_val;
 
 	digits = ft_unsigned_long_to_hex(d, hex_str, up_case);
 	nbr_of_zeros = 0;
@@ -113,13 +108,5 @@ int create_hex_str_from_unsigned(unsigned long d, bool up_case,
 		ft_strlcat(ret, get_hex_prefix(up_case), size);
 	add_zeros_to_str(ret, nbr_of_zeros, size);
 	ft_strlcat(ret, hex_str + 16 - digits, size);
-
-	ret_val = ft_strlen(ret);
-	if (flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	ft_putstr_fd(ret, STDOUT_FILENO);
-	if (!flags.pad_right)
-		ret_val = pad(ret_val, flags.min_width, flags.pad_with_zeros);
-	free(ret);
-	return (ret_val);
+	return (ret);
 }
