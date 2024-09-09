@@ -7,6 +7,45 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+TEST(ft_printf_test, HHFlag) {
+    signed char sc = 'A'; // ASCII value 65
+    signed char sc_neg = -65;
+    unsigned char uc = 200;
+    compare_printf("Signed char (d): %hhd\n", sc);       // Output: 65
+    compare_printf("Signed char (d neg): %hhd\n", sc_neg); // Output: -65
+    compare_printf("Unsigned char (u): %hhu\n", uc);     // Output: 200
+
+    // Unsigned char with `x` specifier (hexadecimal)
+    compare_printf("Unsigned char (x): %hhx\n", uc);     // Output: c8
+
+    // Unsigned char with `X` specifier (hexadecimal uppercase)
+    compare_printf("Unsigned char (X): %hhX\n", uc);     // Output: C8
+
+    // Edge case with maximum value of signed char
+    sc = 127; // Max value for signed char
+    compare_printf("Max signed char (d): %hhd\n", sc);   // Output: 127
+
+    // Edge case with minimum value of signed char
+    sc = -128; // Min value for signed char
+    compare_printf("Min signed char (d): %hhd\n", sc);   // Output: -128
+
+    // Edge case with maximum value of unsigned char
+    uc = 255; // Max value for unsigned char
+    compare_printf("Max unsigned char (u): %hhu\n", uc); // Output: 255
+
+    unsigned char pos_char = 100;
+    compare_printf("Expect 100: %hhu\n", pos_char);
+
+    signed char neg_char = -20;
+    compare_printf("Expect -20: %hhd\n", neg_char);
+
+    unsigned char overflow = 260;
+    compare_printf("Expect 4: %hhu\n", overflow);
+
+    signed char overflow_signed = 130;
+    compare_printf("Expect -126: %hhd\n", overflow_signed);
+}
+
 TEST(ft_printf_test, ft_printf_test) {
     // integer conversion
     compare_printf("%5.i", 0);

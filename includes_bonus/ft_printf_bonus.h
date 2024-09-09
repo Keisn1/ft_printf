@@ -20,6 +20,7 @@
 
 typedef struct s_flags
 {
+	bool	hh;
 	bool	with_sign;
 	bool	blank;
 	bool	alt_form;
