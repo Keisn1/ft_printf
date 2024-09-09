@@ -20,7 +20,8 @@
 
 typedef struct s_flags
 {
-	bool blank;
+	bool	with_sign;
+	bool	blank;
 	bool	alt_form;
 	bool	pad_with_zeros;
 	bool	pad_right;
@@ -34,45 +35,43 @@ typedef struct s_flags
 extern "C"
 {
 # endif
-	int ft_printf(const char *fmt_string, ...);
+int ft_printf(const char *fmt_string, ...);
 
-	const char *handle_conversion(va_list ap, const char *p, int *count);
+const char	*handle_conversion(va_list ap, const char *p, int *count);
 
-	/* handler for specifiers */
-	int handle_integer(va_list ap, t_flags flags);
-	int handle_unsigned_integer(va_list ap, t_flags flags);
-	int handle_integer_hex(va_list ap, bool up_case, t_flags flags);
-	int handle_pointer(va_list ap, t_flags flags);
-	int handle_string(va_list ap, t_flags flags);
-	int handle_char(va_list ap, t_flags flags);
+/* handler for specifiers */
+int			handle_integer(va_list ap, t_flags flags);
+int			handle_unsigned_integer(va_list ap, t_flags flags);
+int			handle_integer_hex(va_list ap, bool up_case, t_flags flags);
+int			handle_pointer(va_list ap, t_flags flags);
+int			handle_string(va_list ap, t_flags flags);
+int			handle_char(va_list ap, t_flags flags);
 
-	char *create_int_str(int d, t_flags flags);
-	char *create_int_str_unsigned(unsigned int d, t_flags flags);
-	char *create_hex_str_from_unsigned(unsigned long d, bool up_case,
-		t_flags flags);
-	char *create_hex_str_from_unsigned_alt(unsigned long d, bool up_case,
-		t_flags flags);
-	char *create_hex_str_from_pointer(void *p, bool up_case, t_flags flags);
+char		*create_int_str(int d, t_flags flags);
+char		*create_int_str_unsigned(unsigned int d, t_flags flags);
+char		*create_hex_str_from_unsigned(unsigned long d, bool up_case,
+				t_flags flags);
+char		*create_hex_str_from_unsigned_alt(unsigned long d, bool up_case,
+				t_flags flags);
+char		*create_hex_str_from_pointer(void *p, bool up_case, t_flags flags);
 
-	int pad_and_print_char(char c, t_flags flags);
-	int pad_and_print_str(char *s, t_flags flags);
-	int new_pad(int width, int min_width, bool zero_padding);
-	int pad(int width, int min_width, bool zero_padding);
-	bool is_integer_conversion(char c);
-	const char *extract_int_arg(va_list ap, const char *p, int *nbr);
+int			pad_and_print_char(char c, t_flags flags);
+int			pad_and_print_str(char *s, t_flags flags);
+int			pad(int width, int min_width, bool zero_padding);
+bool		is_integer_conversion(char c);
+const char	*extract_int_arg(va_list ap, const char *p, int *nbr);
 
-	void init_flags(t_flags *flags);
-	const char *handle_flags(va_list ap, const char *p, t_flags *flags);
+void		init_flags(t_flags *flags);
+const char	*handle_flags(va_list ap, const char *p, t_flags *flags);
 
-	/* helper */
-	char *ft_itoa_unsigned(unsigned int n);
-	char *ft_itoa_abs(int d);
-	void add_zeros_to_str(char *str, int n, size_t size);
+/* helper */
+char		*ft_itoa_unsigned(unsigned int n);
+char		*ft_itoa_abs(int d);
+void		add_zeros_to_str(char *str, int n, size_t size);
 
-	/* new */
-	int handle_perc();
-# ifdef __cplusplus
+#  ifdef __cplusplus
+
 }
-# endif
+#  endif
 
-#endif
+# endif

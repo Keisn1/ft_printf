@@ -7,8 +7,15 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
-TEST(ft_printf_test, FlagCombinations) {
+TEST(ft_printf_test, PlusFlag) {
+    compare_printf("%+d", 42);
+}
+
+TEST(ft_printf_test, Blank) {
     compare_printf("% d", 42);
+}
+
+TEST(ft_printf_test, FlagCombinations) {
     compare_printf("%0#30x", 42);
     compare_printf("%#030x", 42);
 }
@@ -17,7 +24,6 @@ TEST(ft_printf_test, WeirtInput) {
     compare_printf_wo_args("%5%");
     compare_printf_wo_args("%-5%");
     compare_printf_wo_args("%-05%");
-
     compare_printf_wo_args("percent 2 %12%");
     compare_printf_wo_args("percent 3 %-12%");
 }

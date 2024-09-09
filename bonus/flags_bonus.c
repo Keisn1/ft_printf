@@ -21,11 +21,12 @@ void	init_flags(t_flags *flags)
 	flags->pad_right = true;
 	flags->pad_with_zeros = false;
 	flags->blank = false;
+	flags->with_sign = false;
 }
 
 bool	is_flag(char c)
 {
-	if (c == '#' || c == '0' || c == '-' || c == ' ')
+	if (c == '#' || c == '0' || c == '-' || c == ' ' || c == '+')
 		return (true);
 	return (false);
 }
@@ -34,6 +35,8 @@ const char	*extract_flags(const char *p, t_flags *flags)
 {
 	while (is_flag(*p))
 	{
+		if (*p == '+')
+			flags->with_sign = true;
 		if (*p == '#')
 			flags->alt_form = true;
 		if (*p == '0')

@@ -25,7 +25,6 @@ int	handle_integer_hex(va_list ap, bool up_case, t_flags flags)
 		s = create_hex_str_from_unsigned_alt(d, up_case, flags);
 	else
 		s = create_hex_str_from_unsigned(d, up_case, flags);
-
 	width = pad_and_print_str(s, flags);
 	free(s);
 	return (width);

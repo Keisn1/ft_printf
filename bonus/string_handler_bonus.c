@@ -21,7 +21,7 @@ int	handle_string(va_list ap, t_flags flags)
 
 	s = va_arg(ap, char *);
 	if (flags.prec == 0 || (flags.prec >= 0 && flags.prec < 6 && !s))
-		return (new_pad(0, flags.min_width, flags.pad_with_zeros));
+		return (pad(0, flags.min_width, flags.pad_with_zeros));
 	if (!s)
 		return (pad_and_print_str("(null)", flags));
 	if (flags.prec < 0)

@@ -36,6 +36,10 @@
     - [[#][#]]
     - [[#----space][' ' - SPACE]]
     - [[#-1][+]]
+  - [[#length-modifier][length modifier]]
+    - [[#ll][ll]]
+    - [[#l][l]]
+    - [[#h][h]]
     - [[#hh][hh]]
 
 * Makefile
@@ -295,7 +299,6 @@ printf("[%2$][*m1$][conversion]", width, num);
 - using =ft_ptr_to_hex=, which sets a string to the hexadecimal representation of the argument (a pointer in this case)
 - using =print_hex_str= to print this string
 * flags
-
 The character % is followed by zero or more of the following flags:
 * bonus
 ** conversions
@@ -328,7 +331,7 @@ The character % is followed by zero or more of the following flags:
   - greater than or equal to the precision
 - trailing zeros are removed from the fractional part of the result
 - a decimal point appears only if it is followed by at least one digit
-** flags
+** DONE flags
 *** DONE #
 - "alternate form" conversion
 - 'x': to "0x" or "0X" for nonzero result
@@ -337,16 +340,20 @@ The character % is followed by zero or more of the following flags:
 - for "m", errno contains valid error code
 - for other conversions undefined
 
-*** ' ' - SPACE
+*** DONE ' ' - SPACE
 - only signed conversion (or empty string)
 - (a space)  A blank should  be left before a positive number (or empty string) produced by a signed conversion
 - This is useful for formatting purposes, to ensure that positive numbers align correctly with negative numbers when using a fixed-width format.
 - If the value is negative, the negative sign is placed before the number as usual
-*** +
+*** DONE +
 - always place a sign before a number
 - placed before  a number produced by a signed conversion.
 - By default, a sign is used only for  negative numbers.
 -  A '+' overrides a space if both are used
+** length modifier
+*** ll
+*** l
+*** h
 *** hh
 - integer conversion to a signed char or unsigned char
 **** hh what are practical implications?
