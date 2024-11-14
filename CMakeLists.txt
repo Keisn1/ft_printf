@@ -15,18 +15,29 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
+
 # Flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 
+# Add libftprintf library
+file(GLOB LIBFTPRINTF_SOURCES "src/*.c")
+add_library(ftprintf STATIC ${LIBFTPRINTF_SOURCES})
+target_include_directories(ftprintf PRIVATE includes)
+
+# Add libft subdirectory
+add_subdirectory(libft)
+
+# Make sure the libftprintf library depends on libft
+target_link_libraries(ftprintf PRIVATE ft)
+
+# Add test executable
 file(GLOB TEST_FILES "tests/*.cpp")
+add_executable(run_tests ${TEST_FILES})
 
+# Link the test executable with GoogleTest, ftprintf, and libft
 set(TEST_NAME "run_tests")
-
-add_executable(${TEST_NAME} ${SRC_FILES} ${TEST_FILES})
-
-# Link the test executable with GoogleTest and your static library
-target_link_libraries(run_tests gtest gtest_main ${CMAKE_SOURCE_DIR}/libftprintf.a)
+target_link_libraries(${TEST_NAME} gtest gtest_main ftprintf)
 
 target_include_directories(${TEST_NAME} PRIVATE includes)
 target_include_directories(${TEST_NAME} PRIVATE ${gtest_SOURCE_DIR}/googletest/include)

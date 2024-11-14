@@ -25,11 +25,6 @@ typedef struct s_flags
 	int		prec;
 }			t_flags;
 
-# ifdef __cplusplus
-
-extern "C"
-{
-# endif
 int ft_printf(const char *fmt_string, ...);
 
 const char	*handle_conversion(va_list ap, const char *p, int *count);
@@ -59,10 +54,5 @@ const char	*handle_flags(va_list ap, const char *p, t_flags *flags);
 char		*ft_itoa_unsigned(unsigned int n);
 char		*ft_itoa_abs(int d);
 void		add_zeros_to_str(char *str, int n, size_t size);
-
-#  ifdef __cplusplus
-
-}
-#  endif
 
 # endif

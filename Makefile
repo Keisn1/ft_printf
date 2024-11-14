@@ -32,8 +32,6 @@ TEST_OBJ_FILES := $(TEST_FILES:$(TEST_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 NAME := libftprintf.a
 
-TEST_TARGET := bin/run_tests
-
 ############ Rules ##################
 #Mandatory targets
 all:  $(NAME)
@@ -47,9 +45,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 
 $(LIBFT_DIR)/libft.a:
 	$(MAKE) -C libft
-
-$(TEST_TARGET): $(TEST_FILES) $(NAME) | $(BIN_DIR)
-	$(CXX) $(CXX_FLAGS) $(FSANITIZE) -o $@ $(TEST_FILES) $(LDFLAGS) $(NAME) $(INCLUDES)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -79,6 +74,7 @@ $(BONUS_TEST_TARGET): $(BONUS_TEST_FILES) $(BONUS_NAME) | $(BIN_DIR)
 
 ############ PHONY ##################
 clean:
+	$(MAKE) -C libft $@
 	rm -f $(OBJ_FILES) $(BONUS_OBJ_FILES)
 
 fclean: clean
@@ -90,9 +86,9 @@ fclean: clean
 
 re: fclean all
 
-bear: $(TEST_TARGET) $(OBJ_FILES) $(BONUS_TEST_TARGET)
+bear: $(OBJ_FILES) $(BONUS_TEST_TARGET)
 
-test:
+test: all
 	- cmake -S . -B build
 	- cmake --build build
 	- ./build/run_tests
