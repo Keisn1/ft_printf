@@ -92,8 +92,10 @@ re: fclean all
 
 bear: $(TEST_TARGET) $(OBJ_FILES) $(BONUS_TEST_TARGET)
 
-test: $(TEST_TARGET)
-	- $(TEST_TARGET)
+test:
+	- cmake -S . -B build
+	- cmake --build build
+	- ./build/run_tests
 
 examples: $(NAME)
 	$(CC) -g $(INCLUDES) -I$(LIBFT_DIR) $(TEST_DIR)/examples.c -o $(TEST_DIR)/examples.out $(NAME)
