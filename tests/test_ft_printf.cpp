@@ -7,17 +7,86 @@ void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
 void compare_printf(const char* fmt_string, Args... args);
 
+// TEST(ft_printf_test, PercentageFlag) {
+//     compare_printf_wo_args("Hello");
+//     compare_printf_wo_args("");
+//     compare_printf_wo_args("Hello %%");
+//     compare_printf_wo_args("%");
+//     compare_printf_wo_args(" %% ");
+//     compare_printf_wo_args(" %%%%");
+//     compare_printf_wo_args(" %% %% %% ");
+//     compare_printf_wo_args(" %%  %%  %% ");
+//     // TODO: This is not implemented yet
+//     // compare_printf_wo_args(" %%  %%  %% %");
+// }
+
+
 TEST(ft_printf_test, PercentageFlag) {
-    compare_printf_wo_args("Hello");
-    compare_printf_wo_args("");
-    compare_printf_wo_args("Hello %%");
-    compare_printf_wo_args("%");
-    compare_printf_wo_args(" %% ");
-    compare_printf_wo_args(" %%%%");
-    compare_printf_wo_args(" %% %% %% ");
-    compare_printf_wo_args(" %%  %%  %% ");
-    // TODO: This is not implemented yet
-    // compare_printf_wo_args(" %%  %%  %% %");
+    testing::internal::CaptureStdout();
+    int want_return = printf("Hello");
+    std::string stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    int got_return = ft_printf("Hello");
+    std::string ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_return, got_return);
+
+    testing::internal::CaptureStdout();
+    want_return = printf("Hello %%");
+    stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    got_return = ft_printf("Hello %%");
+    ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_return, got_return);
+
+    testing::internal::CaptureStdout();
+    want_return = printf(" %% ");
+    stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    got_return = ft_printf(" %% ");
+    ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_return, got_return);
+
+    testing::internal::CaptureStdout();
+    want_return = printf(" %%%% ");
+    stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    got_return = ft_printf(" %%%% ");
+    ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_return, got_return);
+
+    testing::internal::CaptureStdout();
+    want_return = printf(" %% %% %% ");
+    stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    got_return = ft_printf(" %% %% %% ");
+    ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_return, got_return);
+
+    testing::internal::CaptureStdout();
+    want_return = printf(" %%  %%  %% ");
+    stdPrintfResult = testing::internal::GetCapturedStdout();
+
+    testing::internal::CaptureStdout();
+    got_return = ft_printf(" %%  %%  %% ");
+    ftPrintfResult = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
+    EXPECT_EQ(want_return, got_return);
 }
 
 TEST(ft_printf_test, string_conversion) {
@@ -170,19 +239,6 @@ TEST(ft_printf_test, pointer_conversion) {
 TEST(ft_printf_test, conversion_combos) {
     int d = 1234;
     compare_printf("eins %s zwei %c drei %d vier %p", "world", 'q', d, &d);
-}
-
-void compare_printf_wo_args(const char* fmt_string) {
-    testing::internal::CaptureStdout();
-    int want_return = printf(fmt_string);
-    std::string stdPrintfResult = testing::internal::GetCapturedStdout();
-
-    testing::internal::CaptureStdout();
-    int got_return = ft_printf(fmt_string);
-    std::string ftPrintfResult = testing::internal::GetCapturedStdout();
-
-    EXPECT_EQ(stdPrintfResult, ftPrintfResult);
-    EXPECT_EQ(want_return, got_return);
 }
 
 template<typename... Args>

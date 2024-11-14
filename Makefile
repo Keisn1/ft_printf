@@ -20,6 +20,7 @@ INCLUDES = -Iincludes
 BIN_DIR := ./bin
 SRC_DIR := ./src
 OBJ_DIR := ./obj
+BUILD_DIR := ./build
 TEST_DIR := ./tests
 LIBFT_DIR := ./libft
 
@@ -84,6 +85,7 @@ fclean: clean
 	rm -f $(BIN_DIR)/*
 	rm -rf $(BIN_DIR)
 	rm -rf $(OBJ_DIR)
+	rm -rf $(BUILD_DIR)
 	rm -f $(NAME)
 
 re: fclean all
