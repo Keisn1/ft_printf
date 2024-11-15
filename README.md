@@ -1,5 +1,12 @@
 ![](cover-ft_printf-bonus.png)
 
+<p align="center">
+<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Keisn1/ft_printf?color=blueviolet" />
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Keisn1/ft_printf?color=blue" />
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Keisn1/ft_printf?color=brightgreen" />
+<img alt="GitHub Lines of Code" src="https://tokei.rs/b1/github/Keisn1/ft_printf?category=code" />
+</p>
+
 # Table of contents <span class="tag" data-tag-name="TOC_2"><span class="smallcaps">TOC\_2</span></span>
 
   - [What is ft\_printf](#what-is-ft_printf)
@@ -39,32 +46,30 @@
 
 # What is ft\_printf
 
-The **ft\_printf** project is part of the **Core Curriculum of
-42school** in which students are asked to implement their own version of
-the standard library function `printf`. Doing this
+The **ft\_printf** project is a component of the *Core Curriculum at
+42school* where students are tasked with creating their own version of
+the standard library function `printf`. This project serves multiple
+educational purposes:
 
-  - teaches about variadic functions in C
-      - therefore teaches the usage of [variable argument
-        lists](#variable-argument-lists)
-      - teaches about memory management
-  - teaches about parsing strings
-      - the
-  - the student gets to know the inner working of printf and also a much
-    more deep understanding of the function itself, including different
-    flags
-  - depending on how much bonus exercises are done, students also get to
-    know about conversion of different numerical types and how they are
-    actually represented in binary
+  - It introduces students to variadic functions in C, emphasizing the
+    use of [variable argument lists](#variable-argument-lists) and
+    memory management.
+  - Students learn how to parse strings effectively.
+  - They gain insight into the inner workings of `printf`, achieving a
+    deeper understanding of the function, including various flags.
+  - Depending on the extent of the bonus exercises completed, students
+    also learn about the conversion of different numerical types and
+    their binary representation.
 
-To succeed in this project,
+To succeed in this project:
 
-  - the students need to study the man page of `printf` in great detail
-  - need to get an understanding of the format specifier and the
-    different syntax that can be applied
-  - moreover, the students get more exposure on how to handle libraries
-    in C
-      - using their libft library, they expand it with their
-        implementation of printf, resulting in `libftprintf` library
+  - Students must thoroughly study the `printf` man page.
+  - They need to grasp the format specifier and the various applicable
+    syntaxes.
+  - Additionally, students receive more exposure to handling libraries
+    in C. By incorporating their `libft` library, they enhance it with
+    their `printf` implementation, resulting in the `libftprintf`
+    library.
 
 # Incorporating libft into libftprint
 
