@@ -16,29 +16,17 @@
         directory](#building-libft-from-makefile-in-root-directory)
       - [Incorporating newly compiled object files into
         libft.a](#incorporating-newly-compiled-object-files-into-libfta)
-  - [Makefile](#makefile)
-      - [Integrating libft into
-        libftprintf](#integrating-libft-into-libftprintf)
-      - [bear](#bear)
-  - [Testing](#testing)
-      - [Capturing output](#capturing-output)
-      - [variadic arguments](#variadic-arguments)
   - [variable argument lists](#variable-argument-lists)
       - [va\_start](#va_start)
       - [va\_arg](#va_arg)
       - [va\_end](#va_end)
-  - [Format string](#format-string)
-  - [precision](#precision)
-  - [minimum field width](#minimum-field-width)
-      - [`-`: `dash`](#--dash)
-      - [`0`: zero-flag](#0-zero-flag)
-  - [conversion specifiers](#conversion-specifiers)
-      - [string conversion specifiers](#string-conversion-specifiers)
-      - [character conversion
-        specifiers](#character-conversion-specifiers)
-      - [integer conversions
-        specifiers](#integer-conversions-specifiers)
-      - [pointer conversion specifiers](#pointer-conversion-specifiers)
+  - [Format string and conversions](#format-string-and-conversions)
+      - [precision](#precision)
+      - [minimum field width](#minimum-field-width)
+      - [conversion specifiers](#conversion-specifiers)
+  - [Testing](#testing)
+      - [Capturing output](#capturing-output)
+      - [variadic arguments](#variadic-arguments)
   - [bonus](#bonus)
       - [flags](#flags)
       - [length modifier](#length-modifier)
@@ -98,134 +86,6 @@ expanding their binaries
   - `c`: This flag tells `ar` to "create" the archive if it doesn't
     already exist.
 
-# Makefile
-
-## Integrating libft into libftprintf
-
-The archive `libftprintf.a` that we are building needs to incorporate
-`libft.a`.
-
-``` makefile
-NAME = libftprintf.a
-LIBFT = path/to/libft
-OBJ_FILES = file1.o file2.o # Add your object files here
-
-# Build target
-$(NAME): $(OBJ_FILES) $(LIBFT)/libft.a
-    cp $(LIBFT)/libft.a $(NAME)
-    ar rc $(NAME) $(OBJ_FILES)
-```
-
-Otherwise we can not use our archive without explicitly linking
-`libft.a`.
-
-Imagine an end-user that wants to use our new ft\_printf and therefore
-is linking libftprintf to their project.
-
-``` c
-/* new_project.c */
-#include "libftprintf.h"
-
-int main() {
-    ft_printf("Hello world");
-    return 0;
-}
-```
-
-When they compile their project:
-
-``` shell
-cc new_project.c libftprintf.a
-```
-
-Suppose ft\_printf uses ft\_putstr\_fd from libft. It might look like
-this:
-
-``` c
-#include "libft.h"
-
-int ft_printf(const char* fmt_string, ...) {
-    ft_putstr_fd(fmt_string, STDOUT_FILENO);
-    return 0;
-}
-```
-
-If we built `libftprintf.a` without incorporating `libft.a`, the
-compilation would fail because the linker would not be able to resolve
-ft\_putstr\_fd, as it would not be part of our archive.
-
-An archive essentially is an aggregation of object files that a compiler
-can link to, and ft\_putstr\_fd would not be present without inclusion.
-
-## bear
-
-[bear](https://github.com/rizsotto/Bear) is a program that generates
-compile\_commands.json file for you, so that clang-language server knows
-how compile the programs.
-
-``` shell
-bear -- <your-build-command>
-```
-
-By having a bear rule in your Makefile
-
-``` makefile
-bear: $(TEST_TARGET) $(OBJ_FILES)
-```
-
-you can generate the compile\_commands.json as follows
-
-``` shell
-bear -- make bear
-```
-
-# Testing
-
-We are dealing with two problems testing a function like ft\_prinft.
-
-## Capturing output
-
-Since we need to verify that we're printing the right thing to stdout,
-we need to capture what is actually printed to stdout.
-
-Gtest has a feature that allows us to do that. The syntax is as follows.
-
-``` cpp
-testing::internal::CaptureStdout();
-ft_printf(fmt_string, args...);
-std::string ftPrintfResult = testing::internal::GetCapturedStdout();
-```
-
-## variadic arguments
-
-Variadic arguments, also known as variadic functions, are functions in C
-(and other languages) that can accept a variable number of arguments.
-
-In C, variadic functions are defined using the ellipsis (…) syntax in
-the function parameter list.
-
-Actually there is no big problem, it is just so that we are not able to
-do parametrized tests easily. But the layout that I found I think is
-compelling and easy enough.
-
-``` c
-
-template<typename... Args>
-void compare_printf(const char* fmt_string, Args... args) {
-    ...
-}
-
-TEST(ft_printf_test, without_arguments) {
-    compare_printf("Hello", "");
-    ...
-}
-
-
-TEST(ft_printf_test, string_conversions) {
-    compare_printf("Hello %s", "World");
-}
-```
-
 # variable argument lists
 
 The `va_arg`, `va_start`, and `va_end` macros are part of the C standard
@@ -262,7 +122,7 @@ type va_arg(va_list ap, type);
 
 ### allowed types
 
-1.  a type so that by adding a \* to the type it becomes a pointer to
+1.  a type so that by adding a \* to the type, it becomes a pointer to
     that type
     
     Man page:
@@ -326,7 +186,7 @@ type va_arg(va_list ap, type);
     The default argument promotions ensure that arguments are compatible
     with the function's parameter types and include the following rules:
     
-      - Integral promotions:
+      - Integer promotions:
           - Types smaller than `int` (like `char` and `short`) are
             promoted to `int` or `unsigned int` if `int` can represent
             all the values of the original type.
@@ -352,7 +212,7 @@ void va_end(va_list ap);
   - Cleans up the `va_list` variable when done.
   - Should be called after accessing all the variable arguments.
 
-# Format string
+# Format string and conversions
 
   - Each conversion specification is introduced by the character `%`,
     and ends with a `conversion specifier`.
@@ -379,7 +239,7 @@ void va_end(va_list ap);
         printf("[%2$][*m1$][conversion]", width, num);
         ```
 
-# precision
+## precision
 
   - `.` followed by optional decimal string
   - or by '\*'
@@ -388,7 +248,7 @@ void va_end(va_list ap);
   - if precision given as '.', it equals to 0
   - negative precision is as if precision is omitted
 
-# minimum field width
+## minimum field width
 
 `%[$][flags][width][.precision][length modifier]conversion`
 
@@ -402,14 +262,14 @@ void va_end(va_list ap);
     lead to truncation)
   - value can be given with `*`
 
-## `-`: `dash`
+### `-`: `dash`
 
   - negative field-width
   - A negative field width is taken as a '-' flag followed by a positive
     field width.
       - value is to be left adjusted on the field boundary
 
-## `0`: zero-flag
+### `0`: zero-flag
 
   - value shall be zero padded
   - **for integer**: left with zeros rather than blanks
@@ -417,47 +277,97 @@ void va_end(va_list ap);
   - if precision is given than `0` flag is ignored
   - behavior undefined for other conversions
 
-# conversion specifiers
+## conversion specifiers
 
-## string conversion specifiers
+### string conversion specifiers
 
   - printing with `ft_putstr_fd`
   - getting the length with `ft_strlen`
 
-## character conversion specifiers
+### character conversion specifiers
 
   - printing with `ft_putchar_fd`
   - expect that always returns 1
 
-## integer conversions specifiers
+### integer conversions specifiers
 
   - default **precision** = 1
   - zero with explicit precision 0, output is empty
   - **precision**: minimum number of digits to appear
 
-### d / i
+<!-- end list -->
 
-  - printing with `ft_putnbr_fd`
-  - getting nbr of digits with `ft_num_of_digits`
+1.  d / i
+    
+      - printing with `ft_putnbr_fd`
+      - getting nbr of digits with `ft_num_of_digits`
 
-### x / X
+2.  x / X
+    
+      - using `ft_unsigned_to_hex`, which sets a string to the
+        hexadecimal representation of the argument
+      - using `print_hex_str` to print this string
+          - has an extra parameter to set if lower or upper\_case
 
-  - using `ft_unsigned_to_hex`, which sets a string to the hexadecimal
-    representation of the argument
-  - using `print_hex_str` to print this string
-      - has an extra parameter to set if lower or upper\_case
+3.  u
+    
+      - printing with `ft_put_unsigned_int_fd`
+      - getting nbr of digits with `ft_num_of_digits_unsigned`
 
-### u
-
-  - printing with `ft_put_unsigned_int_fd`
-  - getting nbr of digits with `ft_num_of_digits_unsigned`
-
-## pointer conversion specifiers
+### pointer conversion specifiers
 
   - use `ft_putstr_fd` if the pointer is `NULL`
   - using `ft_ptr_to_hex`, which sets a string to the hexadecimal
     representation of the argument (a pointer in this case)
   - using `print_hex_str` to print this string
+
+# Testing
+
+We are dealing with two problems when testing a function like
+ft\_prinft.
+
+## Capturing output
+
+Since we need to verify that we're printing the right thing to stdout,
+we need to capture what is actually printed to stdout.
+
+Gtest has a feature that allows us to do that. The syntax is as follows.
+
+``` cpp
+testing::internal::CaptureStdout();
+ft_printf(fmt_string, args...);
+std::string ftPrintfResult = testing::internal::GetCapturedStdout();
+```
+
+## variadic arguments
+
+Variadic arguments, also known as variadic functions, are functions in C
+(and other languages) that can accept a variable number of arguments.
+
+In C, variadic functions are defined using the ellipsis (…) syntax in
+the function parameter list.
+
+Actually there is no big problem, it is just so that we are not able to
+do parametrized tests easily. But the layout that I found I think is
+compelling and easy enough.
+
+``` c
+
+template<typename... Args>
+void compare_printf(const char* fmt_string, Args... args) {
+    ...
+}
+
+TEST(ft_printf_test, without_arguments) {
+    compare_printf("Hello", "");
+    ...
+}
+
+
+TEST(ft_printf_test, string_conversions) {
+    compare_printf("Hello %s", "World");
+}
+```
 
 # bonus
 
@@ -589,7 +499,7 @@ void va_end(va_list ap);
 ### g
 
   - if precision is 0, it is treated as 1
-  - Style [11.3.3](#*e%20-%20exponential) is used if exponent is
+  - Style [7.3.3](#*e%20-%20exponential) is used if exponent is
       - less than `-4`
       - greater than or equal to the precision
   - trailing zeros are removed from the fractional part of the result

@@ -18,26 +18,17 @@
 - [[#incorporating-libft-into-libftprint][Incorporating libft into libftprint]]
   - [[#building-libft-from-makefile-in-root-directory][Building libft from Makefile in Root directory]]
   - [[#incorporating-newly-compiled-object-files-into-libfta][Incorporating newly compiled object files into libft.a]]
-- [[#makefile][Makefile]]
-  - [[#integrating-libft-into-libftprintf][Integrating libft into libftprintf]]
-  - [[#bear][bear]]
-- [[#testing][Testing]]
-  - [[#capturing-output][Capturing output]]
-  - [[#variadic-arguments][variadic arguments]]
 - [[#variable-argument-lists][variable argument lists]]
   - [[#va_start][va_start]]
   - [[#va_arg][va_arg]]
   - [[#va_end][va_end]]
-- [[#format-string][Format string]]
-- [[#precision][precision]]
-- [[#minimum-field-width][minimum field width]]
-  - [[#--dash][=-=: =dash=]]
-  - [[#0-zero-flag][=0=: zero-flag]]
-- [[#conversion-specifiers][conversion specifiers]]
-  - [[#string-conversion-specifiers][string conversion specifiers]]
-  - [[#character-conversion-specifiers][character conversion specifiers]]
-  - [[#integer-conversions-specifiers][integer conversions specifiers]]
-  - [[#pointer-conversion-specifiers][pointer conversion specifiers]]
+- [[#format-string-and-conversions][Format string and conversions]]
+  - [[#precision][precision]]
+  - [[#minimum-field-width][minimum field width]]
+  - [[#conversion-specifiers][conversion specifiers]]
+- [[#testing][Testing]]
+  - [[#capturing-output][Capturing output]]
+  - [[#variadic-arguments][variadic arguments]]
 - [[#bonus][bonus]]
   - [[#flags][flags]]
   - [[#length-modifier][length modifier]]
@@ -74,108 +65,6 @@ The command =ar= is used to modify the =libft.a= archive file, basically expandi
 - =r=: This flag stands for "replace" or "insert." It adds the specified files (=$(OBJ_FILES)= in this case) to the archive (=$(NAME)=). If the files already exist within the archive, they will be replaced with the new versions.
 - =c=: This flag tells =ar= to "create" the archive if it doesn't already exist.
 
-* Makefile
-** Integrating libft into libftprintf
-The archive =libftprintf.a= that we are building needs to incorporate =libft.a=.
-
-#+begin_src makefile
-NAME = libftprintf.a
-LIBFT = path/to/libft
-OBJ_FILES = file1.o file2.o # Add your object files here
-
-# Build target
-$(NAME): $(OBJ_FILES) $(LIBFT)/libft.a
-	cp $(LIBFT)/libft.a $(NAME)
-	ar rc $(NAME) $(OBJ_FILES)
-#+end_src
-
-Otherwise we can not use our archive without explicitly linking =libft.a=.
-
-Imagine an end-user that wants to use our new ft_printf and therefore is linking libftprintf to their project.
-
-#+begin_src c
-/* new_project.c */
-#include "libftprintf.h"
-
-int main() {
-	ft_printf("Hello world");
-    return 0;
-}
-#+end_src
-
-When they compile their project:
-
-#+begin_src shell
-cc new_project.c libftprintf.a
-#+end_src
-
-Suppose ft_printf uses ft_putstr_fd from libft. It might look like this:
-
-#+begin_src c
-#include "libft.h"
-
-int ft_printf(const char* fmt_string, ...) {
-	ft_putstr_fd(fmt_string, STDOUT_FILENO);
-	return 0;
-}
-#+end_src
-
-If we built =libftprintf.a= without incorporating =libft.a=, the compilation would fail because the linker would not be able to resolve ft_putstr_fd, as it would not be part of our archive.
-
-An archive essentially is an aggregation of object files that a compiler can link to, and ft_putstr_fd would not be present without inclusion.
-** bear
-[[https://github.com/rizsotto/Bear][bear]] is a program that generates compile_commands.json file for you, so that clang-language server knows how compile the programs.
-
-#+begin_src shell
-bear -- <your-build-command>
-#+end_src
-
-By having a bear rule in your Makefile
-
-#+begin_src makefile
-bear: $(TEST_TARGET) $(OBJ_FILES)
-#+end_src
-
-you can generate the compile_commands.json as follows
-
-#+begin_src shell
-bear -- make bear
-#+end_src
-* Testing
-We are dealing with two problems testing a function like ft_prinft.
-** Capturing output
-Since we need to verify that we're printing the right thing to stdout, we need to capture what is actually printed to stdout.
-
-Gtest has a feature that allows us to do that. The syntax is as follows.
-#+begin_src cpp
-testing::internal::CaptureStdout();
-ft_printf(fmt_string, args...);
-std::string ftPrintfResult = testing::internal::GetCapturedStdout();
-#+end_src
-
-** variadic arguments
-Variadic arguments, also known as variadic functions, are functions in C (and other languages) that can accept a variable number of arguments.
-
-In C, variadic functions are defined using the ellipsis (...) syntax in the function parameter list.
-
-Actually there is no big problem, it is just so that we are not able to do parametrized tests easily. But the layout that I found I think is compelling and easy enough.
-#+begin_src c
-
-template<typename... Args>
-void compare_printf(const char* fmt_string, Args... args) {
-	...
-}
-
-TEST(ft_printf_test, without_arguments) {
-    compare_printf("Hello", "");
-	...
-}
-
-
-TEST(ft_printf_test, string_conversions) {
-    compare_printf("Hello %s", "World");
-}
-#+end_src
 * variable argument lists
 The =va_arg=, =va_start=, and =va_end= macros are part of the C standard library and are used to handle functions with a variable number of arguments. They are defined in the =<stdarg.h>= header.
 
@@ -199,7 +88,7 @@ type va_arg(va_list ap, type);
 - Should be called after =va_start= and before =va_end=.
 - =ap= is the =va_list= variable, and =type= is the type of the next argument.
 *** allowed types
-**** a type so that by adding a * to the type it becomes a pointer to that type
+**** a type so that by adding a * to the type, it becomes a pointer to that type
 Man page:
 #+begin_example
 The argument type is a type name specified so that the type of a pointer to an object that has the specified type can be obtained simply by adding a * to type.
@@ -241,7 +130,7 @@ https://stackoverflow.com/a/1255818
 In C, function arguments undergo a process known as "default argument promotions" when passed to a variadic function like =printf=.
 
 The default argument promotions ensure that arguments are compatible with the function's parameter types and include the following rules:
-- Integral promotions:
+- Integer promotions:
   - Types smaller than =int= (like =char= and =short=) are promoted to =int= or =unsigned int= if =int= can represent all the values of the original type.
 - Float arguments are promoted to =double= if the function parameter's type is =float=.
 
@@ -260,7 +149,7 @@ void va_end(va_list ap);
 - Cleans up the =va_list= variable when done.
 - Should be called after accessing all the variable arguments.
 
-* Format string
+* Format string and conversions
 - Each conversion specification is introduced by the character =%=, and ends with a  ~conversion specifier~.
 - In between there may be (in this order) zero or more flags, an =optional minimum field width=, an =optional precision= and an =optional length modifier=.
 
@@ -278,14 +167,14 @@ printf("%2$*1$d", width, num);
 printf("[%2$][*m1$][conversion]", width, num);
     #+end_src
 
-* precision
+** precision
 - =.= followed by optional decimal string
 - or by '*'
   - means that the precision is given in the next argument
   - must by of type =int=
 - if precision given as '.', it equals to 0
 - negative precision is as if precision is omitted
-* minimum field width
+** minimum field width
 =%[$][flags][width][.precision][length modifier]conversion=
 - minimum number of characters to be printed for a given value
 - independent of format string -> only effects the conversion
@@ -293,42 +182,77 @@ printf("[%2$][*m1$][conversion]", width, num);
   - Value: |      text|
 - if a conversion is wider than the field width, the field is expanded to contain the conversion (non-existant or too small therefore don't lead to truncation)
 - value can be given with =*=
-** =-=: =dash=
+*** =-=: =dash=
 - negative field-width
 - A negative field width is  taken as  a '-' flag  followed by  a positive  field width.
   - value is to be left adjusted on  the field boundary
-** =0=: zero-flag
+*** =0=: zero-flag
 - value shall be zero padded
 - *for integer*: left with zeros rather than blanks
 - =0= and =-= than =0= is ignored
 - if precision is given than =0= flag is ignored
 - behavior undefined for other conversions
 
-* conversion specifiers
-** string conversion specifiers
+** conversion specifiers
+*** string conversion specifiers
 - printing with =ft_putstr_fd=
 - getting the length with =ft_strlen=
-** character conversion specifiers
+*** character conversion specifiers
 - printing with =ft_putchar_fd=
 - expect that always returns 1
-** integer conversions specifiers
+*** integer conversions specifiers
 - default *precision* = 1
 - zero with explicit precision 0, output is empty
 - *precision*: minimum number of digits to appear
-*** d / i
+**** d / i
 - printing with =ft_putnbr_fd=
 - getting nbr of digits with =ft_num_of_digits= 
-*** x / X
+**** x / X
 - using =ft_unsigned_to_hex=, which sets a string to the hexadecimal representation of the argument
 - using =print_hex_str= to print this string
   - has an extra parameter to set if lower or upper_case
-*** u
+**** u
 - printing with =ft_put_unsigned_int_fd=
 - getting nbr of digits with =ft_num_of_digits_unsigned= 
-** pointer conversion specifiers
+*** pointer conversion specifiers
 - use =ft_putstr_fd= if the pointer is =NULL=
 - using =ft_ptr_to_hex=, which sets a string to the hexadecimal representation of the argument (a pointer in this case)
 - using =print_hex_str= to print this string
+* Testing
+We are dealing with two problems when testing a function like ft_prinft.
+** Capturing output
+Since we need to verify that we're printing the right thing to stdout, we need to capture what is actually printed to stdout.
+
+Gtest has a feature that allows us to do that. The syntax is as follows.
+#+begin_src cpp
+testing::internal::CaptureStdout();
+ft_printf(fmt_string, args...);
+std::string ftPrintfResult = testing::internal::GetCapturedStdout();
+#+end_src
+
+** variadic arguments
+Variadic arguments, also known as variadic functions, are functions in C (and other languages) that can accept a variable number of arguments.
+
+In C, variadic functions are defined using the ellipsis (...) syntax in the function parameter list.
+
+Actually there is no big problem, it is just so that we are not able to do parametrized tests easily. But the layout that I found I think is compelling and easy enough.
+#+begin_src c
+
+template<typename... Args>
+void compare_printf(const char* fmt_string, Args... args) {
+	...
+}
+
+TEST(ft_printf_test, without_arguments) {
+    compare_printf("Hello", "");
+	...
+}
+
+
+TEST(ft_printf_test, string_conversions) {
+    compare_printf("Hello %s", "World");
+}
+#+end_src
 * bonus
 ** DONE flags
 *** DONE #
