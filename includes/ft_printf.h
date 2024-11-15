@@ -25,7 +25,7 @@ typedef struct s_flags
 	int		prec;
 }			t_flags;
 
-int ft_printf(const char *fmt_string, ...);
+int			ft_printf(const char *fmt_string, ...);
 
 const char	*handle_conversion(va_list ap, const char *p, int *count);
 char		*handle_integer(va_list ap, int prec);
@@ -55,4 +55,4 @@ char		*ft_itoa_unsigned(unsigned int n);
 char		*ft_itoa_abs(int d);
 void		add_zeros_to_str(char *str, int n, size_t size);
 
-# endif
+#endif

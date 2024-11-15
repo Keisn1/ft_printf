@@ -51,6 +51,11 @@
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/examples.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/examples.cpp",
+  "file": "/home/kfreyer/workspace/ft_printf/tests/examples.cpp"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
   "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/main.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/main.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests/main.cpp"
 },
@@ -58,6 +63,76 @@
   "directory": "/home/kfreyer/workspace/ft_printf/build",
   "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/test_ft_printf.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/test_ft_printf.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests/test_ft_printf.cpp"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/check_functions_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/check_functions_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/check_functions_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/create_hex_string_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/create_hex_string_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/create_hex_string_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/create_int_str_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/create_int_str_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/create_int_str_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/flags_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/flags_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/flags_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/ft_printf_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/ft_printf_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/ft_printf_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/handle_conversion_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/handle_conversion_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/handle_conversion_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/helper2_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/helper2_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/helper2_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/helper_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/helper_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/helper_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/integer_handlers_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/integer_handlers_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/integer_handlers_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/pointer_handler_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/pointer_handler_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/pointer_handler_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/cc  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/libft  -fsanitize=address -o CMakeFiles/ftprintf_bonus.dir/bonus/string_handler_bonus.c.o -c /home/kfreyer/workspace/ft_printf/bonus/string_handler_bonus.c",
+  "file": "/home/kfreyer/workspace/ft_printf/bonus/string_handler_bonus.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/examples_bonus.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/examples_bonus.cpp",
+  "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/examples_bonus.cpp"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/main.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/main.cpp",
+  "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/main.cpp"
+},
+{
+  "directory": "/home/kfreyer/workspace/ft_printf/build",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/test_ft_printf.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/test_ft_printf.cpp",
+  "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/test_ft_printf.cpp"
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build/_deps/googletest-build/googlemock",

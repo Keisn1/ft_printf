@@ -15,22 +15,24 @@
 
 int	handle_n_flag(va_list ap, int count, t_flags flags)
 {
-	int	*s;
-	unsigned char *c;
+	int				*s;
+	unsigned char	*c;
 
-	if (flags.hh) {
+	if (flags.hh)
+	{
 		c = va_arg(ap, unsigned char *);
 		*c = count;
 	}
-	else {
+	else
+	{
 		s = va_arg(ap, int *);
 		*s = count;
 	}
-	return 0;
+	return (0);
 }
 
-
-int	handle_conversion_specifier(va_list ap, char specifier, t_flags flags, int count)
+int	handle_conversion_specifier(va_list ap, char specifier, t_flags flags,
+		int count)
 {
 	if (specifier == '%')
 		return (ft_putchar_fd('%', STDOUT_FILENO));
@@ -49,7 +51,7 @@ int	handle_conversion_specifier(va_list ap, char specifier, t_flags flags, int c
 	if (specifier == 'c')
 		return (handle_char(ap, flags));
 	if (specifier == 'n')
-		return handle_n_flag(ap, count, flags);
+		return (handle_n_flag(ap, count, flags));
 	return (0);
 }
 

@@ -92,6 +92,7 @@ test: all
 	- cmake -S . -B build
 	- cmake --build build
 	- ./build/run_tests
+	- ./build/run_tests_bonus
 
 examples: $(NAME)
 	$(CC) -g $(INCLUDES) -I$(LIBFT_DIR) $(TEST_DIR)/examples.c -o $(TEST_DIR)/examples.out $(NAME)
