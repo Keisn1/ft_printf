@@ -1,3 +1,5 @@
+![](cover-ft_printf-bonus.png)
+
 # Table of contents <span class="tag" data-tag-name="TOC_2"><span class="smallcaps">TOC\_2</span></span>
 
   - [What is ft\_printf](#what-is-ft_printf)

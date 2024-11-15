@@ -1,5 +1,8 @@
 #+title: Ft_Printf
+#+macro: ft_printf-cover [[file:cover-ft_printf-bonus.png]]
 #+options: ^:nil
+
+{{{ft_printf-cover}}}
 
 * Table of contents :TOC_2:
 - [[#what-is-ft_printf][What is ft_printf]]
