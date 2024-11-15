@@ -1,7 +1,4 @@
-#include "ft_printf_bonus.h"
-#include <limits.h>
-#include <gtest/gtest.h>
-#include <unistd.h>
+#include "test_ft_printf_bonus.hpp"
 
 void compare_printf_wo_args(const char* fmt_string);
 template<typename... Args>
