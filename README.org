@@ -1,13 +1,18 @@
 #+title: Ft_Printf
+#+options: ^:nil
 
 * Table of contents :TOC_2:
+- [[#what-is-ft_printf][What is ft_printf]]
+- [[#incorporating-libft-into-libftprint][Incorporating libft into libftprint]]
+  - [[#building-libft-from-makefile-in-root-directory][Building libft from Makefile in Root directory]]
+  - [[#incorporating-newly-compiled-object-files-into-libfta][Incorporating newly compiled object files into libft.a]]
 - [[#makefile][Makefile]]
   - [[#integrating-libft-into-libftprintf][Integrating libft into libftprintf]]
   - [[#bear][bear]]
 - [[#testing][Testing]]
   - [[#capturing-output][Capturing output]]
   - [[#variadic-arguments][variadic arguments]]
-- [[#va_][va_*]]
+- [[#variable-argument-lists][variable argument lists]]
   - [[#va_start][va_start]]
   - [[#va_arg][va_arg]]
   - [[#va_end][va_end]]
@@ -25,6 +30,39 @@
   - [[#flags][flags]]
   - [[#length-modifier][length modifier]]
   - [[#conversions][conversions]]
+
+* What is ft_printf
+The *ft_printf* project is part of the *Core Curriculum of 42school* in which students are asked to implement their own version of the standard library function =printf=. Doing this
+- teaches about variadic functions in C
+  - therefore teaches the usage of [[#variable-argument-lists][variable argument lists]]
+  - teaches about memory management
+- teaches about parsing strings
+  - the
+- the student gets to know the inner working of printf and also a much more deep understanding of the function itself, including different flags
+- depending on how much bonus exercises are done, students also get to know about conversion of different numerical types and how they are actually represented in binary
+
+To succeed in this project,
+- the students need to study the man page of =printf= in great detail
+- need to get an understanding of the format specifier and the different syntax that can be applied
+- moreover, the students get more exposure on how to handle libraries in C
+  - using their libft library, they expand it with their implementation of printf, resulting in =libftprintf= library
+
+
+* Incorporating libft into libftprint
+** Building libft from Makefile in Root directory
+#+begin_src makefile
+$(LIBFT_DIR)/libft.a:
+	$(MAKE) -C libft
+#+end_src
+** Incorporating newly compiled object files into libft.a
+#+begin_src makefile
+$(NAME): $(OBJ_FILES) $(LIBFT_DIR)/libft.a
+	cp $(LIBFT_DIR)/libft.a $(NAME)
+	ar rc $(NAME) $(OBJ_FILES)
+#+end_src
+The command =ar= is used to modify the =libft.a= archive file, basically expanding their binaries
+- =r=: This flag stands for "replace" or "insert." It adds the specified files (=$(OBJ_FILES)= in this case) to the archive (=$(NAME)=). If the files already exist within the archive, they will be replaced with the new versions.
+- =c=: This flag tells =ar= to "create" the archive if it doesn't already exist.
 
 * Makefile
 ** Integrating libft into libftprintf
@@ -128,7 +166,7 @@ TEST(ft_printf_test, string_conversions) {
     compare_printf("Hello %s", "World");
 }
 #+end_src
-* va_*
+* variable argument lists
 The =va_arg=, =va_start=, and =va_end= macros are part of the C standard library and are used to handle functions with a variable number of arguments. They are defined in the =<stdarg.h>= header.
 
 #+begin_src c
