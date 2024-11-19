@@ -78,6 +78,7 @@ clean:
 	rm -f $(OBJ_FILES) $(BONUS_OBJ_FILES)
 
 fclean: clean
+	$(MAKE) -C libft $@
 	rm -f $(BIN_DIR)/*
 	rm -rf $(BIN_DIR)
 	rm -rf $(OBJ_DIR)
