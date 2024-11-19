@@ -25,14 +25,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-# ifdef __cplusplus
-
-extern "C"
-{
-# endif
-
 /* helper */
-char *ft_get_empty_str(size_t n);
+char				*ft_get_empty_str(size_t n);
 int					ft_abs(int x);
 void				ft_rev_char_tab(char *tab, int size);
 
@@ -93,9 +87,5 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-#  ifdef __cplusplus
 
-}
-#  endif
-
-# endif
+#endif
