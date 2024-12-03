@@ -17,12 +17,12 @@ LDFLAGS := -lgtest -lgtest_main -pthread #for googletests
 # including header files
 INCLUDES = -Iincludes
 
-BIN_DIR := ./bin
-SRC_DIR := ./src
-OBJ_DIR := ./obj
-BUILD_DIR := ./build
-TEST_DIR := ./tests
-LIBFT_DIR := ./libft
+BIN_DIR := bin
+SRC_DIR := src
+OBJ_DIR := obj
+BUILD_DIR := build
+TEST_DIR := tests
+LIBFT_DIR := libft
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
