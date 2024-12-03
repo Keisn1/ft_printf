@@ -69,9 +69,6 @@ $(BONUS_NAME): $(BONUS_OBJ_FILES) $(LIBFT_DIR)/libft.a
 $(OBJ_DIR)/%.o: $(BONUS_SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(BONUS_INCLUDES) -I$(LIBFT_DIR) -c $< -o $@
 
-$(BONUS_TEST_TARGET): $(BONUS_TEST_FILES) $(BONUS_NAME) | $(BIN_DIR)
-	$(CXX) $(CXX_FLAGS) $(FSANITIZE) -o $@ $(BONUS_TEST_FILES) $(LDFLAGS) libftprintf.a $(BONUS_INCLUDES)
-
 ############ PHONY ##################
 clean:
 	$(MAKE) -C libft $@
@@ -86,8 +83,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bear: $(OBJ_FILES) $(BONUS_TEST_TARGET)
 
 test: all
 	- cmake -S . -B build
@@ -106,9 +101,6 @@ norminette:
 	norminette -R CheckForbiddenSourceHeader -R CheckDefine
 
 bonus: $(BONUS_NAME)
-
-test-bonus: fclean $(BONUS_TEST_TARGET)
-	- $(BONUS_TEST_TARGET)
 
 examples-bonus: $(BONUS_NAME)
 	$(CC) -g $(BONUS_INCLUDES) -I$(LIBFT_DIR) $(BONUS_TEST_DIR)/examples_bonus.c -o $(BONUS_TEST_DIR)/examples_bonus.out $(NAME)

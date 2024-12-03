@@ -51,17 +51,17 @@
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
-  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/examples.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/examples.cpp",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/tests -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/examples.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/examples.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests/examples.cpp"
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
-  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/main.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/main.cpp",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/tests -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/main.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/main.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests/main.cpp"
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
-  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/test_ft_printf.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/test_ft_printf.cpp",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes -I/home/kfreyer/workspace/ft_printf/tests -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests.dir/tests/test_ft_printf.cpp.o -c /home/kfreyer/workspace/ft_printf/tests/test_ft_printf.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests/test_ft_printf.cpp"
 },
 {
@@ -121,18 +121,18 @@
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
-  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/examples_bonus.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/examples_bonus.cpp",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/tests_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/examples_bonus.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/examples_bonus.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/examples_bonus.cpp"
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
-  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/main.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/main.cpp",
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/tests_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/main.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/main.cpp",
   "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/main.cpp"
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build",
-  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/test_ft_printf.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/test_ft_printf.cpp",
-  "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/test_ft_printf.cpp"
+  "command": "/usr/bin/c++  -I/home/kfreyer/workspace/ft_printf/includes_bonus -I/home/kfreyer/workspace/ft_printf/tests_bonus -I/home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/ft_printf/build/_deps/googletest-src/googletest  -fsanitize=address -std=gnu++14 -o CMakeFiles/run_tests_bonus.dir/tests_bonus/test_ft_printf_bonus.cpp.o -c /home/kfreyer/workspace/ft_printf/tests_bonus/test_ft_printf_bonus.cpp",
+  "file": "/home/kfreyer/workspace/ft_printf/tests_bonus/test_ft_printf_bonus.cpp"
 },
 {
   "directory": "/home/kfreyer/workspace/ft_printf/build/_deps/googletest-build/googlemock",

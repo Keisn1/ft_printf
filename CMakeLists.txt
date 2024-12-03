@@ -19,7 +19,6 @@ enable_testing()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 
-
 ##############################################################
 # mandatory part
 ##############################################################
@@ -44,6 +43,7 @@ set(TEST_NAME "run_tests")
 target_link_libraries(${TEST_NAME} gtest gtest_main ftprintf)
 
 target_include_directories(${TEST_NAME} PRIVATE includes)
+target_include_directories(${TEST_NAME} PRIVATE tests)
 target_include_directories(${TEST_NAME} PRIVATE ${gtest_SOURCE_DIR}/googletest/include)
 ##############################################################
 # bonus part
@@ -66,4 +66,5 @@ set(TEST_NAME_BONUS "run_tests_bonus")
 target_link_libraries(${TEST_NAME_BONUS} gtest gtest_main ftprintf_bonus)
 
 target_include_directories(${TEST_NAME_BONUS} PRIVATE includes_bonus)
+target_include_directories(${TEST_NAME_BONUS} PRIVATE tests_bonus)
 target_include_directories(${TEST_NAME_BONUS} PRIVATE ${gtest_SOURCE_DIR}/googletest/include)
